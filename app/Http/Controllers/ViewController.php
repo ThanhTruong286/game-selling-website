@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class ViewController extends Controller
 {
-    public function show($name = "index"){
-        return view($name);
+    public function show(){
+        return view('home');
     }
 }
