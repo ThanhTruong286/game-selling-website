@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 24, 2024 at 03:41 AM
+-- Generation Time: Mar 24, 2024 at 02:13 PM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -75,6 +75,7 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
+  `slug` varchar(100) NOT NULL,
   `price` double NOT NULL,
   `image` varchar(100) NOT NULL,
   `content` varchar(9999) NOT NULL,
@@ -82,15 +83,18 @@ CREATE TABLE IF NOT EXISTS `products` (
   `category_id` int NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `price`, `image`, `content`, `user_id`, `category_id`, `create_at`) VALUES
-(1, 'Laptop MSI', 10000000, 'laptop1.png', 'Laptop chơi game chuyên dụng', 0, 1, '2024-03-24 03:02:25'),
-(2, 'iPhone 14 Pro Max', 30000000, 'dt1.png', 'Điện thoại iPhone 14 Pro Max thiết kế sang trọng', 0, 4, '2024-03-24 03:03:40');
+INSERT INTO `products` (`id`, `name`, `slug`, `price`, `image`, `content`, `user_id`, `category_id`, `create_at`) VALUES
+(1, 'Laptop MSI', 'lap-top', 10000000, 'laptop1.png', 'Laptop chơi game chuyên dụng', 0, 1, '2024-03-24 13:11:55'),
+(2, 'iPhone 14 Pro Max', 'dien-thoai', 30000000, 'dt1.png', 'Điện thoại iPhone 14 Pro Max thiết kế sang trọng', 0, 4, '2024-03-24 13:12:08'),
+(3, 'Laptop Asus', 'lap-top', 20000000, 'laptop2.png', 'Laptop văn phòng', 0, 1, '2024-03-24 13:34:44'),
+(4, 'Tai Nghe MSI', 'tai-nghe', 123123123, 'tainghe1.png', 'Tai nghe thông dụng ', 0, 3, '2024-03-24 13:34:44'),
+(5, 'Camera Sony', 'camera', 11111111, 'camera1.png', 'Camera chụp hình sống động', 0, 2, '2024-03-24 13:35:44');
 
 -- --------------------------------------------------------
 
