@@ -6,7 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Electro - HTML Ecommerce Template</title>
+		<title>Hopi's Store</title>
+		<link rel="icon" type="image/png" href="{{ asset('/img/star.png') }}">
 
  		<!-- Google font -->
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">

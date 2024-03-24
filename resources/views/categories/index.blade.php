@@ -1,3 +1,7 @@
+<?php
+    use App\Http\Controllers\CategoryController;
+    use Illuminate\Support\Facades\DB;
+?>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -6,7 +10,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-		<title>Technology</title>
+		<title>Hopi's Categories</title>
+		<link rel="icon" type="image/png" href="{{ asset('/img/star.png') }}">
 
 		<!-- Google font -->
 		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
@@ -48,7 +53,7 @@
 					<ul class="main-nav nav navbar-nav">
 						<li><a href="{{ route('home')}}">Home</a></li>
 						<li><a href="{{ route('store.index') }}">Store</a></li>
-						<li class="active"><a href="{{ url('category') }}">Categories</a></li>
+						<li class="active"><a href="{{ route('categories.index') }}">Categories</a></li>
 						<li><a href="#">Laptops</a></li>
 						<li><a href="#">Smartphones</a></li>
 						<li><a href="#">Cameras</a></li>
@@ -70,45 +75,19 @@
 				<!-- row -->
 				<div class="row">
 					<!-- shop -->
+					@foreach($category as $value)
 					<div class="col-md-4 col-xs-6">
 						<div class="shop">
 							<div class="shop-img">
-								<img src="./img/shop01.png" alt="">
+								<img src="{{ asset('img/' . $value->image) }}" alt=""> <!--tro den muc hinh anh trong database-->
 							</div>
 							<div class="shop-body">
-								<h3>Laptop<br>Collection</h3>
+								<h3>{{ $value->name }}<br>Collection</h3>
 								<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
 							</div>
 						</div>
 					</div>
-					<!-- /shop -->
-
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./img/shop03.png" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>Accessories<br>Collection</h3>
-								<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
-					<!-- /shop -->
-
-					<!-- shop -->
-					<div class="col-md-4 col-xs-6">
-						<div class="shop">
-							<div class="shop-img">
-								<img src="./img/shop02.png" alt="">
-							</div>
-							<div class="shop-body">
-								<h3>Cameras<br>Collection</h3>
-								<a href="#" class="cta-btn">Shop now <i class="fa fa-arrow-circle-right"></i></a>
-							</div>
-						</div>
-					</div>
+					@endforeach
 					<!-- /shop -->
 				</div>
 				<!-- /row -->

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 20, 2024 at 02:16 PM
+-- Generation Time: Mar 24, 2024 at 03:41 AM
 -- Server version: 8.2.0
 -- PHP Version: 8.2.13
 
@@ -26,6 +26,21 @@ USE `electro`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `categories`
 --
 
@@ -33,74 +48,22 @@ DROP TABLE IF EXISTS `categories`;
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `parent_id` int NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `image` varchar(100) NOT NULL,
+  `slug` varchar(100) NOT NULL,
+  `create_at` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `update_at` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Table structure for table `customers`
+-- Dumping data for table `categories`
 --
 
-DROP TABLE IF EXISTS `customers`;
-CREATE TABLE IF NOT EXISTS `customers` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `address` int NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `menus`
---
-
-DROP TABLE IF EXISTS `menus`;
-CREATE TABLE IF NOT EXISTS `menus` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `parent_id` int NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `orders`
---
-
-DROP TABLE IF EXISTS `orders`;
-CREATE TABLE IF NOT EXISTS `orders` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `customer_id` int NOT NULL,
-  `status` varchar(100) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `order_item`
---
-
-DROP TABLE IF EXISTS `order_item`;
-CREATE TABLE IF NOT EXISTS `order_item` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `order_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `quantity` int NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+INSERT INTO `categories` (`id`, `name`, `image`, `slug`, `create_at`, `update_at`) VALUES
+(1, 'Laptops', 'laptop1.png', 'lap-top', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'Camera', 'camera1.png', 'camera', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'Headphones', 'tainghe1.png', 'tai-nghe', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(4, 'Phones', 'dt1.png', 'dien-thoai', '2024-03-21 12:24:52', '2024-03-21 12:24:52');
 
 -- --------------------------------------------------------
 
@@ -119,85 +82,53 @@ CREATE TABLE IF NOT EXISTS `products` (
   `category_id` int NOT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `price`, `image`, `content`, `user_id`, `category_id`, `create_at`) VALUES
+(1, 'Laptop MSI', 10000000, 'laptop1.png', 'Laptop chơi game chuyên dụng', 0, 1, '2024-03-24 03:02:25'),
+(2, 'iPhone 14 Pro Max', 30000000, 'dt1.png', 'Điện thoại iPhone 14 Pro Max thiết kế sang trọng', 0, 4, '2024-03-24 03:03:40');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_image`
+-- Table structure for table `transaction`
 --
 
-DROP TABLE IF EXISTS `product_image`;
-CREATE TABLE IF NOT EXISTS `product_image` (
+DROP TABLE IF EXISTS `transaction`;
+CREATE TABLE IF NOT EXISTS `transaction` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `image` varchar(100) NOT NULL,
-  `product_id` int NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` int NOT NULL,
+  `user_id` varchar(100) NOT NULL,
+  `user_name` varchar(100) NOT NULL,
+  `user_email` varchar(100) NOT NULL,
+  `user_phone` varchar(100) NOT NULL,
+  `amount` decimal(10,0) NOT NULL,
+  `payment_info` varchar(100) NOT NULL,
+  `message` varchar(100) NOT NULL,
+  `security` varchar(100) NOT NULL,
+  `created` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product_tag`
+-- Table structure for table `user`
 --
 
-DROP TABLE IF EXISTS `product_tag`;
-CREATE TABLE IF NOT EXISTS `product_tag` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `product_id` int NOT NULL,
-  `tag_id` int NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `settings`
---
-
-DROP TABLE IF EXISTS `settings`;
-CREATE TABLE IF NOT EXISTS `settings` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `config_key` varchar(100) NOT NULL,
-  `config_value` varchar(100) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `sliders`
---
-
-DROP TABLE IF EXISTS `sliders`;
-CREATE TABLE IF NOT EXISTS `sliders` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
-  `description` varchar(300) NOT NULL,
-  `image` varchar(100) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tags`
---
-
-DROP TABLE IF EXISTS `tags`;
-CREATE TABLE IF NOT EXISTS `tags` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `email` varchar(100) NOT NULL,
+  `phone` varchar(100) NOT NULL,
+  `address` varchar(9999) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `created` int NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 COMMIT;

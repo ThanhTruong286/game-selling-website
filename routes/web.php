@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ViewController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
@@ -16,10 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[ViewController::class,'show'])->name('home');//set home name and call 'show' function in ViewController
+Route::get('/',[ProductController::class,'index'])->name('home');//set home name and call 'show' function in ViewController
 
 Route::prefix('categories')->group(function () {
     Route::get('/', [CategoryController::class,'index'])->name('categories.index');//set a name for route and call function index from store controller
+    Route::get('/index', [CategoryController::class,'index'])->name('categories.index');//set a name for route and call function index from store controller
+
+
+    Route::get('/add', [CategoryController::class,'add'])->name('categories.add');
+    Route::get('/getCategories', [CategoryController::class,'getCategories'])->name('categories.test'); //test duong dan
 });
 
 Route::prefix('store')->group(function () {
