@@ -8,8 +8,12 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function index(){
-        $products = Product::all();
+    public function index($slug = "index"){
+        $products = Product::all();//truy van cach 1
         return view('home',['products' => $products]);
+    }
+    public function categories_product($slug = ''){
+        $products = DB::table('products')->get();//truy van cach 2
+        return $products;
     }
 }

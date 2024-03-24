@@ -19,14 +19,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[ProductController::class,'index'])->name('home');//set home name and call 'show' function in ViewController
 
 Route::prefix('categories')->group(function () {
-    Route::get('/', [CategoryController::class,'index'])->name('categories.index');//set a name for route and call function index from store controller
-    Route::get('/index', [CategoryController::class,'index'])->name('categories.index');//set a name for route and call function index from store controller
-
+    Route::get('/{slug?}', [CategoryController::class,'index'])->name('categories.index');//set a name for route and call function index from store controller
 
     Route::get('/add', [CategoryController::class,'add'])->name('categories.add');
-    Route::get('/getCategories', [CategoryController::class,'getCategories'])->name('categories.test'); //test duong dan
 });
 
 Route::prefix('store')->group(function () {
     Route::get('/', [StoreController::class,'index'])->name('store.index');//set a name for route and call function index from category controller
+});
+
+Route::prefix('product')->group(function (){
+    Route::get('/{slug?}', [ProductController::class, 'index'])->name('product.index');
 });

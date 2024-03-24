@@ -27,7 +27,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="categories_id">CATEGORIES ID</label>  
   <div class="col-md-4">
-  <input id="categories_id" name="categories_id" placeholder="CATEGORIES ID" class="form-control input-md" required="" type="text">
+  <input id="categories_id" name="categories_id" placeholder="CATEGORIES ID" class="form-control input-md" type="text">
     
   </div>
 </div>
@@ -36,7 +36,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="categories_name">CATEGORIES NAME</label>  
   <div class="col-md-4">
-  <input id="categories_name" name="categories_name" placeholder="CATEGORIES NAME" class="form-control input-md" required="" type="text">
+  <input id="categories_name" name="categories_name" placeholder="CATEGORIES NAME" class="form-control input-md" type="text">
     
   </div>
 </div>
@@ -45,7 +45,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="slug">SLUG</label>  
   <div class="col-md-4">
-  <input id="slug" name="slug" placeholder="SLUG" class="form-control input-md" required="" type="text">
+  <input id="slug" name="slug" placeholder="SLUG" class="form-control input-md" type="text">
     
   </div>
 </div>
