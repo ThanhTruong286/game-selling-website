@@ -1,5 +1,6 @@
 @extends('app')
 @section('content')
+<?php use App\Http\Controllers\HomeController; ?>
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -23,7 +24,11 @@
 								<div id="tab1" class="tab-pane active">
 									<div class="products-slick" data-nav="#slick-nav-1">
 										<!-- product -->
-										@foreach($products as $value)
+										<?php
+											$products = new HomeController();
+											$product = $products->getProduct(); 
+										?>
+										@foreach($product as $value)
 										<div class="product">
 											<div class="product-img">
 												<img height="200px" src="{{ asset('img/' . $value->image) }}" alt="">

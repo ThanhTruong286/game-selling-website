@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,18 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[ProductController::class,'index'])->name('home');//set home name and call 'show' function in ViewController
+Route::get('/{page?}',[HomeController::class,'index'])->name('home');//set home name and call 'show' function in ViewController
 
 Route::prefix('categories')->group(function () {
+    Route::get('/admin/add', [CategoryController::class,'add'])->name('categories.add');
     Route::get('/{slug?}', [CategoryController::class,'index'])->name('categories.index');//set a name for route and call function index from store controller
 
-    Route::get('/add', [CategoryController::class,'add'])->name('categories.add');
 });
-
-Route::prefix('store')->group(function () {
-    Route::get('/', [StoreController::class,'index'])->name('store.index');//set a name for route and call function index from category controller
-});
-
-Route::prefix('product')->group(function (){
-    Route::get('/{slug?}', [ProductController::class, 'index'])->name('product.index');
+Route::prefix('store')->group(function(){
+    Route::get('/', [StoreController::class, 'index'])->name('store.index');//set a name for route and call function index
 });

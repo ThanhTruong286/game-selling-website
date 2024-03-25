@@ -13,6 +13,7 @@ class CategoryController extends Controller
     }
     public function index($slug = "index"){
         $categories = Category::all();//lay tat ca cac bang trong models category
-        return view('categories.index',['category' => $categories]);
+        return view('categories.index',['category' => $categories]);//tra ve view
     }
+    
 }

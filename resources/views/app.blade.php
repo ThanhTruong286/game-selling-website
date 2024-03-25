@@ -1,6 +1,6 @@
 <?php
     use App\Http\Controllers\ProductController;
-    use App\Http\Controllers\CategoryController;
+    use App\Http\Controllers\HomeController;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,9 +52,16 @@
 				<div id="responsive-nav">
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
-						<li class="active"><a href="{{ route('home')}}">Home</a></li>
+						<li><a href="{{ route('home')}}">Home</a></li>
 						<li><a href="{{ route('store.index') }}">Store</a></li>
 						<li><a href="{{ route('categories.index') }}">Categories</a></li>
+                        <?php 
+                        $categories = new HomeController();
+                        $category = $categories->getCategory();
+                        ?>
+                        @foreach($category as $value)
+						<li><a href="{{ url('categories/' . $value->slug) }}">{{ $value->name }}</a></li>
+                        @endforeach
 						<li><a href="{{ route('categories.add') }}">Add New Categories</a></li>
 					</ul>
 					<!-- /NAV -->
