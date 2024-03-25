@@ -1,3 +1,4 @@
+	<?php use App\Http\Controllers\CategoryController;?>	
 		<!-- HEADER -->
 		<header>
 			<!-- TOP HEADER -->
@@ -38,8 +39,13 @@
 								<form>
 									<select class="input-select">
 										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
+										<?php
+											$categories = new CategoryController();
+											$category = $categories->getCategory();
+										?>
+										@foreach ($category as $value)
+										<option value="{{ $value->id }}">{{ $value->name }}</option>
+										@endforeach
 									</select>
 									<input class="input" placeholder="Search here">
 									<button class="search-btn">Search</button>

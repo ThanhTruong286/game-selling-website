@@ -15,5 +15,8 @@ class CategoryController extends Controller
         $categories = Category::all();//lay tat ca cac bang trong models category
         return view('categories.index',['category' => $categories]);//tra ve view
     }
-    
+    public function getCategory(){
+        $categories = DB::table('categories')->get();
+        return $categories;
+    }
 }
