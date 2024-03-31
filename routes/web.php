@@ -28,6 +28,7 @@ Route::prefix('categories')->group(function () {
 Route::prefix('store')->group(function(){
     Route::get('/', [StoreController::class, 'index'])->name('store.index');//set a name for route and call function index
 });
-Route::prefix('admin')->group(function(){
-    Route::get('/login', [AdminController::class, 'login'])->name('login');
+
+Route::group(['middleware' => 'checkAdminLogin', 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
+	Route::get('/login',[AdminController::class, 'login'])->name('login');
 });
