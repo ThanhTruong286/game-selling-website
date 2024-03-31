@@ -8,8 +8,10 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function categories_product($slug = ''){
-        $products = DB::table('products')->get();//truy van cach 2
+    public function getProduct($slug){
+        $products = DB::table('products')->select('*')
+        ->where('slug','like','%' . $slug . '%')
+        ->get();
         return $products;
     }
 }

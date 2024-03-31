@@ -90,5 +90,13 @@ class DatabaseSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now()
         ]);
+        //insert table admin
+        DB::table('admin')->insert([
+            'username' => 'hopi',
+            'password' => '1',
+            'name' => 'Hopi',
+            'created_at' => now(),
+            'updated_at' => now()
+        ]);
     }
 }

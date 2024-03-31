@@ -1,6 +1,12 @@
 @extends('app')
 @section('content')
 <?php use App\Http\Controllers\HomeController; ?>
+<?php use App\Http\Controllers\ProductController; ?>
+<?php
+$slug = isset($_GET['slug']) ? $_GET['slug'] : '';
+$products = new ProductController();
+$product = $products->getProduct($slug); 
+?>
 		<!-- SECTION -->
 		<div class="section">
 			<!-- container -->
@@ -11,7 +17,16 @@
 					<!-- section title -->
 					<div class="col-md-12">
 						<div class="section-title">
-							<h3 class="title">New Products</h3>
+							<h3 class="title">
+								<?php
+									if(isset($_GET['slug']) && $_GET['slug'] != ''){
+										echo $slug;
+									} 
+									else{
+										echo "New Products";
+									}
+								?>
+							</h3>
 						</div>
 					</div>
 					<!-- /section title -->
@@ -25,8 +40,7 @@
 									<div class="products-slick" data-nav="#slick-nav-1">
 										<!-- product -->
 										<?php
-											$products = new HomeController();
-											$product = $products->getProduct(); 
+											if(!empty($product)){ 
 										?>
 										@foreach($product as $value)
 										<div class="product">
@@ -59,6 +73,8 @@
 											</div>
 										</div>
 										@endforeach
+										<?php }
+										?>
 										<!-- /product -->
 									</div>
 									<div id="slick-nav-1" class="products-slick-nav"></div>

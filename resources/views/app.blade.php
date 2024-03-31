@@ -60,7 +60,7 @@
                         $category = $categories->getCategory();
                         ?>
                         @foreach($category as $value)
-						<li><a href="{{ url('categories/' . $value->slug) }}">{{ $value->name }}</a></li>
+						<li><a href="{{ url('categories/?slug=' . $value->slug) }}">{{ $value->name }}</a></li>
                         @endforeach
 						<li><a href="{{ route('categories.add') }}">Add New Categories</a></li>
 					</ul>

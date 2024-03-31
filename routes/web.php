@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,9 +22,12 @@ Route::get('/{page?}',[HomeController::class,'index'])->name('home');//set home 
 
 Route::prefix('categories')->group(function () {
     Route::get('/admin/add', [CategoryController::class,'add'])->name('categories.add');
-    Route::get('/{slug?}', [CategoryController::class,'index'])->name('categories.index');//set a name for route and call function index from store controller
+    Route::get('/{slug?}', [CategoryController::class,'getCategories'])->name('categories.index');//set a name for route and call function index from store controller
 
 });
 Route::prefix('store')->group(function(){
     Route::get('/', [StoreController::class, 'index'])->name('store.index');//set a name for route and call function index
+});
+Route::prefix('admin')->group(function(){
+    Route::get('/login', [AdminController::class, 'login'])->name('login');
 });
