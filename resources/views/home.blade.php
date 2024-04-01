@@ -1,11 +1,13 @@
 @extends('app')
 @section('content')
-<?php use App\Http\Controllers\HomeController; ?>
-<?php use App\Http\Controllers\ProductController; ?>
-<?php
-$slug = isset($_GET['slug']) ? $_GET['slug'] : '';
-$products = new ProductController();
-$product = $products->getProduct($slug); 
+<?php 
+	use App\Http\Controllers\HomeController; 
+	use App\Http\Controllers\ProductController; 
+	use App\Http\Models\Product;?>
+<?php         
+	$slug = isset($_GET['slug']) ? $_GET['slug'] : '';
+	$products = new ProductController();
+	$product = $products->getProduct($slug); 
 ?>
 		<!-- SECTION -->
 		<div class="section">
@@ -52,7 +54,7 @@ $product = $products->getProduct($slug);
 												</div> -->
 											</div>
 											<div class="product-body">
-												<p class="product-category">Category</p>
+												<p class="product-category"></p>
 												<h3 class="product-name"><a href="#">{{ $value->name }}</a></h3>
 												<h4 class="product-price">{{ $value->price }} <del class="product-old-price">$990.00</del></h4>
 												<div class="product-rating">
