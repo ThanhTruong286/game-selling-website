@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //set defaut string for migration
         Schema::defaultStringLength(191);
     }
 }

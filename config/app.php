@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Ho_Chi_Minh',//set timezone HCM
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
