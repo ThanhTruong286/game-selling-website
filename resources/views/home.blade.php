@@ -4,6 +4,12 @@
 
 <!-- hien thi thong bao thong qua session success -->
 
+@if(session('login-success'))
+  @include('success.login-success')
+@endif
+<?php
+  // dd(Auth::id());
+?>
 <!-- end if -->
 
 
