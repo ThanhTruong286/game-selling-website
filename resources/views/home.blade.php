@@ -1,5 +1,12 @@
 @extends('app')
 @section('content')
+<?php use App\Http\Controllers\Backend\AuthController;?>
+
+<!-- hien thi thong bao thong qua session success -->
+
+<!-- end if -->
+
+
 <!-- start Content  -->
   <div class="main-banner">
     <div class="container">
@@ -266,5 +273,5 @@
       </div>
     </div>
   </div>
-@endsession
+
 <!-- end Content here -->

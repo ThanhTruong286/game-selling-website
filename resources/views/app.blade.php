@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('assets/css/templatemo-lugx-gaming.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/format.css') }}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
 <!--
 
@@ -73,7 +74,7 @@ https://templatemo.com/tm-589-lugx-gaming
   </header>
   <!-- ***** Header Area End ***** -->
 
-  @yield('content', 'Default content')<!-- main content here -->
+  @yield('content')<!-- main content here -->
 
   <footer>
     <div class="container">

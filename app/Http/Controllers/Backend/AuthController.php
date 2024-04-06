@@ -6,27 +6,30 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
+    
     public function index(Request $request){
-        return view("backend/auth/login");
+        return view("backend.auth.login");
     }
     public function login(AuthRequest $request){//su dung auth request de format 
-        //luu tru thong tin vua nhap tren form
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        // //luu tru thong tin vua nhap tren form
+        $credentials = [
+            'email' => $request->input('email'),
+            'password'=> $request->input('password')
+        ];
         //check thong tin
+
         if(Auth::attempt($credentials)){
-            dd('thanh cong');
             $request->session()->regenerate();
-            return redirect()->route('dashboard.index')->with('success','Đăng nhập thành công');
+            return redirect()->route('dashboard.index')->with('message', 'Success|Dang Nhap Thanh Cong');;
         }
-        dd($credentials);
-        return redirect()->route('auth.index')->with('error','Email hoặc mật khẩu không chính xác');
+        else {
+            return redirect()->route('auth.index')->with('message','Email hoặc mật khẩu không chính xác');
+        }
+
     }
     public function logout(Request $request){
         Auth::logout();

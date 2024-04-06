@@ -16,18 +16,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('fullname',50);
-            $table->string('phone',50);
-            $table->string('provice_id',50);//ma thanh pho
-            $table->string('district_id',50);//ma quan
-            $table->string('ward_id',50);//ma quan
-            $table->string('address',50);//ma quan
-            $table->string('ward_id',50);//ma quan
-            $table->dateTime('birthday');
-            $table->string('image',50);
-            $table->string('description',100);//ma quan
-            $table->text('user_agent');
-            $table->text('ip');
+            $table->string('fullname',50)->nullable(true);
+            $table->string('phone',50)->nullable(true);
+            $table->string('provice_id',50)->nullable(true);//ma thanh pho
+            $table->string('district_id',50)->nullable(true);//ma quan
+            $table->string('ward_id',50)->nullable(true);//ma quan
+            $table->string('address',50)->nullable(true);//ma quan
+            $table->dateTime('birthday')->nullable(true);
+            $table->string('image',50)->nullable(true);
+            $table->string('description',100)->nullable(true);//ma quan
+            $table->text('user_agent')->nullable(true);
+            $table->text('ip')->nullable(true);
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
