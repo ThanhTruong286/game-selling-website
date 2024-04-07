@@ -57,8 +57,8 @@ https://templatemo.com/tm-589-lugx-gaming
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <li><a href="{{ route('home') }}" class="active">Home</a></li>
-                      <li><a href="{{ route('dashboard.index') }}">Our Shop</a></li>
+                      <li><a href="{{ route('home') }}">Home</a></li>
+                      <li><a href="{{ route('shop.index') }}">Our Shop</a></li>
                       <li><a href="product-details.html">Product Details</a></li>
                       <li><a href="contact.html">Contact Us</a></li>
                       <li><a href="{{ route('auth.index') }}">Sign In</a></li>

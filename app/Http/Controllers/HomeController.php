@@ -13,4 +13,7 @@ class HomeController extends Controller
         $categories = Category::all();
         return view('home',['dataProduct' => $products,'dataCategory' => $categories]);
     }
+    public function returnViewShop(){
+        return view('shop');
+    }
 }
