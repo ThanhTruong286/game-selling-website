@@ -13,7 +13,7 @@ class AuthController extends Controller
     
     public function index(Request $request){
         if(Auth::id() > 0){
-            return redirect()->route('home');
+            return redirect()->route('home')->with('login',true);
         }
         elseif(Auth::id() == null){
             return view('backend.auth.login');
@@ -29,10 +29,11 @@ class AuthController extends Controller
 
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->route('dashboard.index')->with('login-success', 'Đăng nhập thành công');//gui session login-success len trang home
+            return redirect()->route('home')->with('login',true);
         }
         else {
-            return redirect()->route('auth.index')->with('error','Email hoặc mật khẩu không chính xác');
+            $_SESSION['login-success'] = false;
+            return redirect()->route('auth.index');
         }
 
     }

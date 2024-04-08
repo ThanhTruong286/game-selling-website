@@ -2,16 +2,6 @@
 @section('content')
 <?php use App\Http\Controllers\Backend\AuthController;?>
 
-<!-- hien thi thong bao thong qua session success -->
-
-@if(session('login-success'))
-  @include('success.login-success')
-@endif
-<?php
-  // dd(Auth::id());
-?>
-<!-- end if -->
-
 
 <!-- start Content  -->
   <div class="main-banner">
@@ -33,7 +23,7 @@
         <div class="col-lg-4 offset-lg-2">
           <div class="right-image">
             <img src="assets/images/re4.jpg" alt="">
-            <span class="price">$???</span>
+            <span class="price">$500</span>
             <span class="offer">-40%</span>
           </div>
         </div>
@@ -102,21 +92,26 @@
             <a href="{{ route('shop.index') }}">View All</a>
           </div>
         </div>
+
+        <!-- foreach product -->
         @foreach($dataProduct as $value)
         <div class="col-lg-3 col-md-6">
           <div class="item">
             <div class="thumb">
-              <a href="product-details.html"><img src="{{ asset('assets/images/' . $value->image) }}" alt=""></a>
+              <a href="product-details.html"><img height="250px" src="{{ asset('assets/images/' . $value->image) }}" alt=""></a>
               <span class="price"><em>${{ $value->price }}</em>${{ $value->price }}</span>
             </div>
             <div class="down-content">
-              <span class="category">Action</span>
+              <span class="category">{{ $product_category }}</span>
               <h4>{{ $value->name }}</h4>
+              <br><br>
               <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
             </div>
           </div>
         </div>
         @endforeach
+
+        <!-- end of foreach -->
       </div>
     </div>
   </div>
@@ -167,7 +162,7 @@
           <div class="item">
             <h4>{{ $value->name }}</h4>
             <div class="thumb">
-              <a href="product-details.html"><img height="400px" src="{{ asset('assets/images/' . $value->image) }}" alt=""></a>
+              <a href="product-details.html"><img height="300px" src="{{ asset('assets/images/' . $value->image) }}" alt=""></a>
             </div>
           </div>
         </div>

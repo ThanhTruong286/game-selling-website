@@ -119,7 +119,11 @@
                     </ul>
                 </li>
 
-
+                <li>
+                    <a href="{{ route('home') }}">
+                        <i class="fa fa-home"></i> Home
+                    </a>
+                </li>
                 <li>
                     <a href="{{ route('auth.logout') }}">
                         <i class="fa fa-sign-out"></i> Log out
