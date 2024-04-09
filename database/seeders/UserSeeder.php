@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -21,5 +22,7 @@ class UserSeeder extends Seeder
         ];
 
         DB::table('users')->insert($data);
+        $user = User::factory()->count(1000)->create();//tao ra 1 nghin ban ghi gia
+
     }
 }

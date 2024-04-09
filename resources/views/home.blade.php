@@ -23,7 +23,7 @@
         <div class="col-lg-4 offset-lg-2">
           <div class="right-image">
             <img src="assets/images/re4.jpg" alt="">
-            <span class="price">$500</span>
+            <span class="price">$1</span>
             <span class="offer">-40%</span>
           </div>
         </div>

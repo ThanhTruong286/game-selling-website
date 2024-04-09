@@ -10,7 +10,7 @@
         </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-                    <span class="m-r-sm text-muted welcome-message">Welcome to INSPINIA+ Admin Theme.</span>
+                    <span class="m-r-sm text-muted welcome-message">Welcome to admin dashboard</span>
                 </li>
                 <li class="dropdown">
                     <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
@@ -108,9 +108,13 @@
                     </ul>
                 </li>
 
-
                 <li>
-                    <a href="login.html">
+                    <a href="{{ route('home') }}">
+                        <i class="fa fa-home"></i> Home
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('auth.logout') }}">
                         <i class="fa fa-sign-out"></i> Log out
                     </a>
                 </li>
