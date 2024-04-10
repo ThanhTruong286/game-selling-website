@@ -19,7 +19,7 @@ class AuthenticateMiddleware
     {
         //kiem tra dang nhap
         if(Auth::id() == null){
-            return redirect()->route('home');//neu chua dang nhap thi tra ve trang home
+            return redirect()->route('home')->with('error','Bạn Phải Đăng Nhập Để Sử Dụng Chức Năng Admin');//neu chua dang nhap thi tra ve trang home
         }
         return $next($request);
     }

@@ -59,19 +59,12 @@ https://templatemo.com/tm-589-lugx-gaming
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                      <?php
-                        if(isset($_SESSION['login']) && $_SESSION['login'] == true){
-                          echo 'login true';
-                        } 
-                        else{
-                          echo 'login false';
-                        }
-                      ?>
                       <li><a href="{{ route('home') }}">Home</a></li>
                       <li><a href="{{ route('shop.index') }}">Our Shop</a></li>
                       <li><a href="product-details.html">Product Details</a></li>
                       <li><a href="contact.html">Contact Us</a></li>
                       <li><a href="{{ route('dashboard.index') }}">Admin</a></li>
+                      <li><a href="{{ route('auth.signup') }}">Sign Up</a></li>
                       <li><a href="{{ route('auth.index') }}">Sign In</a></li>
                   </ul>   
                     <a class='menu-trigger'>

@@ -13,18 +13,15 @@
                             <li><a href="contacts.html">Contacts</a></li>
                             <li><a href="mailbox.html">Mailbox</a></li>
                             <li class="divider"></li>
-                            <li><a href="login.html">Logout</a></li>
+                            <li><a href="{{ route('auth.logout') }}">Logout</a></li>
                         </ul>
-                    </div>
-                    <div class="logo-element">
-                        IN+
                     </div>
                 </li>
                 <li class="active">
-                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lý Users</span> <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lý</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li><a href="{{ route('user.index') }}">Quản Lý Thành Viên</a></li>
-                        <li class="active"><a href="dashboard_2.html">Dashboard v.2</a></li>
+                        <li><a href="{{ route('product.crud') }}">Quản Lý Sản Phẩm</a></li>
                     </ul>
                 </li>
                 

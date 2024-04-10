@@ -13,7 +13,7 @@ class UserController extends Controller
     }
     public function index(){
         $users = User::paginate(5);//lay ra 5 ban ghi
-        $template = 'backend.user.index';
+        $template = 'backend.dashboard.user.index';
         return view('backend.dashboard.layout',compact('template','users'));
     }
 }

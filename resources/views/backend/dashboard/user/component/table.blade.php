@@ -3,7 +3,6 @@
                             <tr>
                                 <th><input type="checkbox" id="checkAll"></th><strong>Check All</strong>
                                 <th>Avatar</th>
-                                <th>Number</th>
                                 <th>Thông Tin Thành Viên</th>
                                 <th>Địa Chỉ</th>
                                 <th>Tình Trạng</th>
@@ -17,7 +16,6 @@
                             <tr>
                                 <td><input type="checkbox" id="checkAll"></td>
                                 <td><img width="auto" height="80px" src="{{ asset('assets/images/' . $value->image) }}" alt=""></td>
-                                <td>1</td>
                                 <!-- information -->
                                 <td>
                                     <div class="info-item name"><strong>Họ Tên:</strong> {{ $value->fullname }}</div>

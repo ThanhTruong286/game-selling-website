@@ -20,11 +20,11 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
                 <!-- toolbox here -->
-                @include('backend.user.component.toolbox')
+                @include('backend.dashboard.user.component.toolbox')
             <div class="ibox-content">
                         
                 <!-- infor table here -->
-                 @include('backend.user.component.table')
+                 @include('backend.dashboard.user.component.table')
 
             </div>
         </div>
