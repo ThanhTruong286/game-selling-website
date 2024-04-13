@@ -26,13 +26,17 @@ class AuthRequest extends FormRequest
         return [
             'email'=>['required','email'],//chinh dinh dang yeu cau email
             'password'=>['required'],
+            'phone' =>['required'],
+            'name' => ['required'],
         ];
     }
     public function messages():array{
         return[
             'email.required'=>'Bạn chưa nhập email !!!',
             'email.email'=>'Bạn nhập email chưa đúng định dạng !!!',
-            'password.required'=>'Bạn chưa nhập password !!!'
+            'password.required'=>'Bạn chưa nhập password !!!',
+            'phone.required' => 'Bạn chưa nhập số điện thoại !!!',
+            'name.required' => 'Bạn chưa nhập họ tên !!!',
         ];
     }
 }

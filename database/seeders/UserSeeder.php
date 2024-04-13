@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => 'Truong','email' => 'caot43069@gmail.com', 'password' => Hash::make('123')/*tao mat khau la 123 va ma hoa bang Hash */,'image' => 'goku.jpg','roles'=>0],
+            ['name' => 'Truong','email' => 'caot43069@gmail.com', 'password' => Hash::make('123')/*tao mat khau la 123 va ma hoa bang Hash */,'image' => 'goku.jpg','roles'=> 0,'phone' => 123456789],
             ['name' => 'Thanh','email' => 'thanht43069@gmail.com', 'password' => Hash::make('456')/*tao mat khau la 123 va ma hoa bang Hash */,'image' => 'vegeta.jpg','roles'=>1]
         ];
 

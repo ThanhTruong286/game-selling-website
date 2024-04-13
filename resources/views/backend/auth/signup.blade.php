@@ -212,12 +212,26 @@ input[type="submit"]:active
 
     <div class="content"> 
 
-     <h2>Sign In</h2> 
+     <h2>Sign Up</h2> 
 
-    <form action="{{ route('auth.login') }}" method="post"><!-- gui du lieu den route: auth.login -->
+    <form action="{{ route('auth.signup') }}" method="post"><!-- gui du lieu den route: auth.login -->
     @csrf
      <div class="form"> 
 
+
+    <!-- FULL NAME -->
+    <div class="inputBox"> 
+    
+    <input name="name" type="text"> <i>Name</i> 
+    <!-- kiem tra loi xay ra voi PROVINCE -->
+    @if($errors->has('name'))
+      <span class="error-message">{{ $errors->first('name') }} </span>
+    @endif
+    <!-- ket thuc if -->
+
+
+    </div> 
+      <!-- EMAIL -->
       <div class="inputBox"> 
 
        <input name="email" type="text"> <i>Email</i> 
@@ -228,6 +242,7 @@ input[type="submit"]:active
       <!-- ket thuc if -->
       </div> 
 
+      <!-- PASSWORD -->
       <div class="inputBox"> 
 
        <input name="password" type="password"> <i>Password</i> 
@@ -238,8 +253,18 @@ input[type="submit"]:active
       <!-- ket thuc if -->
 
       </div> 
+      <!-- PHONE -->
+      <div class="inputBox"> 
 
-      <div class="links"> <a href="#">Forgot Password</a> <a href="{{ route('signup.form') }}">Signup</a> 
+      <input name="phone" type="text"> <i>Phone</i> 
+      <!-- kiem tra loi xay ra voi phone -->
+      @if($errors->has('phone'))
+          <span class="error-message">{{ $errors->first('phone') }} </span>
+      @endif
+      </div> 
+    <!-- ket thuc if -->
+
+      <div class="links"> <strong style="color:white;">Have Account ?</strong> <a href="{{ route('signin.form') }}">Sign In</a> 
 
       </div> 
 

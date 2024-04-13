@@ -20,8 +20,27 @@ class AuthController extends Controller
             return view('backend.auth.login');
         }
     }
-    public function signup(Request $request){
-        echo 1;die();
+    public function returnViewSignup(Request $request){
+        return view('backend.auth.signup');
+    }
+    public function signup(AuthRequest $request){//su dung auth request de format required
+        $email = $request->input('email');
+        $check_email = DB::table('users')->where('email',$email)->value('email');//chi tra ve cot email trong user duoc chon
+        $phone = $request->input('phone');
+        $check_phone = DB::table('users')->where('phone',$phone)->value('phone');
+        //check xem email da ton tai hay chua
+        if($email == $check_email )//doi chieu email vua input va toan bo email trong table users
+        {
+            return redirect()->route('signup.form')->with('error','Email Đã Được Đăng Ký !!!');
+        }
+        //check xem sdt da ton tai hay chua
+        else if($check_phone == $phone) {
+            return redirect()->route('signup.form')->with('error','Số Điện Thoại Đã Được Đăng Ký !!!');
+        }
+        //thoa dieu kien de tao account
+        else{
+            echo 1;
+        }
     }
     public function login(AuthRequest $request){//su dung auth request de format 
         // //luu tru thong tin vua nhap tren form

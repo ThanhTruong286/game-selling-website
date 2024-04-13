@@ -67,8 +67,8 @@ https://templatemo.com/tm-589-lugx-gaming
                       <li><a href="contact.html">Contact Us</a></li>
                       <!-- neu chua dang nhap -->
                       @if(!Auth::check())
-                        <li><a href="{{ route('auth.signup') }}">Sign Up</a></li>
-                        <li><a href="{{ route('auth.index') }}">Sign In</a></li>
+                        <li><a href="{{ route('signup.form') }}">Sign Up</a></li>
+                        <li><a href="{{ route('signin.form') }}">Sign In</a></li>
                         @endif
                       <!-- check user login -->
                         @if(Auth::check())
