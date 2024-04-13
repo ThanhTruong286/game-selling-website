@@ -30,9 +30,9 @@ class AuthRequest extends FormRequest
     }
     public function messages():array{
         return[
-            'email.required'=>'Mày chưa nhập email kìa !!!',
-            'email.email'=>'Mày nhập email chưa đúng định dạng kìa !!!',
-            'password.required'=>'Mày chưa nhập password kìa !!!'
+            'email.required'=>'Bạn chưa nhập email !!!',
+            'email.email'=>'Bạn nhập email chưa đúng định dạng !!!',
+            'password.required'=>'Bạn chưa nhập password !!!'
         ];
     }
 }

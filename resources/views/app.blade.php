@@ -1,4 +1,6 @@
-<?php session_start();?>
+<?php session_start();
+use Illuminate\Support\Facades\Auth;
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -63,9 +65,21 @@ https://templatemo.com/tm-589-lugx-gaming
                       <li><a href="{{ route('shop.index') }}">Our Shop</a></li>
                       <li><a href="product-details.html">Product Details</a></li>
                       <li><a href="contact.html">Contact Us</a></li>
-                      <li><a href="{{ route('dashboard.index') }}">Admin</a></li>
-                      <li><a href="{{ route('auth.signup') }}">Sign Up</a></li>
-                      <li><a href="{{ route('auth.index') }}">Sign In</a></li>
+                      <!-- neu chua dang nhap -->
+                      @if(!Auth::check())
+                        <li><a href="{{ route('auth.signup') }}">Sign Up</a></li>
+                        <li><a href="{{ route('auth.index') }}">Sign In</a></li>
+                        @endif
+                      <!-- check user login -->
+                        @if(Auth::check())
+                          <li><a href="{{ route('auth.logout') }}">Log Out</a></li>
+                            <!-- check admin login -->
+                            @if(Auth::user()->roles == 0)
+                              <li><a href="{{ route('dashboard.index') }}">Admin</a></li>
+                            @endif
+                          <li><a href="{{ route('auth.logout') }}">{{ Auth::user()->name }}</a></li>
+                        @endif
+
                   </ul>   
                     <a class='menu-trigger'>
                         <span>Menu</span>

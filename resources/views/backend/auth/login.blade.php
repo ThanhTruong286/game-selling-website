@@ -46,7 +46,7 @@ section::before
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#000,#D10024e6,#000);
+  background: linear-gradient(#000,#007cf8,#000);
   animation: animate 5s linear infinite;
 }
 @keyframes animate 
@@ -72,7 +72,7 @@ section span
 }
 section span:hover 
 {
-  background: #D10024e6;
+  background: #007cf8;
   transition: 0s;
 }
 
@@ -102,7 +102,7 @@ section .signin .content
 section .signin .content h2 
 {
   font-size: 2em;
-  color: #D10024e6;
+  color: #007cf8;
   text-transform: uppercase;
 }
 section .signin .content .form 
@@ -161,13 +161,13 @@ section .signin .content .form .inputBox i
 }
 .signin .content .form .links a:nth-child(2)
 {
-  color: #D10024e6;
+  color: #007cf8;
   font-weight: 600;
 }
 .signin .content .form .inputBox input[type="submit"]
 {
   padding: 10px;
-  background: #D10024e6;
+  background: #007cf8;
   color: #fff;
   font-weight: 600;
   font-size: 1.35em;
@@ -239,7 +239,7 @@ input[type="submit"]:active
 
       </div> 
 
-      <div class="links"> <a href="#">Forgot Password</a> <a href="#">Signup</a> 
+      <div class="links"> <a href="#">Forgot Password</a> <a href="{{ route('auth.signup') }}">Signup</a> 
 
       </div> 
 

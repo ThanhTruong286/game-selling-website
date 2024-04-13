@@ -1,6 +1,7 @@
 @extends('app')
 @section('content')
-<?php use App\Http\Controllers\Backend\AuthController;?>
+<?php use App\Http\Controllers\Backend\AuthController;
+?>
 
 
 <!-- start Content  -->
