@@ -1,4 +1,4 @@
-@include('backend.auth.mailer')
+
 <!doctype html>
 
 <html lang="en"> 
@@ -22,15 +22,21 @@
 
      <h3 style="color:#2196F3;">Reset Password</h3> 
 
-    <form action="{{ $_SERVER['PHP_SELF'] }}" method="get"><!-- gui du lieu ban than no -->
+    <form action="{{ route('make_new_password') }}" method="get"><!-- gui du lieu ban than no -->
     @csrf
      <div class="form"> 
-        
+
       <div class="inputBox"> 
 
-       <input name="email" type="text" required> <i>Email</i> 
+       <input name="password" type="text" required> <i>New Password</i> 
 
       </div> 
+
+      <div class="inputBox"> 
+
+        <input name="confirm" type="text" required> <i>Confirm Password</i> 
+
+        </div> 
 
       <div class="links"> <p style="color:white;">Have Account ?</p> <a href="{{ route('signin.form') }}">Sign In</a> 
 
@@ -38,7 +44,7 @@
 
       <div class="inputBox"> 
 
-       <input type="submit" value="Send Message"> 
+       <input type="submit" value="Submit"> 
 
       </div> 
 

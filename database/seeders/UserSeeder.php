@@ -19,11 +19,10 @@ class UserSeeder extends Seeder
     {
         $data = [
             ['name' => 'Truong','email' => 'caot43069@gmail.com', 'password' => Hash::make('123')/*tao mat khau la 123 va ma hoa bang Hash */,'image' => 'goku.jpg','roles'=> 0,'phone' => 123456789],
-            ['name' => 'Thanh','email' => 'thanht43069@gmail.com', 'password' => Hash::make('456')/*tao mat khau la 123 va ma hoa bang Hash */,'image' => 'vegeta.jpg','roles'=>1]
+            ['name' => 'Thanh','email' => 'thanht43069@gmail.com', 'password' => Hash::make('456')/*tao mat khau la 123 va ma hoa bang Hash */,'image' => 'vegeta.jpg','roles'=>1, 'phone' => 123]
         ];
 
         DB::table('users')->insert($data);
-        // $user = User::factory()->count(1000)->create();//tao ra 1 nghin ban ghi gia
 
     }
 }

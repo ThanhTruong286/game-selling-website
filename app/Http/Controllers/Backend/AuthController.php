@@ -65,12 +65,30 @@ class AuthController extends Controller
             return redirect()->route('home',['user_name' => $user_name])->with('success','Đăng Nhập Thành Công');
         }
         else {
-            return redirect()->route('auth.index')->with('error','Đăng Nhập Thất Bại');
+            return redirect()->route('home')->with('error','Đăng Nhập Thất Bại');
         }
 
     }
-    public function resetPassword(){
-        return view('backend.auth.reset_password');
+    public function reset_password(Request $request){ 
+        $email = $request->get('email');//chi lay gia tri email trong array bao gom _token va email tu request
+        if($email != null){
+            return view('backend.auth.reset_password',compact('email'))->with('success','Gửi Yêu Cầu Thành Công !!!');
+        }
+        else{
+            $email = '';
+            return view('backend.auth.reset_password',compact('email'))->with('error','Gửi Yêu Cầu Thất Bại !!!');
+        }
+    }
+    public function make_new_password(Request $request){
+        $email = $request->get('email');//chi lay gia tri email trong array bao gom _token va email tu request
+        $password = $request->input('password');
+        $confirm = $request->input('confirm');
+        if($password == $confirm && $password != null){
+            dd($email);
+            DB::table('users')->where('email', $email)->update(['password'=> Hash::make($password)]);
+            return redirect()->route('signin.form')->with('success','Đổi Mật Khẩu Thành Công !!!');
+        }
+        return view('backend.auth.new_password',compact('email'));
     }
     public function logout(Request $request){
         Auth::logout();
