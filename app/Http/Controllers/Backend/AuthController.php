@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
@@ -23,7 +24,7 @@ class AuthController extends Controller
     public function returnViewSignup(Request $request){
         return view('backend.auth.signup');
     }
-    public function signup(AuthRequest $request){//su dung auth request de format required
+    public function signup(Request $request){//su dung auth request de format required
         $email = $request->input('email');
         $check_email = DB::table('users')->where('email',$email)->value('email');//chi tra ve cot email trong user duoc chon
         $phone = $request->input('phone');
@@ -39,10 +40,18 @@ class AuthController extends Controller
         }
         //thoa dieu kien de tao account
         else{
-            echo 1;
+            $data = [
+                'name' => $request->input('name'),
+                'phone' => $phone,
+                'email' => $email,
+                'password' => Hash::make($request->input('password')),
+                'roles' => 1
+            ];
+            DB::table('users')->insert($data);
+            return redirect()->route('signin.form')->with('success','Đăng Ký Thành Công !!!');
         }
     }
-    public function login(AuthRequest $request){//su dung auth request de format 
+    public function login(Request $request){//su dung auth request de format 
         // //luu tru thong tin vua nhap tren form
         $credentials = [
             'email' => $request->input('email'),
@@ -59,6 +68,9 @@ class AuthController extends Controller
             return redirect()->route('auth.index')->with('error','Đăng Nhập Thất Bại');
         }
 
+    }
+    public function resetPassword(){
+        return view('backend.auth.reset_password');
     }
     public function logout(Request $request){
         Auth::logout();

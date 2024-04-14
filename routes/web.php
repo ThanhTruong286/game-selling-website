@@ -31,6 +31,7 @@ Route::prefix('user')->group(function () {
     Route::get('signupForm', [AuthController::class,'returnViewSignup'])->name('signup.form');//duong dan toi chuc nang dang ky
     Route::post('signup', [AuthController::class,'signup'])->name('auth.signup');//duong dan toi chuc nang dang ky
     Route::get('loginForm',[AuthController::class,'index'])->name('signin.form');//duong dan toi login form
+    Route::get('reset-password',[AuthController::class,'resetPassword'])->name('resetPassword');
 });
 /* ADMIN */
 Route::prefix('admin')->group(function () {
