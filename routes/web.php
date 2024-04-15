@@ -34,6 +34,7 @@ Route::prefix('user')->group(function () {
     Route::get('reset-password',[AuthController::class,'reset_password'])->name('resetPassword');
     Route::get('change-password',[AuthController::class,'returnResetPasswordView'])->name('make_new_password_view');
     Route::get('make-new-password',[AuthController::class,'make_new_password'])->name('makeNewPass');
+    Route::get('profile',[AuthController::class,'showProfile'])->name('profile');
 });
 /* ADMIN */
 Route::prefix('admin')->group(function () {

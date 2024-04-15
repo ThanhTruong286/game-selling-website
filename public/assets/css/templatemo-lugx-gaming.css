@@ -861,6 +861,7 @@ Trending Style
 
 .trending .item .down-content {
   padding: 25px;
+  height: 150px;
 }
 
 .trending .item .down-content span.category {

@@ -77,7 +77,7 @@ https://templatemo.com/tm-589-lugx-gaming
                             @if(Auth::user()->roles == 0)
                               <li><a href="{{ route('dashboard.index') }}">Admin</a></li>
                             @endif
-                          <li><a href="{{ route('auth.logout') }}">{{ Auth::user()->name }}</a></li>
+                          <li><a href="{{ route('profile') }}">{{ Auth::user()->name }}</a></li>
                         @endif
 
                   </ul>   

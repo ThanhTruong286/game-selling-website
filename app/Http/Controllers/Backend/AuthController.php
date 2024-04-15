@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\AuthRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
+use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function showProfile(Request $request){
+        // $user = User::where("email", $request->email)->first();cach khong toi uu 
+        $user = Auth::user();
+        return view("backend.user.profile",compact("user"));
+    }
     
     public function index(Request $request){
         if(Auth::check()){
@@ -24,7 +28,7 @@ class AuthController extends Controller
     public function returnViewSignup(Request $request){
         return view('backend.auth.signup');
     }
-    public function signup(Request $request){//su dung auth request de format required
+    public function signup(Request $request){
         $email = $request->input('email');
         $check_email = DB::table('users')->where('email',$email)->value('email');//chi tra ve cot email trong user duoc chon
         $phone = $request->input('phone');
@@ -51,7 +55,7 @@ class AuthController extends Controller
             return redirect()->route('signin.form')->with('success','Đăng Ký Thành Công !!!');
         }
     }
-    public function login(Request $request){//su dung auth request de format 
+    public function login(Request $request){
         // //luu tru thong tin vua nhap tren form
         $credentials = [
             'email' => $request->input('email'),

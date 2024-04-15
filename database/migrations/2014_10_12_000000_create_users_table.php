@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('fullname',50)->nullable(true);
             $table->string('phone',50)->nullable(true);
-            $table->string('provice_id',50)->nullable(true);//ma thanh pho
-            $table->string('district_id',50)->nullable(true);//ma quan
-            $table->string('ward_id',50)->nullable(true);//ma quan
+            $table->string('province',50)->nullable(true);//ma thanh pho
+            $table->string('district',50)->nullable(true);//ma quan
+            $table->string('ward',50)->nullable(true);//ma quan
             $table->string('address',50)->nullable(true);//ma quan
             $table->dateTime('birthday')->nullable(true);
             $table->string('image',50)->nullable(true);
