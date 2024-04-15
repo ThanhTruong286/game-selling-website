@@ -22,10 +22,15 @@
 
      <h3 style="color:#2196F3;">Reset Password</h3> 
 
-    <form action="{{ route('make_new_password') }}" method="get"><!-- gui du lieu ban than no -->
+    <form action="{{ route('makeNewPass') }}" method="get"><!-- gui du lieu ban than no -->
     @csrf
      <div class="form"> 
+      
+     <div class="inputBox"> 
 
+    <input name="email" type="hidden" value="{{ $email }}" required> <i></i> 
+
+    </div> 
       <div class="inputBox"> 
 
        <input name="password" type="text" required> <i>New Password</i> 

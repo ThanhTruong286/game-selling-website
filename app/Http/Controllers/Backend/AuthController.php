@@ -79,16 +79,25 @@ class AuthController extends Controller
             return view('backend.auth.reset_password',compact('email'))->with('error','Gửi Yêu Cầu Thất Bại !!!');
         }
     }
-    public function make_new_password(Request $request){
-        $email = $request->get('email');//chi lay gia tri email trong array bao gom _token va email tu request
-        $password = $request->input('password');
-        $confirm = $request->input('confirm');
-        if($password == $confirm && $password != null){
-            dd($email);
-            DB::table('users')->where('email', $email)->update(['password'=> Hash::make($password)]);
-            return redirect()->route('signin.form')->with('success','Đổi Mật Khẩu Thành Công !!!');
-        }
+    public function returnResetPasswordView(Request $request){
+        $email = $request->get('email');
         return view('backend.auth.new_password',compact('email'));
+    }
+    public function make_new_password(Request $request){
+        $password = $request->get('password');
+        $confirm = $request->get('confirm');
+        if($password != null){
+            $email = $request->get('email');//chi lay gia tri email trong array bao gom _token va email tu request
+
+            if($password == $confirm){
+                // dd($email);
+                DB::table('users')->where('email', $email)->update(['password'=> Hash::make($password)]);
+                return redirect()->route('signin.form')->with('success','Đổi Mật Khẩu Thành Công !!!');
+            }
+            else{
+                return redirect()->route('signin.form')->with('error','Mật Khẩu Không Trùng Khớp !!!');
+            }
+        }
     }
     public function logout(Request $request){
         Auth::logout();

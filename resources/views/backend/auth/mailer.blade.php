@@ -45,7 +45,7 @@ try {
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Reset Password Request';
-    $mail->Body    = 'Link to reset below <br> '. route('make_new_password',compact('email'));
+    $mail->Body    = 'Link to reset below <br> '. route('make_new_password_view',compact('email'));
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
     $mail->send();

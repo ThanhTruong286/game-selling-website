@@ -32,7 +32,8 @@ Route::prefix('user')->group(function () {
     Route::post('signup', [AuthController::class,'signup'])->name('auth.signup');//duong dan toi chuc nang dang ky
     Route::get('loginForm',[AuthController::class,'index'])->name('signin.form');//duong dan toi login form
     Route::get('reset-password',[AuthController::class,'reset_password'])->name('resetPassword');
-    Route::get('make-new-password',[AuthController::class,'make_new_password'])->name('make_new_password');
+    Route::get('change-password',[AuthController::class,'returnResetPasswordView'])->name('make_new_password_view');
+    Route::get('make-new-password',[AuthController::class,'make_new_password'])->name('makeNewPass');
 });
 /* ADMIN */
 Route::prefix('admin')->group(function () {
