@@ -39,7 +39,7 @@
 
       </div> 
 
-      <div class="links"> <a href="{{ route('resetPassword') }}">Forgot Password</a> <a href="{{ route('signup.form') }}">Signup</a> 
+      <div class="links"> <a href="{{ route('reset_password_view') }}">Forgot Password</a> <a href="{{ route('signup.form') }}">Signup</a> 
 
       </div> 
 

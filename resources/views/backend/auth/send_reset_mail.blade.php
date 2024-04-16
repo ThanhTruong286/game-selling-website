@@ -1,4 +1,4 @@
-@include('backend.auth.mailer')
+
 <!doctype html>
 
 <html lang="en"> 
@@ -22,7 +22,7 @@
 
      <h3 style="color:#2196F3;">Reset Password</h3> 
 
-    <form action="{{ $_SERVER['PHP_SELF'] }}" method="get"><!-- gui du lieu ban than no -->
+    <form action="{{ route('send_email_reset') }}" method="post">
     @csrf
      <div class="form"> 
         

@@ -28,13 +28,17 @@ Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard.i
 Route::prefix('user')->group(function () {
     Route::get('logout',[AuthController::class,'logout'])->name('auth.logout');
     Route::post('login',[AuthController::class,'login'])->name('auth.login');//su dung phuong thuc login trong AuthController
-    Route::get('signupForm', [AuthController::class,'returnViewSignup'])->name('signup.form');//duong dan toi chuc nang dang ky
+    Route::get('signup-form', [AuthController::class,'returnViewSignup'])->name('signup.form');//duong dan toi chuc nang dang ky
     Route::post('signup', [AuthController::class,'signup'])->name('auth.signup');//duong dan toi chuc nang dang ky
-    Route::get('loginForm',[AuthController::class,'index'])->name('signin.form');//duong dan toi login form
-    Route::get('reset-password',[AuthController::class,'reset_password'])->name('resetPassword');
+    Route::get('login-form',[AuthController::class,'index'])->name('signin.form');//duong dan toi login form
+
+    Route::get('reset-password',[AuthController::class,'reset_password_view'])->name('reset_password_view');
     Route::get('change-password',[AuthController::class,'returnResetPasswordView'])->name('make_new_password_view');
+    Route::post('send-email-reset',[AuthController::class,'send_email_reset'])->name('send_email_reset');
+
     Route::get('make-new-password',[AuthController::class,'make_new_password'])->name('makeNewPass');
     Route::get('profile',[AuthController::class,'showProfile'])->name('profile');
+    Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
 });
 /* ADMIN */
 Route::prefix('admin')->group(function () {

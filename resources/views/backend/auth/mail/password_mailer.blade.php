@@ -31,7 +31,7 @@ try {
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('hopi2806@gmail.com', 'Hopi Steam');
+    $mail->setFrom('thanht43069@gmail.com', 'Hopi Steam');
     $mail->addAddress($email);     //Add a recipient
     // $mail->addAddress('ellen@example.com');               //Name is optional
     // $mail->addReplyTo('info@example.com', 'Information');
@@ -44,10 +44,11 @@ try {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
+
+    //include content here
     $mail->Subject = 'Reset Password Request';
     $mail->Body    = 'Link to reset below <br> '. route('make_new_password_view',compact('email'));
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
     $mail->send();
 } catch (Exception $e) {
     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";

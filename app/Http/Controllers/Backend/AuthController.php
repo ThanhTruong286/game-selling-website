@@ -11,6 +11,17 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
+    public function confirm_email(Request $request){
+            $data = [
+            'name' => $request->get('name'),
+            'phone' => $request->get('phone'),
+            'email' => $request->get('email'),
+            'password' => Hash::make($request->get('password')),
+            'roles' => 1
+        ];
+            DB::table('users')->insert($data);
+            return redirect()->route('signin.form')->with('success','Tạo Tài Khoản Thành Công');
+    }
     public function showProfile(Request $request){
         // $user = User::where("email", $request->email)->first();cach khong toi uu 
         $user = Auth::user();
@@ -33,6 +44,8 @@ class AuthController extends Controller
         $check_email = DB::table('users')->where('email',$email)->value('email');//chi tra ve cot email trong user duoc chon
         $phone = $request->input('phone');
         $check_phone = DB::table('users')->where('phone',$phone)->value('phone');
+        $password = $request->input('password');
+        $name = $request->input('name');
         //check xem email da ton tai hay chua
         if($email == $check_email )//doi chieu email vua input va toan bo email trong table users
         {
@@ -44,15 +57,7 @@ class AuthController extends Controller
         }
         //thoa dieu kien de tao account
         else{
-            $data = [
-                'name' => $request->input('name'),
-                'phone' => $phone,
-                'email' => $email,
-                'password' => Hash::make($request->input('password')),
-                'roles' => 1
-            ];
-            DB::table('users')->insert($data);
-            return redirect()->route('signin.form')->with('success','Đăng Ký Thành Công !!!');
+            return view('backend.auth.waiting.waiting_signup',compact('email','phone','name','password'));
         }
     }
     public function login(Request $request){
@@ -69,19 +74,20 @@ class AuthController extends Controller
             return redirect()->route('home',['user_name' => $user_name])->with('success','Đăng Nhập Thành Công');
         }
         else {
-            return redirect()->route('home')->with('error','Đăng Nhập Thất Bại');
+            return redirect()->route('signin.form')->with('error','Đăng Nhập Thất Bại, Lỗi Tài Khoản Hoặc Mật Khẩu');
         }
 
     }
-    public function reset_password(Request $request){ 
-        $email = $request->get('email');//chi lay gia tri email trong array bao gom _token va email tu request
-        if($email != null){
-            return view('backend.auth.reset_password',compact('email'))->with('success','Gửi Yêu Cầu Thành Công !!!');
+    public function send_email_reset(Request $request){ 
+        $email = $request->get('email');
+        if(DB::table('users')->where('email', $email)->count() == 0){
+            return redirect()->route('reset_password_view')->with('error','Email Chưa Từng Dùng Để Đăng Ký');
         }
-        else{
-            $email = '';
-            return view('backend.auth.reset_password',compact('email'))->with('error','Gửi Yêu Cầu Thất Bại !!!');
-        }
+        return view('backend.auth.waiting.waiting_reset_password',compact('email'));
+    }
+    public function reset_password_view(Request $request){
+        $email = $request->get('email');
+        return view('backend.auth.send_reset_mail',compact('email'));
     }
     public function returnResetPasswordView(Request $request){
         $email = $request->get('email');
