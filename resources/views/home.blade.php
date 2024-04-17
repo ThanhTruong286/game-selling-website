@@ -103,7 +103,7 @@
               <span class="price"><em>${{ $value->price }}</em>${{ $value->price }}</span>
             </div>
             <div class="down-content">
-              <span class="category">{{ $product_category }}</span>
+              <span class="category">{{ $value->category->name }}</span>
               <h4>{{ $value->name }}</h4>
               <br><br>
               <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>

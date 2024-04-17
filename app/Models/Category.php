@@ -12,10 +12,6 @@ class Category extends Model
     
     public function product()
     {
-        return $this->hasMany(Product::class);//su dung categories_id lam chia khoa ngoai giua Product va Category Models
-    }
-    public function category()
-    {
-        return $this->belongsTo(Category::class);//su dung categories_id lam chia khoa ngoai giua Product va Category Models
+        return $this->hasMany(Product::class,'categories_id');//su dung categories_id lam chia khoa ngoai giua Product va Category Models
     }
 }

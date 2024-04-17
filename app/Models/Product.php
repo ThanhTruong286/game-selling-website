@@ -11,10 +11,6 @@ class Product extends Model
     use HasFactory;
     public function category()
     {
-        return $this->belongsTo(Category::class);//su dung categories_id lam chia khoa ngoai giua Product va Category Models
-    }
-    public function product()
-    {
-        return $this->hasMany(Product::class);//su dung categories_id lam chia khoa ngoai giua Product va Category Models
+        return $this->belongsTo(Category::class,'categories_id');//su dung categories_id lam chia khoa ngoai giua Product va Category Models
     }
 }

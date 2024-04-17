@@ -25,7 +25,7 @@
                                 <td>
                                     ${{ $value->price }}
                                 </td>
-                                <td>{{ $product_category }}</td>
+                                <td>{{ $value->category->name }}</td>
                                 <!-- switch button -->
                                 <td>
                                     <label class="switch">

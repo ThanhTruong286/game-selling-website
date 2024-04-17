@@ -11,9 +11,7 @@ class HomeController extends Controller
     public function returnViewHome(Request $request){
         $products = Product::all();
         $categories = Category::all();
-        $a = Product::first();
-        $product_categoryName = null;
-        return view('home',['dataProduct' => $products,'dataCategory' => $categories,'product_category' => $product_categoryName]);
+        return view('home',['dataProduct' => $products,'dataCategory' => $categories]);
     }
     public function returnViewShop(){
         return view('shop');
