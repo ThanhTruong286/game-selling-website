@@ -17,7 +17,7 @@
 <div class="panel">
 <div class="user-heading round">
 <a href="#">
-<img src="{{ asset('assets/images/' . $user->image) }}" alt>
+<img src="{{ asset('storage/images/' . $user->image) }}" alt>
 </a>
 <h1>{{ $user->name }}</h1>
 <P>{{ $user->email }}</P>

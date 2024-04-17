@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="{{ asset('assets/css/format.css') }}">
+<!-- <link rel="stylesheet" href="{{ asset('assets/css/format.css') }}">
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
         <h2>Quản Lý Thành Viên</h2>
@@ -9,11 +9,10 @@
             <li>
                 <a href="{{ route('dashboard.index') }}">Dashboard</a>
             </li>
-            <!-- tro den thu muc user trong file config/apps -->
             <li class="active"><strong>Quản Lý Thành Viên</strong></li>
         </ol>
     </div>
-</div>
+</div> -->
 
 <!-- Form -->
 <div class="row-mt-12" style="margin-top:20px;">

@@ -23,7 +23,7 @@
         </div>
         <div class="col-lg-4 offset-lg-2">
           <div class="right-image">
-            <img src="assets/images/re4.jpg" alt="">
+            <img src="{{ asset('storage/images/re4.jpg') }}" alt="">
             <span class="price">$1</span>
             <span class="offer">-40%</span>
           </div>
@@ -99,7 +99,7 @@
         <div class="col-lg-3 col-md-6">
           <div class="item">
             <div class="thumb">
-              <a href="product-details.html"><img height="250px" src="{{ asset('assets/images/' . $value->image) }}" alt=""></a>
+              <a href="product-details.html"><img height="250px" src="{{ asset('storage/images/' . $value->image) }}" alt=""></a>
               <span class="price"><em>${{ $value->price }}</em>${{ $value->price }}</span>
             </div>
             <div class="down-content">
@@ -163,7 +163,7 @@
           <div class="item">
             <h4>{{ $value->name }}</h4>
             <div class="thumb">
-              <a href="product-details.html"><img height="300px" src="{{ asset('assets/images/' . $value->image) }}" alt=""></a>
+              <a href="product-details.html"><img height="300px" src="{{ asset('storage/images/' . $value->image) }}" alt=""></a>
             </div>
           </div>
         </div>

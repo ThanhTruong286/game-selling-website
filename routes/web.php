@@ -45,6 +45,8 @@ Route::prefix('admin')->group(function () {
     Route::get('user', [UserController::class,'index'])->name('user.index')->middleware('admin');
     /* PRODUCT */
     Route::prefix('product')->group(function () {
-    Route::get('home', [ProductController::class,'index'])->name('product.crud')->middleware('admin');
+    Route::get('home', [ProductController::class,'index'])->name('product.index')->middleware('admin');
+    Route::get('add-form', [ProductController::class,'add_form'])->name('product.add.form')->middleware('admin');
+    Route::post('add', [ProductController::class,'add'])->name('product.add')->middleware('admin');
     });
 });

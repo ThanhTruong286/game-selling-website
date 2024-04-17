@@ -12,12 +12,13 @@ use App\Models\User;
 class AuthController extends Controller
 {
     public function confirm_email(Request $request){
-            $data = [
+        //tao bien data luu tru du lieu user moi
+        $data = [
             'name' => $request->get('name'),
             'phone' => $request->get('phone'),
             'email' => $request->get('email'),
-            'password' => Hash::make($request->get('password')),
-            'roles' => 1
+            'password' => Hash::make($request->get('password')),//hash password bang thu vien Hash
+            'roles' => 1//role luon luon bang 1(khach hang)
         ];
             DB::table('users')->insert($data);
             return redirect()->route('signin.form')->with('success','Tạo Tài Khoản Thành Công');
@@ -29,6 +30,7 @@ class AuthController extends Controller
     }
     
     public function index(Request $request){
+        //check xem user da dang nhap hay chua
         if(Auth::check()){
             return redirect()->route('home')->with('error','Bạn Đã Đăng Nhập');
         }
@@ -40,11 +42,11 @@ class AuthController extends Controller
         return view('backend.auth.signup');
     }
     public function signup(Request $request){
-        $email = $request->input('email');
+        $email = $request->input('email');//lay du lieu email
         $check_email = DB::table('users')->where('email',$email)->value('email');//chi tra ve cot email trong user duoc chon
-        $phone = $request->input('phone');
+        $phone = $request->input('phone');//lay du lieu so dien thoai
         $check_phone = DB::table('users')->where('phone',$phone)->value('phone');
-        $password = $request->input('password');
+        $password = $request->input('password');//lay du lieu password
         $name = $request->input('name');
         //check xem email da ton tai hay chua
         if($email == $check_email )//doi chieu email vua input va toan bo email trong table users
@@ -80,6 +82,7 @@ class AuthController extends Controller
     }
     public function send_email_reset(Request $request){ 
         $email = $request->get('email');
+        //kiem tra xem email da duoc dung de dang ky hay chua
         if(DB::table('users')->where('email', $email)->count() == 0){
             return redirect()->route('reset_password_view')->with('error','Email Chưa Từng Dùng Để Đăng Ký');
         }

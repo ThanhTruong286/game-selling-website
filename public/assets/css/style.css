@@ -179,7 +179,7 @@ ul.nav-second-level {
   background: #293846;
 }
 .nav > li.active {
-  border-left: 4px solid #19aa8d;
+  border-left: 4px solid #007cf8;
   background: #293846;
 }
 .nav.nav-second-level > li.active {
@@ -283,28 +283,28 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   left: 65px;
 }
 .navbar-default .special_link a {
-  background: #1ab394;
+  background: #007cf8;
   color: white;
 }
 .navbar-default .special_link a:hover {
-  background: #17987e !important;
+  background: #007cf8 !important;
   color: white;
 }
 .navbar-default .special_link a span.label {
   background: #fff;
-  color: #1ab394;
+  color: #007cf8;
 }
 .navbar-default .landing_link a {
-  background: #1cc09f;
+  background: #007cf8;
   color: white;
 }
 .navbar-default .landing_link a:hover {
-  background: #1ab394 !important;
+  background: #007cf8 !important;
   color: white;
 }
 .navbar-default .landing_link a span.label {
   background: #fff;
-  color: #1cc09f;
+  color: #007cf8;
 }
 .logo-element {
   text-align: center;
@@ -413,7 +413,7 @@ body.canvas-menu .logo-element {
 }
 body.mini-navbar .nav-header {
   padding: 0;
-  background-color: #1ab394;
+  background-color: #007cf8;
 }
 body.canvas-menu .nav-header {
   padding: 33px 25px;
@@ -512,7 +512,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 }
 .top-navigation .navbar-nav .dropdown-menu > .active > a {
   background: white;
-  color: #1ab394;
+  color: #007cf8;
   font-weight: bold;
 }
 .white-bg .navbar-fixed-top,
@@ -529,7 +529,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
 .top-navigation .nav > li a:hover,
 .top-navigation .nav > li a:focus {
   background: #fff;
-  color: #1ab394;
+  color: #007cf8;
 }
 .top-navigation .navbar .nav > li.active {
   background: #fff;
@@ -553,7 +553,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   margin-top: 0;
 }
 .top-navigation .navbar-brand {
-  background: #1ab394;
+  background: #007cf8;
   color: #fff;
   padding: 15px 25px;
 }
@@ -582,7 +582,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   padding: 40px 0 40px 0;
 }
 .navbar-toggle {
-  background-color: #1ab394;
+  background-color: #007cf8;
   color: #fff;
   padding: 6px 12px;
   font-size: 14px;
@@ -629,7 +629,7 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   min-width: 120px;
 }
 .btn-primary.btn-outline {
-  color: #1ab394;
+  color: #007cf8;
 }
 .btn-success.btn-outline {
   color: #1c84c6;
@@ -651,8 +651,8 @@ body.canvas-menu.mini-navbar nav.navbar-static-side {
   color: #fff;
 }
 .btn-primary {
-  background-color: #1ab394;
-  border-color: #1ab394;
+  background-color: #007cf8;
+  border-color: #007cf8;
   color: #FFFFFF;
 }
 .btn-primary:hover,
@@ -902,7 +902,7 @@ fieldset[disabled] .btn-danger.active {
 .btn-link:active,
 .btn-link.active,
 .open .dropdown-toggle.btn-link {
-  color: #1ab394;
+  color: #007cf8;
   text-decoration: none;
 }
 .btn-link:active,
@@ -1091,7 +1091,7 @@ button.dim:active:before {
 }
 .label-primary,
 .badge-primary {
-  background-color: #1ab394;
+  background-color: #007cf8;
   color: #FFFFFF;
 }
 .label-success,
@@ -1149,7 +1149,7 @@ button.dim:active:before {
   display: block;
   overflow: hidden;
   cursor: pointer;
-  border: 2px solid #1ab394;
+  border: 2px solid #007cf8;
   border-radius: 2px;
 }
 .onoffswitch-inner {
@@ -1178,7 +1178,7 @@ button.dim:active:before {
 .onoffswitch-inner:before {
   content: "ON";
   padding-left: 10px;
-  background-color: #1ab394;
+  background-color: #007cf8;
   color: #FFFFFF;
 }
 .onoffswitch-inner:after {
@@ -1192,7 +1192,7 @@ button.dim:active:before {
   width: 20px;
   margin: 0;
   background: #FFFFFF;
-  border: 2px solid #1ab394;
+  border: 2px solid #007cf8;
   border-radius: 2px;
   position: absolute;
   top: 0;
@@ -8559,4 +8559,23 @@ body.md-skin {
   #page-wrapper {
     margin: 0;
   }
+}
+.inputBox input[type="submit"]
+{
+  padding: 10px;
+  background: #007cf8;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.35em;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: none;
+  text-align: center;
+  display: block;
+  border-radius: 10px;
+  margin: 0 auto;
+}
+input[type="submit"]:active
+{
+  opacity: 0.6;
 }

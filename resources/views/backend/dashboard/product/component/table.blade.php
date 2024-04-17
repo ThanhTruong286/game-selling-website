@@ -1,7 +1,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th><input type="checkbox" id="checkAll"></th><strong>Check All</strong>
+                                <th>Check Box</th>
                                 <th>Hình Ảnh</th>
                                 <th>Tên Sản Phẩm</th>
                                 <th>Giá Sản Phẩm</th>
@@ -16,14 +16,14 @@
                             @foreach($products as $value)
                             <tr>
                                 <td><input type="checkbox" id="checkAll"></td>
-                                <td><img width="150px" height="80px" src="{{ asset('assets/images/' . $value->image) }}" alt=""></td>
+                                <td><img width="150px" height="80px" src="{{ asset('storage/images/' . $value->image) }}" alt=""></td>
                                 <!-- information -->
                                 <td>
                                     {{ $value->name }}
                                 </td>
                                 <!-- address field -->
                                 <td>
-                                    {{ $value->price }}
+                                    ${{ $value->price }}
                                 </td>
                                 <td>{{ $product_category }}</td>
                                 <!-- switch button -->

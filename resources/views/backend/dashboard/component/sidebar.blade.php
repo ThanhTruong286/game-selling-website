@@ -1,4 +1,4 @@
-<nav class="navbar-default navbar-static-side" role="navigation">
+<nav class="navbar-default navbar-static-side" role="navigation" style="height:100%;">
         <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
@@ -20,12 +20,13 @@
                 <li class="active">
                     <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lý</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
+                        <li><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
                         <li><a href="{{ route('user.index') }}">Quản Lý Thành Viên</a></li>
-                        <li><a href="{{ route('product.crud') }}">Quản Lý Sản Phẩm</a></li>
+                        <li><a href="{{ route('product.index') }}">Quản Lý Sản Phẩm</a></li>
                     </ul>
                 </li>
                 
             </ul>
 
         </div>
-    </nav>
+</nav>

@@ -3,7 +3,7 @@
                         
                         <div class="ibox-tools">
                             <!-- add new button -->
-                            <a href="" class="btn btn-danger"><i class="fa fa-plus"></i></a>
+                            <a href="{{ route('product.add.form') }}" class="btn btn-danger"><i class="fa fa-plus"></i></a>
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 <i class="fa fa-wrench"></i>
                             </a>

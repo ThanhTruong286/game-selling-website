@@ -1,7 +1,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th><input type="checkbox" id="checkAll"></th><strong>Check All</strong>
+                                <th>Check Box</th>
                                 <th>Avatar</th>
                                 <th>Thông Tin Thành Viên</th>
                                 <th>Địa Chỉ</th>
@@ -15,7 +15,7 @@
                             @foreach($users as $value)
                             <tr>
                                 <td><input type="checkbox" id="checkAll"></td>
-                                <td><img width="auto" height="80px" src="{{ asset('assets/images/' . $value->image) }}" alt=""></td>
+                                <td><img width="auto" height="80px" src="{{ asset('storage/images/' . $value->image) }}" alt=""></td>
                                 <!-- information -->
                                 <td>
                                     <div class="info-item name"><strong>Họ Tên:</strong> {{ $value->fullname }}</div>
@@ -32,7 +32,7 @@
                                 <!-- switch button -->
                                 <td>
                                     <label class="switch">
-                                    <input type="checkbox" checked>
+                                    <input type="checkbox" name="checkAll" checked>
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
