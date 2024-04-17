@@ -32,6 +32,9 @@ class ProductController extends Controller
             'description' => $request->get("description"),
             'categories_id' => $categories_id,
             'slug' => strtolower($slug),
+            'created_at'=>now(),
+            'updated_at'=>now(),
+            'total_play_time'=>0,
             'image' => $request->image->getClientOriginalName(),//lay ra ten cua file hinh 
         ];
         $file = $request->file('image');//lay du lieu file hinh
@@ -49,8 +52,7 @@ class ProductController extends Controller
     }
     public function index(){
         $products = Product::paginate(5);//lay ra 5 ban ghi
-        $product_category = Product::find(1)->Category;
         $template = "backend.dashboard.product.index";
-        return view("backend.dashboard.layout",compact("template","products","product_category"));
+        return view("backend.dashboard.layout",compact("template","products"));
     }
 }

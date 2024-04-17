@@ -12,7 +12,7 @@
           <div class="caption header-text">
             <h6>Welcome to steam</h6>
             <h2>BEST GAMING SITE EVER!</h2>
-            <p>Steam description</p>
+            <p>Steam is the ultimate destination for playing, discussing, and creating games.</p>
             <div class="search-input">
               <form id="search" action="#">
                 <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
@@ -95,7 +95,7 @@
         </div>
 
         <!-- foreach product -->
-        @foreach($dataProduct as $value)
+        @foreach($products as $value)
         <div class="col-lg-3 col-md-6">
           <div class="item">
             <div class="thumb">
@@ -131,18 +131,20 @@
             <a href="shop.html">View All</a>
           </div>
         </div>
+        @foreach($most_play as $value)
         <div class="col-lg-2 col-md-6 col-sm-6">
           <div class="item">
             <div class="thumb">
-              <a href="product-details.html"><img src="assets/images/top-game-01.jpg" alt=""></a>
+              <a href="product-details.html"><img height="150px" src="{{ asset('storage/images/'.$value->image) }}" alt=""></a>
             </div>
             <div class="down-content">
-                <span class="category">Adventure</span>
-                <h4>Assasin Creed</h4>
+                <span class="category">{{$value->category->name}}</span>
+                <h4>{{ $value->name }}</h4>
                 <a href="product-details.html">Explore</a>
             </div>
           </div>
         </div>
+        @endforeach
       </div>
     </div>
   </div>
@@ -158,7 +160,7 @@
         </div>
 
         <!-- show category list -->
-        @foreach($dataCategory as $value)
+        @foreach($categories as $value)
         <div class="col-lg col-sm-6 col-xs-12">
           <div class="item">
             <h4>{{ $value->name }}</h4>

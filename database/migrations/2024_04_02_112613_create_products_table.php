@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('categories_id');
             $table->string('image');
             $table->string('slug');
+            $table->double('total_play_time');
             $table->timestamps();
             //khoa ngoai la cot categories_id noi voi id ben bang categories
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
