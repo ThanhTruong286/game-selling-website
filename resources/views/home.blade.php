@@ -125,7 +125,7 @@
                 @else
                 {{ 'Free' }}</span>
                 @endif
-              <a class="edit-cart" href="{{route('add.to.cart',['product_id' => $value->id])}}">Buy</i></a>
+              <a class="edit-cart" href="{{route('add.to.cart',['product_id' => $value->id,'qty'=>$qty])}}">ADD TO CART</i></a>
             </div>
           </div>
         </div>

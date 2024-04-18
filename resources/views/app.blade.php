@@ -79,7 +79,9 @@ https://templatemo.com/tm-589-lugx-gaming
                               <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart 
                               <span class="badge text-bg-danger">
                                 <!-- Tong So Luong San Pham Lay Tu HomeController -->
+                              @if(isset($qty))
                               {{ $qty }}
+                              @endif
                               </span>
                             <!-- END METHOD -->
                             </a>

@@ -881,11 +881,11 @@ Trending Style
   display: inline-block;
   text-align: center;
   line-height: 40px;
-  width: 40px;
+  width: 120px;
   height: 40px;
   background-color: #ee626b;
   color: #fff;
-  border-radius: 50%;
+  border-radius: 20px;
   right: 25px;
   bottom: 25px;
   transition: all .3s;

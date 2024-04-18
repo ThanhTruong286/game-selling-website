@@ -568,6 +568,6 @@ ul.summary-list > li:last-child  {
     color: #fff;
     text-align: center;
     line-height: 40px;
-    font-weight: 400;
+    font-weight: bold;
     font-style: inherit;
 }

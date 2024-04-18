@@ -13,9 +13,18 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     public function product_detail(Request $request){
+        $qty = 0;//bien luu tru tong so luong san pham
+        //kiem tra su ton tai cua session 'cart'
+        $cart = session("cart");
+        if($cart){
+            //tao vong lap va cong don quantity ben trong session('cart')
+            foreach(session('cart') as $cart){
+                $qty += $cart['quantity'];
+            }
+        }
         $product_id = $request->get("product_id");
         $data = Product::where("id",$product_id)->get();
-        return view('backend.dashboard.product.product-details',compact('data'));
+        return view('backend.dashboard.product.product-details',compact('data','qty'));
     }
     public function add(Request $request){
         $rule = [

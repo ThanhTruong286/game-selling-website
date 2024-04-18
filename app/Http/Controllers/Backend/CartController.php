@@ -31,15 +31,15 @@ class CartController extends Controller
                 ]
             ];
         session()->put('cart', $cart);
-        return redirect()->route('home')->with('success', 'Product has been added to cart!');
+        return redirect()->route('home')->with('success', 'Đã Thêm Sản Phẩm Vào Giỏ Hàng');
         } 
         if (isset($cart[$product_id])) {
 
-            $cart[$product_id]['quantity']++;
+            // $cart[$product_id]['quantity']++;
 
-            session()->put('cart', $cart);
+            // session()->put('cart', $cart);
 
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
+            return redirect()->back()->with('error', 'Sản Phẩm Đã Có Trong Giỏ Hàng');
         }
 
         $cart[$product_id] = [
@@ -49,7 +49,7 @@ class CartController extends Controller
             "photo" => $product->photo
         ];
         session()->put('cart', $cart);
-        return redirect()->route('home')->with('success', 'Product has been added to cart!');
+        return redirect()->route('home')->with('success', 'Đã Thêm Sản Phẩm Vào Giỏ Hàng');
     }
     public function show_cart(){
         dd(session()->get('cart',[]));

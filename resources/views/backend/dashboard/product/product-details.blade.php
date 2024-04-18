@@ -38,7 +38,7 @@
           <p>{{ $value->description }}</p>
           <form id="qty" action="#">
             <input type="qty" class="form-control" id="1" aria-describedby="quantity" placeholder="1">
-            <button type="submit"><i class="fa fa-shopping-bag"></i> <a style="color:white;" href="{{route('add.to.cart')}}">ADD TO CART</a></button>
+            <button class="submit" onclick="window.location='{{ route('add.to.cart',['product_id'=>$value->id]) }}'"><i class="fa fa-shopping-bag"></i> <a style="color:white;" href="{{route('add.to.cart',['product_id' => $value->id])}}">ADD TO CART</a></button>
           </form>
           <ul>
             <li><span>Game ID:</span> {{$value->id}}</li>
