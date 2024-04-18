@@ -98,15 +98,34 @@
         @foreach($products as $value)
         <div class="col-lg-3 col-md-6">
           <div class="item">
+            
             <div class="thumb">
-              <a href="product-details.html"><img height="250px" src="{{ asset('storage/images/' . $value->image) }}" alt=""></a>
-              <span class="price"><em>${{ $value->price }}</em>${{ $value->price }}</span>
+              <a href="{{ route('product.detail',['product_id'=>$value->id]) }}">
+              @if($value->sale > 0)
+              <span class="product-offer">
+                <p>{{ $value->sale }}%</p>
+              </span>
+              @endif
+              <img width="150px" height="200px" src="{{ asset('storage/images/' . $value->image) }}" alt="">
+              </a>
+
             </div>
             <div class="down-content">
               <span class="category">{{ $value->category->name }}</span>
               <h4>{{ $value->name }}</h4>
+              
               <br><br>
-              <a href="product-details.html"><i class="fa fa-shopping-bag"></i></a>
+              <span class="price">
+                @if($value->sale > 0)
+                <em>${{ number_format($value->old_price) }}</em>
+                
+                @endif
+                @if($value->price > 0)
+                ${{ $value->price }}</span>
+                @else
+                {{ 'Free' }}</span>
+                @endif
+              <a class="edit-cart" href="{{route('add.to.cart',['product_id' => $value->id])}}">Buy</i></a>
             </div>
           </div>
         </div>

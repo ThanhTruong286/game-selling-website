@@ -556,4 +556,18 @@ ul.summary-list > li:last-child  {
 /* PROFILE */
   
   
-
+.product-offer{
+    background-color: red;
+    width: 60px;
+    height: 40px;
+    border-bottom-right-radius: 20px;
+    display: block;
+    position: absolute;
+}
+.product-offer p{
+    color: #fff;
+    text-align: center;
+    line-height: 40px;
+    font-weight: 400;
+    font-style: inherit;
+}

@@ -12,6 +12,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function product_detail(Request $request){
+        $product_id = $request->get("product_id");
+        $data = Product::where("id",$product_id)->get();
+        return view('backend.dashboard.product.product-details',compact('data'));
+    }
     public function add(Request $request){
         $rule = [
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Backend\AuthController;
+use App\Http\Controllers\Backend\CartController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProductController;
@@ -20,6 +21,7 @@ use App\Http\Middleware\AuthenticateMiddleware;
 */
 
 Route::get('/', [HomeController::class, 'returnViewHome'])->name('home');
+Route::get('product-detail', [ProductController::class,'product_detail'])->name('product.detail');
 
 /* BACKEND ROUTES */
 Route::get('shop', [HomeController::class,'returnViewShop'])->name('shop.index');
@@ -46,7 +48,11 @@ Route::prefix('admin')->group(function () {
     /* PRODUCT */
     Route::prefix('product')->group(function () {
     Route::get('home', [ProductController::class,'index'])->name('product.index')->middleware('admin');
+    /* CRUD */
     Route::get('add-form', [ProductController::class,'add_form'])->name('product.add.form')->middleware('admin');
     Route::post('add', [ProductController::class,'add'])->name('product.add')->middleware('admin');
     });
 });
+Route::get('add-to-cart/{product_id}', [CartController::class,'add'])->name('add.to.cart')->middleware('cart');
+Route::get('show-cart', [CartController::class,'show_cart'])->name('show.cart')->middleware('cart');
+Route::get('update-cart', [CartController::class,'updateCart'])->name('update.cart')->middleware('cart');

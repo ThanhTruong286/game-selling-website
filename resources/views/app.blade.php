@@ -63,7 +63,7 @@ https://templatemo.com/tm-589-lugx-gaming
                     <ul class="nav">
                       <li><a href="{{ route('home') }}">Home</a></li>
                       <li><a href="{{ route('shop.index') }}">Our Shop</a></li>
-                      <li><a href="product-details.html">Product Details</a></li>
+
                       <li><a href="contact.html">Contact Us</a></li>
                       <!-- neu chua dang nhap -->
                       @if(!Auth::check())
@@ -73,17 +73,33 @@ https://templatemo.com/tm-589-lugx-gaming
                       <!-- check user login -->
                         @if(Auth::check())
                           <li><a href="{{ route('auth.logout') }}">Log Out</a></li>
+                          <li>
+                            <a href="{{route('show.cart')}}">
+                              <!-- khi an buy thi luu session cart -->
+                              <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart 
+                              <span class="badge text-bg-danger">
+                                <!-- Tong So Luong San Pham Lay Tu HomeController -->
+                              {{ $qty }}
+                              </span>
+                            <!-- END METHOD -->
+                            </a>
+                          </li>
                             <!-- check admin login -->
                             @if(Auth::user()->roles == 0)
-                              <li><a href="{{ route('dashboard.index') }}">Admin</a></li>
+                            <li>
+                            <a href="{{ route('dashboard.index') }}">
+                              <i class="fa fa-robot" aria-hidden="true"></i> ADMIN 
+                            </a>
+                            </li>
                             @endif
-                          <li><a href="{{ route('profile') }}">{{ Auth::user()->name }}</a></li>
+                          <li class="active"><a href="{{ route('profile') }}">{{ Auth::user()->name }}</a></li>
                         @endif
-
                   </ul>   
+                  
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
+                    
                     <!-- ***** Menu End ***** -->
                 </nav>
             </div>

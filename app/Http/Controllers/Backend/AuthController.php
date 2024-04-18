@@ -115,7 +115,7 @@ class AuthController extends Controller
     public function logout(Request $request){
         Auth::logout();
         $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->session()->regenerate();
         return redirect()->route('home')->with('success','Đăng xuất thành công');//gui session logout-success len trang auth.index
     }
 }
