@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Gallery;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -12,6 +13,56 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function delete(Request $request){
+        $product_id = $request->get("product_id");
+        if(DB::table("products")->where("id", $product_id)->exists()){  
+            DB::table("products")->where("id", $product_id)->delete();
+            return redirect()->route('product.index')->with("success","Xóa Sản Phẩm Thành Công");
+        }
+        return redirect()->route('product.index')->with("error","Xoá Sản Phẩm Thất Bại");
+    }
+    public function edit(Request $request){
+        $category_str  = $request->get('category_id');//lay du lieu tu form
+        $category = explode('<>', $category_str);//cat du lieu qua chuoi <>, truong hop nay se tao dc 2 chuoi id va name
+        $categories_id = $category[0];//phan tu thu 0 chinh la id category
+        $slug = $category[1];//phan tu thu 1 chinh la name category, dung de tao slug
+        //tao bien data luu tru du lieu cua product can dc insert
+        $imageName = $request->get('imageName');
+        if($request->file('image')){
+            $image = $request->file('image');
+            $imageName = $request->file('image')->getClientOriginalName();
+        }
+        $data = [
+            'id' => $request->get("id"),
+            'name' => $request->get("name"),
+            'sale' => $request->get("sale"),
+            'price' => $request->get("price"),
+            'description' => $request->get("description"),
+            'categories_id' => $categories_id,
+            'slug'=>$slug,
+            'updated_at'=>now(),
+            'image' => $imageName,
+        ];
+        if($request->file('image') != null){
+            if($image->storeAs('public/images', $imageName)){
+                DB::table('products')->where('id',$request->get('id'))->update($data);
+                return redirect()->route('product.index')->with('success','Sửa Sản Phẩm Thành Công');
+            }
+        }
+        else{
+            DB::table('products')->where('id',$request->get('id'))->update($data);
+            return redirect()->route('product.index')->with('success','Sửa Sản Phẩm Thành Công');
+        }
+        
+        return redirect()->route('product.edit.form')->with('error','Sửa Sản Phẩm Thất Bại');
+    }
+    public function edit_form(Request $request){
+        $product_id = isset($_GET['product_id']) ? $_GET['product_id'] : 0;
+        $product = Product::where("id",$product_id)->get();
+        $category = Category::get();//lay toan bo du lieu category
+        $template = "backend.dashboard.product.crud.edit";
+        return view("backend.dashboard.layout",compact("template",'category','product'));
+    }
     public function product_detail(Request $request){
         $qty = 0;//bien luu tru tong so luong san pham
         //kiem tra su ton tai cua session 'cart'
@@ -23,8 +74,9 @@ class ProductController extends Controller
             }
         }
         $product_id = $request->get("product_id");
+        $gallery = Gallery::where("product_id",$product_id)->get();
         $data = Product::where("id",$product_id)->get();
-        return view('backend.dashboard.product.product-details',compact('data','qty'));
+        return view('backend.dashboard.product.product-details',compact('data','qty','gallery'));
     }
     public function add(Request $request){
         $rule = [
@@ -49,6 +101,8 @@ class ProductController extends Controller
             'created_at'=>now(),
             'updated_at'=>now(),
             'total_play_time'=>0,
+            'sale'=>0,
+            'old_price'=>$request->get('price'),
             'image' => $request->image->getClientOriginalName(),//lay ra ten cua file hinh 
         ];
         $file = $request->file('image');//lay du lieu file hinh
@@ -61,7 +115,7 @@ class ProductController extends Controller
     }
     public function add_form(){
         $category = Category::get();//lay toan bo du lieu category
-        $template = "backend.dashboard.product.add";
+        $template = "backend.dashboard.product.crud.add";
         return view("backend.dashboard.layout",compact("template",'category'));
     }
     public function index(){

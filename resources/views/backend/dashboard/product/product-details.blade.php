@@ -1,6 +1,48 @@
 @extends('app')
 @section('content')
+<style>
 
+
+div.gallery img {
+  width: 200px;
+  height: 200px;
+  margin: 50px 0;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.responsive {
+  padding: 0 6px;
+  float: left;
+  width: 20%;
+}
+
+@media only screen and (max-width: 200px) {
+  .responsive {
+    width: 49.99999%;
+    margin: 6px 0;
+  }
+}
+
+@media only screen and (max-width: 200px) {
+  .responsive {
+    width: 100%;
+  }
+}
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+</style>
   <!-- duyet data bang foreach -->
   @foreach($data as $value)
   <div class="page-heading header-text">
@@ -22,6 +64,7 @@
           <div class="left-image">
             <img src="{{ asset('storage/images/'.$value->image) }}" alt="">
           </div>
+
         </div>
         <div class="col-lg-6 align-self-center">
           <h4>{{$value->name}}</h4>
@@ -38,7 +81,7 @@
           <p>{{ $value->description }}</p>
           <form id="qty" action="#">
             <input type="qty" class="form-control" id="1" aria-describedby="quantity" placeholder="1">
-            <button class="submit" onclick="window.location='{{ route('add.to.cart',['product_id'=>$value->id]) }}'"><i class="fa fa-shopping-bag"></i> <a style="color:white;" href="{{route('add.to.cart',['product_id' => $value->id])}}">ADD TO CART</a></button>
+            <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$value->id]) }}'"><i class="fa fa-shopping-bag"></i> <a style="color:white;" href="">ADD TO CART</a></button>
           </form>
           <ul>
             <li><span>Game ID:</span> {{$value->id}}</li>
@@ -47,6 +90,17 @@
           </ul>
         </div>
         <div class="col-lg-12">
+        
+        @foreach($gallery as $value)
+        <div class="responsive">
+          <div class="gallery">
+            <a target="_blank" href="img_5terre.jpg">
+            <img src="{{asset('storage/images/'.$value->image)}}" alt="">
+            </a>
+          </div>
+        </div>
+        @endforeach
+
           <div class="sep"></div>
         </div>
       </div>

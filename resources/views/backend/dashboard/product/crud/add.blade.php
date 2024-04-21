@@ -50,6 +50,26 @@
                                                     <!-- END IF -->
                                                 </div>
                                             </div>
+                                            <!--<div class="form-group"><label class="col-sm-2 control-label">Gallery:</label>
+                                                <div class="col-sm-10">
+                                                    <input required name="gl1" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
+                                                    <input required name="gl2" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
+                                                    <input required name="gl3" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
+                                                    <input required name="gl4" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
+                                                    <input required name="gl5" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
+          
+                                                    @if ($errors->any())
+                                                        <div class="alert alert-danger">
+                                                            <ul>
+                                                                @foreach ($errors->all() as $error)
+                                                                    <li>{{ $error }}</li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    @endif
+                                                  
+                                                </div>
+                                            </div>-->
                                         </fieldset>
                                         <div class="inputBox"> 
 

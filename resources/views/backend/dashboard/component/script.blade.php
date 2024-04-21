@@ -16,6 +16,16 @@
     <!-- end foreach -->
 
     <script>
+        //doi gia tri new price trong edit product
+        $(document).ready(function() {
+
+            $("#cal").click(function(){
+                var old_price = $('#old-price').val();
+                var sale = $('#sale').val();
+                var price = old_price - old_price * sale / 100;
+                $('#price').val(price).trigger('change');
+        }); 
+    });
         $(document).ready(function() {
             $('.chart').easyPieChart({
                 barColor: '#f8ac59',

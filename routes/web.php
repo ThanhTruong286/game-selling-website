@@ -51,6 +51,9 @@ Route::prefix('admin')->group(function () {
     /* CRUD */
     Route::get('add-form', [ProductController::class,'add_form'])->name('product.add.form')->middleware('admin');
     Route::post('add', [ProductController::class,'add'])->name('product.add')->middleware('admin');
+    Route::get('edit-form', [ProductController::class,'edit_form'])->name('product.edit.form')->middleware('admin');
+    Route::post('edit', [ProductController::class,'edit'])->name('product.edit')->middleware('admin');
+    Route::get('delete', [ProductController::class,'delete'])->name('product.delete')->middleware('admin');
     });
 });
 Route::get('add-to-cart/{product_id}', [CartController::class,'add'])->name('add.to.cart')->middleware('cart');
