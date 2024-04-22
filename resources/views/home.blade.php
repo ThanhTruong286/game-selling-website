@@ -90,7 +90,7 @@
         </div>
         <div class="col-lg-6">
           <div class="main-button">
-            <a href="{{ route('shop.index') }}">View All</a>
+            <li><a href="{{ route('category.trending') }}">View All</a></li>
           </div>
         </div>
 
@@ -125,7 +125,7 @@
                 @else
                 {{ 'Free' }}</span>
                 @endif
-              <a class="edit-cart" href="{{route('add.to.cart',['product_id' => $value->id,'qty'=>$qty])}}">ADD TO CART</i></a>
+              <a class="edit-cart" href="{{route('add.to.cart',['product_id' => $value->id,'qty'=>$qty])}}">ADD TO CART</a>
             </div>
           </div>
         </div>

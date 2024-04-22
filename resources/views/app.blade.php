@@ -62,7 +62,7 @@ https://templatemo.com/tm-589-lugx-gaming
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                       <li><a href="{{ route('home') }}">Home</a></li>
-                      <li><a href="{{ route('shop.index') }}">Our Shop</a></li>
+                      <li><a href="{{ route('category.home') }}">Our Shop</a></li>
 
                       <li><a href="contact.html">Contact Us</a></li>
                       <!-- neu chua dang nhap -->

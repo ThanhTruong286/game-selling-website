@@ -16,9 +16,9 @@ class CategorySeeder extends Seeder
     public function run()
     {
         $data = [
-            ['name' => 'Horror','image' => 'horror.jpg','created_at' => now(),'updated_at' => now()],
-            ['name' => 'Action','image' => 'action.jpg','created_at' => now(),'updated_at' => now()],
-            ['name' => 'FPS','image' => 'fps.jpg','created_at' => now(),'updated_at' => now()],
+            ['name' => 'Horror','slug'=>'horror','image' => 'horror.jpg','created_at' => now(),'updated_at' => now()],
+            ['name' => 'Action','slug'=>'action','image' => 'action.jpg','created_at' => now(),'updated_at' => now()],
+            ['name' => 'FPS','slug'=>'fps','image' => 'fps.jpg','created_at' => now(),'updated_at' => now()],
         ];
         DB::table('categories')->insert($data);
     }

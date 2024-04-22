@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\CartController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\CategoryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\AuthenticateMiddleware;
@@ -24,7 +25,6 @@ Route::get('/', [HomeController::class, 'returnViewHome'])->name('home');
 Route::get('product-detail', [ProductController::class,'product_detail'])->name('product.detail');
 
 /* BACKEND ROUTES */
-Route::get('shop', [HomeController::class,'returnViewShop'])->name('shop.index');
 Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard.index')->middleware('admin');//chi dc truy cap khi check dc da dang nhap qua mdw
 /* USER */
 Route::prefix('user')->group(function () {
@@ -48,7 +48,7 @@ Route::prefix('admin')->group(function () {
     /* PRODUCT */
     Route::prefix('product')->group(function () {
     Route::get('home', [ProductController::class,'index'])->name('product.index')->middleware('admin');
-    /* CRUD */
+    /* CRUD PRODUCT */
     Route::get('add-form', [ProductController::class,'add_form'])->name('product.add.form')->middleware('admin');
     Route::post('add', [ProductController::class,'add'])->name('product.add')->middleware('admin');
     Route::get('edit-form', [ProductController::class,'edit_form'])->name('product.edit.form')->middleware('admin');
@@ -59,3 +59,9 @@ Route::prefix('admin')->group(function () {
 Route::get('add-to-cart/{product_id}', [CartController::class,'add'])->name('add.to.cart')->middleware('cart');
 Route::get('show-cart', [CartController::class,'show_cart'])->name('show.cart')->middleware('cart');
 Route::get('update-cart', [CartController::class,'updateCart'])->name('update.cart')->middleware('cart');
+/* CATEGORY */
+Route::prefix('category')->group(function () {
+    Route::get('/', [CategoryController::class,'index'])->name('category.home');
+});
+Route::get('trending', [CategoryController::class,'trending'])->name('category.trending');
+
