@@ -1,10 +1,11 @@
 <nav class="navbar-default navbar-static-side" role="navigation" style="height:100%;">
-        <div class="sidebar-collapse">
+    <div class="sidebar-collapse">
             <ul class="nav metismenu" id="side-menu">
                 <li class="nav-header">
-                    <div class="dropdown profile-element"> <span>
+                    <div class="dropdown profile-element"> 
+                        <span>
                             <img height="50px" width="50px" alt="image" class="img-circle" src="{{ asset('assets/images/' . Auth::user()->image) }}" />
-                             </span>
+                        </span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ Auth::user()->name }}</strong>
                              </span> <span class="text-muted text-xs block">{{ Auth::user()->email }}<b class="caret"></b></span> </span> </a>
@@ -28,5 +29,5 @@
                 
             </ul>
 
-        </div>
+    </div>
 </nav>

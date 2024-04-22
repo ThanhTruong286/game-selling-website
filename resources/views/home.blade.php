@@ -14,8 +14,8 @@
             <h2>BEST GAMING SITE EVER!</h2>
             <p>Steam is the ultimate destination for playing, discussing, and creating games.</p>
             <div class="search-input">
-              <form id="search" action="#">
-                <input type="text" placeholder="Type Something" id='searchText' name="searchKeyword" onkeypress="handle" />
+              <form id="search" action="{{route('search')}}">
+                <input type="text" placeholder="Type Something" id='searchText' name="keyword" onkeypress="handle" />
                 <button role="button">Search Now</button>
               </form>
             </div>

@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+    public function search(Request $request){
+        $search = $request->get("keyword");
+        dd($search);
+    }
     public function returnViewHome(Request $request){
         $qty = 0;//bien luu tru tong so luong san pham
         //kiem tra su ton tai cua session 'cart'

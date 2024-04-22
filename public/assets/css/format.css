@@ -618,6 +618,9 @@ div.gallery img {
     display: table;
     clear: both;
   }
+  .sidebar-collapse{
+    height: 100%;
+  }
 
 
 

@@ -26,6 +26,7 @@ Route::get('product-detail', [ProductController::class,'product_detail'])->name(
 
 /* BACKEND ROUTES */
 Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard.index')->middleware('admin');//chi dc truy cap khi check dc da dang nhap qua mdw
+Route::get('search', [HomeController::class,'search'])->name('search');
 /* USER */
 Route::prefix('user')->group(function () {
     Route::get('logout',[AuthController::class,'logout'])->name('auth.logout');
