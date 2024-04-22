@@ -1,48 +1,6 @@
 @extends('app')
 @section('content')
-<style>
 
-
-div.gallery img {
-  width: 200px;
-  height: 200px;
-  margin: 50px 0;
-}
-
-div.desc {
-  padding: 15px;
-  text-align: center;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.responsive {
-  padding: 0 6px;
-  float: left;
-  width: 20%;
-}
-
-@media only screen and (max-width: 200px) {
-  .responsive {
-    width: 49.99999%;
-    margin: 6px 0;
-  }
-}
-
-@media only screen and (max-width: 200px) {
-  .responsive {
-    width: 100%;
-  }
-}
-
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-</style>
   <!-- duyet data bang foreach -->
   @foreach($data as $value)
   <div class="page-heading header-text">
@@ -90,7 +48,7 @@ div.desc {
           </ul>
         </div>
         <div class="col-lg-12">
-        
+        <!-- Nhan data tu ham product_detail ProductController -->
         @foreach($gallery as $value)
         <div class="responsive">
           <div class="gallery">
