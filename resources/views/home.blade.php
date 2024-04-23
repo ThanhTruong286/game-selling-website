@@ -154,12 +154,12 @@
         <div class="col-lg-2 col-md-6 col-sm-6">
           <div class="item">
             <div class="thumb">
-              <a href="product-details.html"><img height="150px" src="{{ asset('storage/images/'.$value->image) }}" alt=""></a>
+              <a href="{{ route('product.detail',['product_id'=>$value->id]) }}"><img height="150px" src="{{ asset('storage/images/'.$value->image) }}" alt=""></a>
             </div>
             <div class="down-content">
                 <span class="category">{{$value->category->name}}</span>
                 <h4>{{ $value->name }}</h4>
-                <a href="product-details.html">Explore</a>
+                <a href="{{ route('product.detail',['product_id'=>$value->id]) }}">Explore</a>
             </div>
           </div>
         </div>
@@ -184,7 +184,7 @@
           <div class="item">
             <h4>{{ $value->name }}</h4>
             <div class="thumb">
-              <a href="product-details.html"><img height="300px" src="{{ asset('storage/images/' . $value->image) }}" alt=""></a>
+              <a href="{{route('category.home',['name' => $value->slug])}}"><img height="300px" src="{{ asset('storage/images/' . $value->image) }}" alt=""></a>
             </div>
           </div>
         </div>

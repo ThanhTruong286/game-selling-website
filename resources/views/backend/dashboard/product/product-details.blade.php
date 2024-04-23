@@ -8,7 +8,7 @@
       <div class="row">
         <div class="col-lg-12">
           <h3>{{ $value->name }}</h3>
-          <span class="breadcrumb"><a href="{{ route('home') }}">Home</a>  >  <a href="#">Shop</a>  >  {{ $value->name }}</span>
+          <span class="breadcrumb"><a href="{{ route('home') }}">Home</a>  >  <a href="{{route('category.home')}}">Our Shop</a>  >  {{ $value->name }}</span>
         </div>
       </div>
     </div>
@@ -38,7 +38,6 @@
           </span>
           <p>{{ $value->description }}</p>
           <form id="qty" action="#">
-            <input type="qty" class="form-control" id="1" aria-describedby="quantity" placeholder="1">
             <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$value->id]) }}'"><i class="fa fa-shopping-bag"></i> <a style="color:white;" href="">ADD TO CART</a></button>
           </form>
           <ul>

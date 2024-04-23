@@ -55,7 +55,16 @@ Route::prefix('admin')->group(function () {
     Route::get('edit-form', [ProductController::class,'edit_form'])->name('product.edit.form')->middleware('admin');
     Route::post('edit', [ProductController::class,'edit'])->name('product.edit')->middleware('admin');
     Route::get('delete', [ProductController::class,'delete'])->name('product.delete')->middleware('admin');
-    });
+});
+    Route::prefix('category')->group(function () {
+        Route::get('home', [CategoryController::class,'home'])->name('category.crud')->middleware('admin');
+        Route::get('add-form', [CategoryController::class,'add_form'])->name('category.add.form')->middleware('admin');
+        Route::post('add', [CategoryController::class,'add'])->name('category.add')->middleware('admin');
+        Route::get('edit-form', [CategoryController::class,'edit_form'])->name('category.edit.form')->middleware('admin');
+        Route::post('edit', [CategoryController::class,'edit'])->name('category.edit')->middleware('admin');
+        Route::get('delete', [CategoryController::class,'delete'])->name('category.delete')->middleware('admin');
+        });
+
 });
 Route::get('add-to-cart/{product_id}', [CartController::class,'add'])->name('add.to.cart')->middleware('cart');
 Route::get('show-cart', [CartController::class,'show_cart'])->name('show.cart')->middleware('cart');
