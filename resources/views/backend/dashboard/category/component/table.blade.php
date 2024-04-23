@@ -34,7 +34,7 @@
                                 <!-- edit button -->
                                 <td>
                                     <a href="{{route('category.edit.form',['categories_id'=>$value->id])}}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('category.delete',['categories_id'=>$value->id])}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('category.delete',['categories_id'=>$value->id,'file'=>$value->image])}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach

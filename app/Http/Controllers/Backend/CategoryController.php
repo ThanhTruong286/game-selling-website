@@ -7,13 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
     public function delete(Request $request){
+        $file = $request->get('file');
         $categories_id = $request->get("categories_id");
         if(DB::table("categories")->where("id", $categories_id)->exists()){  
             DB::table("categories")->where("id", $categories_id)->delete();
+            //xoa file khoi storage
+            unlink(storage_path('app/public/images/'.$file));
             return redirect()->route('category.crud')->with("success","Xóa Danh Mục Thành Công");
         }
         return redirect()->route('category.crud')->with("error","Xoá Danh Mục Thất Bại");

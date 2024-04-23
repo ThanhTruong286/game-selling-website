@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Storage;
 class ProductController extends Controller
 {
     public function delete(Request $request){
+        $file = $request->get('file');
         $product_id = $request->get("product_id");
         if(DB::table("products")->where("id", $product_id)->exists()){  
             DB::table("products")->where("id", $product_id)->delete();
+            //xoa file khoi storage
+            unlink(storage_path('app/public/images/'.$file));
             return redirect()->route('product.index')->with("success","Xóa Sản Phẩm Thành Công");
         }
         return redirect()->route('product.index')->with("error","Xoá Sản Phẩm Thất Bại");

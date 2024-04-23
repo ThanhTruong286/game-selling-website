@@ -36,7 +36,7 @@
                                 <!-- edit button -->
                                 <td>
                                     <a href="{{route('product.edit.form',['product_id'=>$value->id])}}" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('product.delete',['product_id'=>$value->id])}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                    <a href="{{route('product.delete',['product_id'=>$value->id,'file'=>$value->image])}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
