@@ -67,12 +67,13 @@ class ProductController extends Controller
         return view("backend.dashboard.layout",compact("template",'category','product'));
     }
     public function product_detail(Request $request){
+        $user_id = session('user_id');
         $qty = 0;//bien luu tru tong so luong san pham
         //kiem tra su ton tai cua session 'cart'
-        $cart = session("cart");
+        $cart = session($user_id . "cart");
         if($cart){
             //tao vong lap va cong don quantity ben trong session('cart')
-            foreach(session('cart') as $cart){
+            foreach(session($user_id . 'cart') as $cart){
                 $qty += $cart['quantity'];
             }
         }

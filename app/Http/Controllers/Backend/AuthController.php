@@ -72,9 +72,11 @@ class AuthController extends Controller
         if(Auth::attempt($credentials)){
             $user_name = DB::table('users')->where('email', $request->input('email'))->value('name');
             $user_id = DB::table('users')->where('email', $request->input('email'))->value('id');
+            $user = DB::table('users')->where('email', $request->input('email'))->get();
             // dd($user_name);
             $request->session()->regenerate();
             $request->session()->put('user_id',$user_id);
+            $request->session()->put('user',$user);
             // dd(session()->all());
             return redirect()->route('home',['user_name' => $user_name])->with('success','Đăng Nhập Thành Công');
         }

@@ -66,9 +66,12 @@ Route::prefix('admin')->group(function () {
         });
 
 });
+/* CART */
+
 Route::get('add-to-cart/{product_id}', [CartController::class,'add'])->name('add.to.cart')->middleware('cart');
-Route::get('show-cart', [CartController::class,'show_cart'])->name('show.cart')->middleware('cart');
+Route::get('cart', [CartController::class,'show_cart'])->name('show.cart')->middleware('cart');
 Route::get('update-cart', [CartController::class,'updateCart'])->name('update.cart')->middleware('cart');
+Route::get('delete-cart/{product_id}',[CartController::class,'delete'])->name('delete.cart')->middleware('cart');
 /* CATEGORY */
 Route::prefix('category')->group(function () {
     Route::get('/', [CategoryController::class,'index'])->name('category.home');
