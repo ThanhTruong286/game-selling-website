@@ -48,7 +48,7 @@
         </div>
 
         @endforeach
-        {{ $product->links('pagination::semantic-ui', ['foo' => 'bar']) }}
+        {{ $product->links('pagination::default', ['foo' => 'bar']) }}
 
     </div>
   </div>
