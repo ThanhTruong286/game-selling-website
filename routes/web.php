@@ -74,4 +74,5 @@ Route::prefix('category')->group(function () {
     Route::get('/', [CategoryController::class,'index'])->name('category.home');
 });
 Route::get('trending', [CategoryController::class,'trending'])->name('category.trending');
+Route::get('session', [HomeController::class,'session'])->name('session');
 

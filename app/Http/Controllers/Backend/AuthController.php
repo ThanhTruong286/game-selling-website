@@ -71,8 +71,11 @@ class AuthController extends Controller
         //check thong tin
         if(Auth::attempt($credentials)){
             $user_name = DB::table('users')->where('email', $request->input('email'))->value('name');
+            $user_id = DB::table('users')->where('email', $request->input('email'))->value('id');
             // dd($user_name);
             $request->session()->regenerate();
+            $request->session()->put('user_id',$user_id);
+            // dd(session()->all());
             return redirect()->route('home',['user_name' => $user_name])->with('success','Đăng Nhập Thành Công');
         }
         else {
@@ -113,9 +116,12 @@ class AuthController extends Controller
         }
     }
     public function logout(Request $request){
+        $user_id = session()->get('user_id');
+        $cart = session()->get($user_id . 'cart');
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerate();
+        session()->put($user_id . 'cart',$cart);
         return redirect()->route('home')->with('success','Đăng xuất thành công');//gui session logout-success len trang auth.index
     }
 }

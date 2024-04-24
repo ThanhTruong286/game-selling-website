@@ -10,17 +10,19 @@ class CartController extends Controller
 {
     public function updateCart(Request $request)
     {
+        $user_id = session()->get('user_id');
         if($request->id && $request->quantity){
-            $cart = session()->get('cart');
+            $cart = session()->get($user_id . 'cart');
             $cart[$request->id]["quantity"] = $request->quantity;
-            session()->put('cart', $cart);
+            session()->put($user_id . 'cart', $cart);
             session()->flash('success', 'Book added to cart.');
         }
     }
     public function add($product_id)
     {
+        $user_id = session()->get('user_id');
         $product = Product::find($product_id);
-        $cart = session()->get('cart');
+        $cart = session()->get($user_id . 'cart');
         if(!$cart) {
             $cart = [
                 $product_id => [
@@ -30,7 +32,7 @@ class CartController extends Controller
                     "photo" => $product->photo
                 ]
             ];
-        session()->put('cart', $cart);
+        session()->put($user_id . 'cart', $cart);
         return redirect()->route('home')->with('success', 'Đã Thêm Sản Phẩm Vào Giỏ Hàng');
         } 
         if (isset($cart[$product_id])) {
@@ -48,10 +50,11 @@ class CartController extends Controller
             "price" => $product->price,
             "photo" => $product->photo
         ];
-        session()->put('cart', $cart);
+        session()->put($user_id . 'cart', $cart);
         return redirect()->route('home')->with('success', 'Đã Thêm Sản Phẩm Vào Giỏ Hàng');
     }
     public function show_cart(){
-        dd(session()->get('cart',[]));
+        $user_id = session()->get('user_id');
+        dd(session()->get($user_id . 'cart',[]));
     }
 }
