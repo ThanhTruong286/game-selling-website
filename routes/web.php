@@ -78,4 +78,6 @@ Route::prefix('category')->group(function () {
 });
 Route::get('trending', [CategoryController::class,'trending'])->name('category.trending');
 Route::get('session', [HomeController::class,'session'])->name('session');
+Route::post('online-checkout', [CartController::class,'online_checkout'])->name('payment');
+Route::get('thanks', [CartController::class,'thanks'])->name('thanks');
 

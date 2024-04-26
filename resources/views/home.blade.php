@@ -117,13 +117,15 @@
               <br><br>
               <span class="price">
                 @if($value->sale > 0)
-                <em>${{ number_format($value->old_price) }}</em>
+                <em>{{ number_format($value->old_price) }} VND</em>
                 
                 @endif
                 @if($value->price > 0)
-                ${{ $value->price }}</span>
+                {{ number_format($value->price) }} VND
+              </span>
                 @else
-                {{ 'Free' }}</span>
+                {{ 'Free' }}
+              </span>
                 @endif
               <a class="edit-cart" href="{{route('add.to.cart',['product_id' => $value->id,'qty'=>$qty])}}">ADD TO CART</a>
             </div>

@@ -23,7 +23,7 @@
                                 </td>
                                 <!-- address field -->
                                 <td>
-                                    ${{ $value->price }}
+                                    {{ number_format($value->price )}} VND
                                 </td>
                                 <td>{{ $value->category->name }}</td>
                                 <!-- switch button -->

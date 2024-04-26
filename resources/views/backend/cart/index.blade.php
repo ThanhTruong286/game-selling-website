@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,6 +37,8 @@ height: 100vh !important;
 }
 }
 </style>
+<form class="mt-4" method="post" action="{{ route('payment') }}" enctype="application/x-www-form-urlencoded">
+@csrf
 <section class="h-100 h-custom" style="background-color: #eee;">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -45,7 +48,7 @@ height: 100vh !important;
 
             <div class="row">
 
-              <div class="col-lg-7">
+              <div class="col">
                 <h5 class="mb-3"><a href="{{route('category.home')}}" class="text-body"><i
                       class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
                 <hr>
@@ -74,14 +77,14 @@ height: 100vh !important;
                         </div>
                         <div class="ms-3">
                           <h5>{{$value['name']}}</h5>
-                          <p class="small mb-0">{{$value['description']}}</p>
+                          <!-- <p class="small mb-0">{{$value['description']}}</p> -->
                         </div>
                       </div>
                       <div class="d-flex flex-row align-items-center">
                         <div style="width: 50px;">
                         </div>
-                        <div style="width: 80px; margin-right: 10px">
-                          <h5 class="mb-0">${{$value['price']}}</h5>
+                        <div style="width: auto; margin-right: 10px">
+                          <h5 class="mb-0">{{number_format($value['price'])}} VND</h5>
                         </div>
                         <a href="{{route('delete.cart',['product_id'=>$key])}}" style="color: red;"><i class="fas fa-trash-alt"></i></a>
                       </div>
@@ -89,20 +92,25 @@ height: 100vh !important;
                   </div>
                 </div>
                 @endforeach
+                <p style="color:dark;font-weight:bold;" class="mb-2">Subtotal</p>
+                <hr class="my-2">
+                <p style="color:dark;font-weight:bold;" class="mb-2">{{number_format($totalPrice)}} VND</p>
+                <input type="hidden" value="{{$totalPrice}}" name="amount">
+                <button name="payUrl" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
+                  <div class="d-flex justify-content-between">
+                    <span style="color:white;">MoMo</span>
+                  </div>
+                </button>
 
             </div>
             @elseif(is_null($cart))
-            <h5 class="mb-3">Bạn Chưa Có Sản Phẩm Nào Trong Giỏ</h5>
-            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
+              <h5 class="mb-3">Bạn Chưa Có Sản Phẩm Nào Trong Giỏ</h5>
+              <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
                 <div class="d-flex justify-content-between">
                 <span style="margin-left:10px;color:white;"> <a style="color:white;" href="{{route('category.home')}}">Mua Gì Đó</a></span>
-            </div>
-            </button>
-            @endif
-
-            @if(!is_null($cart))
-            @include($template)
-            @endif
+              </div>
+              </button>
+            @endif            
 
           </div>
         </div>
@@ -110,5 +118,6 @@ height: 100vh !important;
     </div>
   </div>
 </section>
+</form>
 </body>
 </html>

@@ -19,7 +19,8 @@
         class="fab fa-cc-amex fa-2x me-2"></i></a>
     <a href="#!" type="submit" class="text-white"><i class="fab fa-cc-paypal fa-2x"></i></a>
 
-    <form class="mt-4">
+  <form class="mt-4" method="post" action="{{ route('payment') }}" enctype="application/x-www-form-urlencoded">
+    @csrf
       <div data-mdb-input-init class="form-outline form-white mb-4">
         <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
           placeholder="Name" />
@@ -48,32 +49,30 @@
           </div>
         </div>
       </div>
-
-    </form>
-
     <hr class="my-4">
 
-    <div class="d-flex justify-content-between">
-      <p style="color:white;" class="mb-2">Subtotal</p>
-      <p style="color:white;" class="mb-2">${{$totalPrice}}</p>
-    </div>
-
-    <div class="d-flex justify-content-between">
-      <p style="color:white;" class="mb-2">Shipping</p>
-      <p style="color:white;" class="mb-2">$20.00</p>
-    </div>
-
-    <div class="d-flex justify-content-between mb-4">
-      <p style="color:white;" class="mb-2">Total(Incl. taxes)</p>
-      <p style="color:white;" class="mb-2">$4818.00</p>
-    </div>
-
-    <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
       <div class="d-flex justify-content-between">
-        <span style="color:white;">${{$totalPrice}}</span>
-        <span style="margin-left:10px;color:white;"> Total<i class="fas fa-long-arrow-alt-right ms-2"></i></span>
+        <p style="color:white;" class="mb-2">Subtotal</p>
+        <input name="price" style="color:dark;float:left;" class="mb-2" type="text" value="{{$totalPrice}}" readOnly>
       </div>
-    </button>
+
+      <div class="d-flex justify-content-between">
+        <p style="color:white;" class="mb-2">Shipping</p>
+        <input name="shipping" style="color:dark;float:right;" class="mb-2" type="text" value="{{20}}" readOnly>
+      </div>
+
+      <div class="d-flex justify-content-between mb-4">
+        <p style="color:white;" class="mb-2">Total(Incl. taxes)</p>
+        <input name="amount" style="color:dark;float:right;" class="mb-2" type="text" value="{{$totalPrice+20}}" readOnly>
+      </div>
+
+      <button name="payUrl" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-info btn-block btn-lg">
+        <div class="d-flex justify-content-between">
+          <span style="color:white;">MoMo</span>
+        </div>
+      </button>
+  </form>
+
 
   </div>
 </div>

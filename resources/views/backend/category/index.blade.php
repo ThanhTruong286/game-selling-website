@@ -28,12 +28,13 @@
               </span>
               @endif
               <a href="{{ route('product.detail',['product_id'=>$value->id]) }}"><img height="200px" src="{{asset('storage/images/'.$value->image)}}" alt=""></a>
-              <span class="price">                @if($value->sale > 0)
-                <em>${{ number_format($value->old_price) }}</em>
+              <span class="price">                
+                @if($value->sale > 0)
+                <em>{{ number_format($value->old_price) }} VND</em>
                 
                 @endif
                 @if($value->price > 0)
-                ${{ $value->price }}</span>
+                {{ number_format($value->price )}} VND</span>
                 @else
                 {{ 'Free' }}</span>
                 @endif

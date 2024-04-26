@@ -28,17 +28,17 @@
           <h4>{{$value->name}}</h4>
           <span class="price">
           @if($value->sale > 0)
-            <em>${{ $value->old_price }}</em>
+            <em>{{ number_format($value->old_price) }} VND</em>
           @endif
           @if($value->price > 0)
-              ${{ $value->price }}</span>
+              {{ number_format($value->price) }} VND</span>
             @else
               {{ 'Free' }}
           @endif
           </span>
           <p>{{ $value->description }}</p>
           <form id="qty" action="#">
-            <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$value->id]) }}'"><i class="fa fa-shopping-bag"></i> <a style="color:white;" href="">ADD TO CART</a></button>
+            <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$value->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
           </form>
           <ul>
             <li><span>Game ID:</span> {{$value->id}}</li>
