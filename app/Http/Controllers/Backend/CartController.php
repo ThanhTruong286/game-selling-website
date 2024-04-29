@@ -25,8 +25,8 @@ class CartController extends Controller
             $orderInfo = "Thanh toán qua MoMo";
             $amount = $_POST['amount'];
             $orderId = time() . "";
-            $redirectUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
-            $ipnUrl = "https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b";
+            $redirectUrl = "http://127.0.0.1:8000/cart";
+            $ipnUrl = "http://127.0.0.1:8000/cart";
             $extraData = "";
 
             $serectkey = $secretKey;

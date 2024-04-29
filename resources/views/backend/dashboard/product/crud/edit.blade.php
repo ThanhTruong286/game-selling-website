@@ -72,6 +72,7 @@
                                                     <!-- END IF -->
                                                 </div>
                                             </div>
+                                            <hr>
                                             <div class="form-group"><label class="col-sm-2 control-label">Gallery:</label>
                                                 <div class="col-sm-10">
                                                     <input  name="gl1" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>

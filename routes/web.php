@@ -22,7 +22,6 @@ use App\Http\Middleware\AuthenticateMiddleware;
 */
 
 Route::get('/', [HomeController::class, 'returnViewHome'])->name('home');
-Route::get('product-detail', [ProductController::class,'product_detail'])->name('product.detail');
 
 /* BACKEND ROUTES */
 Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard.index')->middleware('admin');//chi dc truy cap khi check dc da dang nhap qua mdw
@@ -42,11 +41,16 @@ Route::prefix('user')->group(function () {
     Route::get('make-new-password',[AuthController::class,'make_new_password'])->name('makeNewPass');
     Route::get('profile',[AuthController::class,'showProfile'])->name('profile');
     Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
+
+    Route::get('library',[AuthController::class,'user_library'])->name('game.library');
 });
+Route::get('product-detail', [ProductController::class,'product_detail'])->name('product.detail');
+
 /* ADMIN */
 Route::prefix('admin')->group(function () {
     Route::get('user', [UserController::class,'index'])->name('user.index')->middleware('admin');
     /* PRODUCT */
+
     Route::prefix('product')->group(function () {
     Route::get('home', [ProductController::class,'index'])->name('product.index')->middleware('admin');
     /* CRUD PRODUCT */
@@ -64,6 +68,8 @@ Route::prefix('admin')->group(function () {
         Route::post('edit', [CategoryController::class,'edit'])->name('category.edit')->middleware('admin');
         Route::get('delete', [CategoryController::class,'delete'])->name('category.delete')->middleware('admin');
         });
+/* WEB CONTENT*/
+    Route::get('web-banner', [ProductController::class,'banner'])->name('web.banner')->middleware('admin');
 
 });
 /* CART */
@@ -80,4 +86,5 @@ Route::get('trending', [CategoryController::class,'trending'])->name('category.t
 Route::get('session', [HomeController::class,'session'])->name('session');
 Route::post('online-checkout', [CartController::class,'online_checkout'])->name('payment');
 Route::get('thanks', [CartController::class,'thanks'])->name('thanks');
+
 

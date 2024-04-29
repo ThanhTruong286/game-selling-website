@@ -3,14 +3,25 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use SebastianBergmann\Type\VoidType;
 
 class AuthController extends Controller
 {
+    public function user_library(Request $request){
+        $user_id = $request->get('user_id');
+        $product_id = DB::table('library')->where('user_id',$user_id)->get('product_id');
+        foreach($product_id as $value){
+            $product[] = DB::table('products')->where('id',$value->product_id)->get('name');
+        }
+        // dd($product);
+        return view('backend.library.index',['product'=>$product]);
+    }
     public function confirm_email(Request $request){
         //tao bien data luu tru du lieu user moi
         $data = [
@@ -20,6 +31,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->get('password')),//hash password bang thu vien Hash
             'roles' => 1//role luon luon bang 1(khach hang)
         ];
+
             DB::table('users')->insert($data);
             return redirect()->route('signin.form')->with('success','Tạo Tài Khoản Thành Công');
     }

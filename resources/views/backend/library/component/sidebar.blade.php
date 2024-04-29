@@ -21,11 +21,11 @@
                 <li class="active">
                     <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lý</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
-                        <li><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
-                        <li><a href="{{ route('user.index') }}">Quản Lý Thành Viên</a></li>
-                        <li><a href="{{ route('product.index') }}">Quản Lý Sản Phẩm</a></li>
-                        <li><a href="{{ route('category.crud') }}">Quản Lý Danh Mục</a></li>
-                        <li><a href="{{ route('web.banner') }}">Quản Lý Banner</a></li>
+                        @foreach($product as $key => $value)
+                            @foreach($value as $a => $b)
+                                <li ><a style="padding:10px 10px;" href="#">{{ $b->name }}</a></li>
+                            @endforeach
+                        @endforeach
                     </ul>
                 </li>
                 

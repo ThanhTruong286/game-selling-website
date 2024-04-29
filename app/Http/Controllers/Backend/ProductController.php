@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function banner(Request $request){
+        echo 'banner';
+    }
     public function delete(Request $request){
         $file = $request->get('file');
         $product_id = $request->get("product_id");
