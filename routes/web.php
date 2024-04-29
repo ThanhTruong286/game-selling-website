@@ -39,10 +39,11 @@ Route::prefix('user')->group(function () {
     Route::post('send-email-reset',[AuthController::class,'send_email_reset'])->name('send_email_reset');
 
     Route::get('make-new-password',[AuthController::class,'make_new_password'])->name('makeNewPass');
+    // USER PROFILE
     Route::get('profile',[AuthController::class,'showProfile'])->name('profile');
     Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
-
-    Route::get('library',[AuthController::class,'user_library'])->name('game.library');
+    // SHOW LIBRARY
+    Route::get('library',[AuthController::class,'user_library'])->name('game.library')->middleware('user');
 });
 Route::get('product-detail', [ProductController::class,'product_detail'])->name('product.detail');
 
@@ -60,6 +61,7 @@ Route::prefix('admin')->group(function () {
     Route::post('edit', [ProductController::class,'edit'])->name('product.edit')->middleware('admin');
     Route::get('delete', [ProductController::class,'delete'])->name('product.delete')->middleware('admin');
 });
+    // CRUD CATEGORIES
     Route::prefix('category')->group(function () {
         Route::get('home', [CategoryController::class,'home'])->name('category.crud')->middleware('admin');
         Route::get('add-form', [CategoryController::class,'add_form'])->name('category.add.form')->middleware('admin');
@@ -78,6 +80,7 @@ Route::get('add-to-cart/{product_id}', [CartController::class,'add'])->name('add
 Route::get('cart', [CartController::class,'show_cart'])->name('show.cart')->middleware('cart');
 Route::get('update-cart', [CartController::class,'updateCart'])->name('update.cart')->middleware('cart');
 Route::get('delete-cart/{product_id}',[CartController::class,'delete'])->name('delete.cart')->middleware('cart');
+Route::get('add-to-library', [CartController::class,'add_to_library'])->name('add.to.library')->middleware('cart');
 /* CATEGORY */
 Route::prefix('category')->group(function () {
     Route::get('/', [CategoryController::class,'index'])->name('category.home');

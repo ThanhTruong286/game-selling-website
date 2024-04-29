@@ -5,9 +5,22 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+    public function add_to_library(Request $request){
+        $product_id = $request->get("product_id");
+        $user_id = Auth::user()->id;
+        $data = [
+            "product_id"=> $product_id,
+            'user_id'=> $user_id,
+        ];
+        // dd($data);
+        DB::table("library")->insert($data);
+        return redirect()->route('profile')->with("success","Mua Sản Phẩm Thành Công");
+    }
     public function thanks()
     {
         return redirect()->route("home");
@@ -24,6 +37,7 @@ class CartController extends Controller
             $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
             $orderInfo = "Thanh toán qua MoMo";
             $amount = $_POST['amount'];
+
             $orderId = time() . "";
             $redirectUrl = "http://127.0.0.1:8000/cart";
             $ipnUrl = "http://127.0.0.1:8000/cart";
