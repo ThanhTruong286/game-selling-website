@@ -78,7 +78,7 @@ height: 100vh !important;
                         <div class="ms-3">
                           <h5>{{$value['name']}}</h5>
                           <!-- <p class="small mb-0">{{$value['description']}}</p> -->
-                          <input name="product_id" type="text" value="{{$value['id']}}">
+                          <input name="product_id" type="hidden" value="{{$value['id']}}">
                         </div>
                       </div>
                       <div class="d-flex flex-row align-items-center">

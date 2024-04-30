@@ -19,7 +19,7 @@
             @include('backend.library.component.nav')
             <!-- end navbar -->
 
-            <!-- include template dc gui thong qua compact -->
+            @include('backend.library.component.table')
             
             <!-- footer -->
             @include('backend.library.component.footer')

@@ -13,14 +13,24 @@ use SebastianBergmann\Type\VoidType;
 
 class AuthController extends Controller
 {
+    public function library_game(Request $request){
+        $product_id = $request->get("product_id");
+        $data = DB::table("products")->where("id",$product_id)->get();
+        $user_id = session()->get('user_id');
+        $product_id_user = DB::table('library')->where('user_id',$user_id)->get('product_id');
+        foreach($product_id_user as $value){
+            $product[] = DB::table('products')->where('id',$value->product_id)->get();
+        }
+        return view('backend.library.index',['product'=>$product,'data'=>$data]);
+    }
     public function user_library(Request $request){
         $user_id = $request->get('user_id');
         $product_id = DB::table('library')->where('user_id',$user_id)->get('product_id');
         foreach($product_id as $value){
-            $product[] = DB::table('products')->where('id',$value->product_id)->get('name');
+            $product[] = DB::table('products')->where('id',$value->product_id)->get();
         }
-        // dd($product);
-        return view('backend.library.index',['product'=>$product]);
+        $data = null;
+        return view('backend.library.index',['product'=>$product,'data'=>$data]);
     }
     public function confirm_email(Request $request){
         //tao bien data luu tru du lieu user moi

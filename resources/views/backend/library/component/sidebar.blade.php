@@ -19,11 +19,11 @@
                     </div>
                 </li>
                 <li class="active">
-                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Quản Lý</span> <span class="fa arrow"></span></a>
+                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Game của bạn</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         @foreach($product as $key => $value)
                             @foreach($value as $a => $b)
-                                <li ><a style="padding:10px 10px;" href="#">{{ $b->name }}</a></li>
+                                <li ><a style="padding:10px 10px;" href="{{route('library.game',['product_id'=>$b->id])}}">{{ $b->name }}</a></li>
                             @endforeach
                         @endforeach
                     </ul>

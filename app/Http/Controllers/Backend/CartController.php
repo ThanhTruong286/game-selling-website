@@ -18,6 +18,9 @@ class CartController extends Controller
             'user_id'=> $user_id,
         ];
         // dd($data);
+        if(DB::table('library')->where('product_id', $product_id)->where('user_id',$user_id)->exists()){
+            return redirect()->back()->with('error','Đã Có Sản Phẩm Trong Thư Viện');
+        }
         DB::table("library")->insert($data);
         return redirect()->route('profile')->with("success","Mua Sản Phẩm Thành Công");
     }

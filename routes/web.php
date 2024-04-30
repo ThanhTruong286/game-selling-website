@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Middleware\LibraryMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Middleware\AuthenticateMiddleware;
@@ -44,6 +45,7 @@ Route::prefix('user')->group(function () {
     Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
     // SHOW LIBRARY
     Route::get('library',[AuthController::class,'user_library'])->name('game.library')->middleware('user');
+    Route::get('library/game',[AuthController::class,'library_game'])->name('library.game')->middleware(LibraryMiddleware::class);
 });
 Route::get('product-detail', [ProductController::class,'product_detail'])->name('product.detail');
 
