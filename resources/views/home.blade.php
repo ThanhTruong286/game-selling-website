@@ -153,7 +153,7 @@
         </div>
         <div class="col-lg-6">
           <div class="main-button">
-            <a href="shop.html">View All</a>
+            <a href="{{route('category.most.play')}}">View All</a>
           </div>
         </div>
         @foreach($most_play as $value)
@@ -170,6 +170,8 @@
           </div>
         </div>
         @endforeach
+        <br><br><br>
+        
       </div>
     </div>
   </div>
@@ -215,7 +217,7 @@
                 </div>
                 <p>Lorem ipsum dolor consectetur adipiscing, sed do eiusmod tempor incididunt.</p>
                 <div class="main-button">
-                  <a href="shop.html">Shop Now</a>
+                  <a href="{{route('category.home')}}">Shop Now</a>
                 </div>
               </div>
             </div>

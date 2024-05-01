@@ -87,9 +87,12 @@ Route::get('add-to-library', [CartController::class,'add_to_library'])->name('ad
 Route::prefix('category')->group(function () {
     Route::get('/', [CategoryController::class,'index'])->name('category.home');
 });
+// ORTHER
 Route::get('trending', [CategoryController::class,'trending'])->name('category.trending');
+Route::get('most-played', [CategoryController::class,'most_play'])->name('category.most.play');
 Route::get('session', [HomeController::class,'session'])->name('session');
 Route::post('online-checkout', [CartController::class,'online_checkout'])->name('payment');
 Route::get('thanks', [CartController::class,'thanks'])->name('thanks');
+Route::get('contact', [HomeController::class,'contact'])->name('contact');
 
 

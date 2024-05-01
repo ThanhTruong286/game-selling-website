@@ -2,13 +2,13 @@
 @section('content')
 
   <!-- duyet data bang foreach -->
-  @foreach($data as $value)
+  @foreach($data as $values)
   <div class="page-heading header-text">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <h3>{{ $value->name }}</h3>
-          <span class="breadcrumb"><a href="{{ route('home') }}">Home</a>  >  <a href="{{route('category.home')}}">Our Shop</a>  >  {{ $value->name }}</span>
+          <h3>{{ $values->name }}</h3>
+          <span class="breadcrumb"><a href="{{ route('home') }}">Home</a>  >  <a href="{{route('category.home')}}">Our Shop</a>  >  {{ $values->name }}</span>
         </div>
       </div>
     </div>
@@ -20,32 +20,32 @@
       <div class="row">
         <div class="col-lg-6">
           <div class="left-image">
-            <img src="{{ asset('storage/images/'.$value->image) }}" alt="">
+            <img src="{{ asset('storage/images/'.$values->image) }}" alt="">
           </div>
 
         </div>
         <div class="col-lg-6 align-self-center">
-          <h4>{{$value->name}}</h4>
+          <h4>{{$values->name}}</h4>
           <span class="price">
-          @if($value->sale > 0)
-            <em>{{ number_format($value->old_price) }} VND</em>
+          @if($values->sale > 0)
+            <em>{{ number_format($values->old_price) }} VND</em>
           @endif
-          @if($value->price > 0)
-              {{ number_format($value->price) }} VND</span>
+          @if($values->price > 0)
+              {{ number_format($values->price) }} VND</span>
             @else
               {{ 'Free' }}
           @endif
           </span>
-          <p>{{ $value->description }}</p>
+          <p>{{ $values->description }}</p>
           <form id="qty" action="#">
-            @if($value->price == 0)
-            <button type="button" onclick="window.location='{{ route('add.to.library',['product_id'=>$value->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO LIBRARY</button>
-            @elseif($value->price > 0)
-            <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$value->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
+            @if($values->price == 0)
+            <button type="button" onclick="window.location='{{ route('add.to.library',['product_id'=>$values->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO LIBRARY</button>
+            @elseif($values->price > 0)
+            <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$values->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
             @endif
           </form>
           <ul>
-            <li><span>Game ID:</span> {{$value->id}}</li>
+
             <li><span>Genre:</span> <a href="#">Action</a>, <a href="#">Team</a>, <a href="#">Single</a></li>
             <li><span>Multi-tags:</span> <a href="#">War</a>, <a href="#">Battle</a>, <a href="#">Royal</a></li>
           </ul>
@@ -55,9 +55,7 @@
         @foreach($gallery as $value)
         <div class="responsive">
           <div class="gallery">
-            <a target="_blank" href="img_5terre.jpg">
             <img src="{{asset('storage/images/'.$value->image)}}" alt="">
-            </a>
           </div>
         </div>
         @endforeach
@@ -87,7 +85,7 @@
               </div>              
               <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                  <p>{{ $value->description }}</p>
+                  <p>{{ $values->description }}</p>
                 </div>
                 <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
                   <p>Coloring book air plant shabby chic, crucifix normcore raclette cred swag artisan activated charcoal. PBR&B fanny pack pok pok gentrify truffaut kitsch helvetica jean shorts edison bulb poutine next level humblebrag la croix adaptogen. <br><br>Hashtag poke literally locavore, beard marfa kogi bruh artisan succulents seitan tonx waistcoat chambray taxidermy. Same cred meggings 3 wolf moon lomo irony cray hell of bitters asymmetrical gluten-free art party raw denim chillwave tousled try-hard succulents street art.</p>
@@ -99,15 +97,13 @@
       </div>
     </div>
   </div>
-  @endforeach
-  <!-- endforeach -->
 
   <div class="section categories related-games">
     <div class="container">
       <div class="row">
         <div class="col-lg-6">
           <div class="section-heading">
-            <h6>Action</h6>
+            <h6>{{ $values->Category->name }}</h6>
             <h2>Related Games</h2>
           </div>
         </div>
@@ -159,3 +155,5 @@
       </div>
     </div>
   </div>
+  @endforeach
+  <!-- endforeach -->

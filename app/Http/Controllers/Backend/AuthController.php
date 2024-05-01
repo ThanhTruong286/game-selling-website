@@ -26,6 +26,7 @@ class AuthController extends Controller
     public function user_library(Request $request){
         $user_id = $request->get('user_id');
         $product_id = DB::table('library')->where('user_id',$user_id)->get('product_id');
+        $product[] = null;
         foreach($product_id as $value){
             $product[] = DB::table('products')->where('id',$value->product_id)->get();
         }

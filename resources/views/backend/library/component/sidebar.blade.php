@@ -22,9 +22,12 @@
                     <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Game của bạn</span> <span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         @foreach($product as $key => $value)
-                            @foreach($value as $a => $b)
-                                <li ><a style="padding:10px 10px;" href="{{route('library.game',['product_id'=>$b->id])}}">{{ $b->name }}</a></li>
-                            @endforeach
+                            @if($value == null)
+                            @else($value != null)
+                                @foreach($value as $a => $b)
+                                    <li ><a style="padding:10px 10px;" href="{{route('library.game',['product_id'=>$b->id])}}">{{ $b->name }}</a></li>
+                                @endforeach
+                            @endif
                         @endforeach
                     </ul>
                 </li>

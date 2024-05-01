@@ -11,6 +11,23 @@ use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
+    public function most_play(Request $request){
+        $template = "backend.category.most_play";
+        $title = "Most Played";
+        $qty = 0;//bien luu tru tong so luong san pham
+        //kiem tra su ton tai cua session 'cart'
+        $cart = session("cart");
+        if($cart){
+            //tao vong lap va cong don quantity ben trong session('cart')
+            foreach(session('cart') as $cart){
+                $qty += $cart['quantity'];
+            }
+        }
+        $product = Product::where('total_play_time','>=',100000)->orderBy('total_play_time','desc')->paginate(8);
+        $categories = DB::table("categories")->get();
+        $count = count($product);
+        return view("backend.category.layout",compact("product",'categories','qty','count','template','title'));
+    }
     public function delete(Request $request){
         $file = $request->get('file');
         $categories_id = $request->get("categories_id");
