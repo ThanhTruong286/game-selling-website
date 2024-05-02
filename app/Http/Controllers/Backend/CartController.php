@@ -22,11 +22,11 @@ class CartController extends Controller
             return redirect()->back()->with('error','Đã Có Sản Phẩm Trong Thư Viện');
         }
         DB::table("library")->insert($data);
-        return redirect()->route('profile')->with("success","Mua Sản Phẩm Thành Công");
+        return redirect()->route('thanks')->with("success","Mua Sản Phẩm Thành Công");
     }
     public function thanks()
     {
-        return redirect()->route("home");
+        return view('thanks');
     }
     public function online_checkout(Request $request)
     {
@@ -39,11 +39,11 @@ class CartController extends Controller
             $accessKey = 'klm05TvNBzhg7h7j';
             $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
             $orderInfo = "Thanh toán qua MoMo";
-            $amount = $_POST['amount'];
+            $amount = "10000";
 
             $orderId = time() . "";
-            $redirectUrl = "http://127.0.0.1:8000/cart";
-            $ipnUrl = "http://127.0.0.1:8000/cart";
+            $redirectUrl = "http://127.0.0.1:8000/thanks";
+            $ipnUrl = "http://127.0.0.1:8000/thanks";
             $extraData = "";
 
             $serectkey = $secretKey;

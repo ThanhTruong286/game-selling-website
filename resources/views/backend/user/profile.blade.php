@@ -26,7 +26,7 @@
 <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
 <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-danger pull-right r-activity">9</span></a></li>
 <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>
-<li><a href="{{route('game.library',['user_id'=>$user->id])}}"> <i class="fa fa-gamepad"></i> Game Library</a></li>
+<li><a href="{{route('library',['user_id'=>$user->id])}}"> <i class="fa fa-gamepad"></i> Game Library</a></li>
 </ul>
 </div>
 </div>

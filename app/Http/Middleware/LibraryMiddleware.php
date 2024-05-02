@@ -22,7 +22,7 @@ class LibraryMiddleware
         $user_id = Auth::user()->id;
         // dd($user_id);
         if(DB::table('library')->where('product_id',$product_id)->where('user_id',$user_id)->exists()){
-        return $next($request);
+            return $next($request);
         }
         return redirect()->route('profile')->with('error','Bạn Không Có Quyền Truy Cập Game');
     }

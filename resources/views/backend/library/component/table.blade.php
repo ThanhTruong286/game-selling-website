@@ -1,70 +1,121 @@
-@if($data == null)
-<h1>Nothing Here</h1>
-@elseif($data != null)
+
+@if(!$data)
+<h1 style="text-align:center;">Nothing Here</h1>
+@elseif($data)
 @foreach($data as $value)
+<div class="container bootstrap snippets bootdey">
+<div class="panel-body inf-content">
+<div class="row">
+<div class="col-md-4">
+<img alt style="width:600px;" title class="img-square img-thumbnail isTooltip" src="{{asset('storage/images/'.$value->image)}}" data-original-title="Usuario">
+<ul title="Ratings" class="list-inline ratings text-center">
+<a href="{{route('delete.game.library',['product_id'=>$value->id])}}" class="btn btn-info btn-lg play-btn">
+  <span class="play-btn"></span> Play        
+</a>
 
-<div class="single-product section">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="left-image">
-            <img src="{{ asset('storage/images/'.$value->image) }}" alt="">
-          </div>
+</ul>
+</div>
+<div class="col-md-6">
+<strong>Information</strong><br>
+<div class="table-responsive">
+<table class="table table-user-information">
+<tbody>
+<tr>
+<td>
+<strong>
+<span class="glyphicon glyphicon-asterisk text-primary"></span>
+Name
+</strong>
+</td>
+<td class="text-primary">
+{{$value->name}}
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+<span class="glyphicon glyphicon-user  text-primary"></span>
+Price
+</strong>
+</td>
+<td class="text-primary">
+{{$value->old_price}}
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+<span class="glyphicon glyphicon-cloud text-primary"></span>
+Category
+</strong>
+</td>
+<td class="text-primary">
+{{$value->category->name}}
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+<span class="glyphicon glyphicon-bookmark text-primary"></span>
+Description
+</strong>
+</td>
+<td class="text-primary">
+{{$value->description}}
+</td>
+</tr>
+<tr>
+<td>
+<!-- <strong>
+<span class="glyphicon glyphicon-eye-open text-primary"></span>
+Role
+</strong>
+</td>
+<td class="text-primary">
+Admin
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+<span class="glyphicon glyphicon-envelope text-primary"></span>
+Email
+</strong>
+</td>
+<td class="text-primary">
+<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7719180512071b0e37121a161e1b5914181a">[email&#160;protected]</a>
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+<span class="glyphicon glyphicon-calendar text-primary"></span>
+created
+</strong>
+</td>
+<td class="text-primary">
+20 jul 20014
+</td>
+</tr>
+<tr>
+<td>
+<strong>
+<span class="glyphicon glyphicon-calendar text-primary"></span>
+Modified
+</strong>
+</td>
+<td class="text-primary">
+20 jul 20014 20:00:00
+</td>
+</tr> -->
+</tbody>
+</table>
 
-        </div>
-        <div class="col-lg-6 align-self-center">
-          <h4>{{$value->name}}</h4>
 
-          <p>{{ $value->description }}</p>
-
-          </form>
-          <ul>
-            <li><span>Game ID:</span> {{$value->id}}</li>
-            <li><span>Genre:</span> <a href="#">Action</a>, <a href="#">Team</a>, <a href="#">Single</a></li>
-            <li><span>Multi-tags:</span> <a href="#">War</a>, <a href="#">Battle</a>, <a href="#">Royal</a></li>
-          </ul>
-        </div>
-        <div class="col-lg-12">
-        <!-- Nhan data tu ham product_detail ProductController -->
-
-
-          <div class="sep"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="more-info">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div class="tabs-content">
-            <div class="row">
-              <div class="nav-wrapper ">
-                <ul class="nav nav-tabs" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab" aria-controls="description" aria-selected="true">Description</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button" role="tab" aria-controls="reviews" aria-selected="false">Reviews (3)</button>
-                  </li>
-                </ul>
-              </div>              
-              <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-                  <p>{{ $value->description }}</p>
-                </div>
-                <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
-                  <p>Coloring book air plant shabby chic, crucifix normcore raclette cred swag artisan activated charcoal. PBR&B fanny pack pok pok gentrify truffaut kitsch helvetica jean shorts edison bulb poutine next level humblebrag la croix adaptogen. <br><br>Hashtag poke literally locavore, beard marfa kogi bruh artisan succulents seitan tonx waistcoat chambray taxidermy. Same cred meggings 3 wolf moon lomo irony cray hell of bitters asymmetrical gluten-free art party raw denim chillwave tousled try-hard succulents street art.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  @endforeach
-  @endif
-  <!-- endforeach -->
+</div>
+</div>
+</div>
+</div>
+</div>
+@endforeach
+@endif

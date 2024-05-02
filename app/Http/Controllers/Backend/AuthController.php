@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,26 +12,6 @@ use SebastianBergmann\Type\VoidType;
 
 class AuthController extends Controller
 {
-    public function library_game(Request $request){
-        $product_id = $request->get("product_id");
-        $data = DB::table("products")->where("id",$product_id)->get();
-        $user_id = session()->get('user_id');
-        $product_id_user = DB::table('library')->where('user_id',$user_id)->get('product_id');
-        foreach($product_id_user as $value){
-            $product[] = DB::table('products')->where('id',$value->product_id)->get();
-        }
-        return view('backend.library.index',['product'=>$product,'data'=>$data]);
-    }
-    public function user_library(Request $request){
-        $user_id = $request->get('user_id');
-        $product_id = DB::table('library')->where('user_id',$user_id)->get('product_id');
-        $product[] = null;
-        foreach($product_id as $value){
-            $product[] = DB::table('products')->where('id',$value->product_id)->get();
-        }
-        $data = null;
-        return view('backend.library.index',['product'=>$product,'data'=>$data]);
-    }
     public function confirm_email(Request $request){
         //tao bien data luu tru du lieu user moi
         $data = [
@@ -101,7 +80,7 @@ class AuthController extends Controller
             $request->session()->put('user_id',$user_id);
             $request->session()->put('user',$user);
             // dd(session()->all());
-            return redirect()->route('home',['user_name' => $user_name])->with('success','Đăng Nhập Thành Công');
+            return redirect()->route('home')->with('success','Đăng Nhập Thành Công');
         }
         else {
             return redirect()->route('signin.form')->with('error','Đăng Nhập Thất Bại, Lỗi Tài Khoản Hoặc Mật Khẩu');

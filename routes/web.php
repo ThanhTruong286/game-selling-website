@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\LibraryController;
 use App\Http\Middleware\LibraryMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -43,9 +44,12 @@ Route::prefix('user')->group(function () {
     // USER PROFILE
     Route::get('profile',[AuthController::class,'showProfile'])->name('profile');
     Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
-    // SHOW LIBRARY
-    Route::get('library',[AuthController::class,'user_library'])->name('game.library')->middleware('user');
-    Route::get('library/game',[AuthController::class,'library_game'])->name('library.game')->middleware(LibraryMiddleware::class);
+    // LIBRARY
+    Route::prefix('library')->group(function () {
+        Route::get('home',[LibraryController::class,'user_library'])->name('library')->middleware('user');
+        Route::get('game',[LibraryController::class,'library_game'])->name('library.game')->middleware(LibraryMiddleware::class);
+        Route::get('delete',[LibraryController::class,'delete_game'])->name('delete.game.library')->middleware(LibraryMiddleware::class);
+    });
 });
 Route::get('product-detail', [ProductController::class,'product_detail'])->name('product.detail');
 
