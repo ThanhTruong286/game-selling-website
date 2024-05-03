@@ -27,7 +27,6 @@ Route::get('/', [HomeController::class, 'returnViewHome'])->name('home');
 
 /* BACKEND ROUTES */
 Route::get('dashboard', [DashboardController::class,'index'])->name('dashboard.index')->middleware('admin');//chi dc truy cap khi check dc da dang nhap qua mdw
-Route::get('search', [HomeController::class,'search'])->name('search');
 /* USER */
 Route::prefix('user')->group(function () {
     Route::get('logout',[AuthController::class,'logout'])->name('auth.logout');
@@ -43,6 +42,8 @@ Route::prefix('user')->group(function () {
     Route::get('make-new-password',[AuthController::class,'make_new_password'])->name('makeNewPass');
     // USER PROFILE
     Route::get('profile',[AuthController::class,'showProfile'])->name('profile');
+    Route::get('edit-profile-form',[AuthController::class,'edit_profile'])->name('edit.profile.form');
+    Route::post('edit',[AuthController::class,'edit'])->name('edit.profile');
     Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
     // LIBRARY
     Route::prefix('library')->group(function () {
@@ -89,7 +90,7 @@ Route::get('delete-cart/{product_id}',[CartController::class,'delete'])->name('d
 Route::get('add-to-library', [CartController::class,'add_to_library'])->name('add.to.library')->middleware('cart');
 /* CATEGORY */
 Route::prefix('category')->group(function () {
-    Route::get('/', [CategoryController::class,'index'])->name('category.home');
+    Route::get('/{search?}', [CategoryController::class,'index'])->name('category.home');
 });
 // ORTHER
 Route::get('trending', [CategoryController::class,'trending'])->name('category.trending');

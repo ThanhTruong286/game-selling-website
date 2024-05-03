@@ -1,5 +1,4 @@
 
-
   <div class="section trending">
     <div class="container">
       <ul class="trending-filter">
@@ -49,7 +48,7 @@
         </div>
 
         @endforeach
-        {{ $product->links('pagination::default', ['foo' => 'bar']) }}
+        {{ $product->appends(request()->except('page'))->links('pagination::default')}}
 
     </div>
   </div>

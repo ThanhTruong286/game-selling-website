@@ -112,46 +112,17 @@
             <a href="shop.html">View All</a>
           </div>
         </div>
+        @foreach($data_related as $value)
         <div class="col-lg col-sm-6 col-xs-12">
           <div class="item">
-            <h4>Action</h4>
+            <h4>{{$value->category->name}}</h4>
             <div class="thumb">
-              <a href="product-details.html"><img src="assets/images/categories-01.jpg" alt=""></a>
+              <a href="{{route('product.detail',['product_id'=>$value->id])}}"><img height="150px" src="{{asset('storage/images/'.$value->image)}}" alt=""></a>
             </div>
           </div>
         </div>
-        <div class="col-lg col-sm-6 col-xs-12">
-          <div class="item">
-            <h4>Action</h4>
-            <div class="thumb">
-              <a href="product-details.html"><img src="assets/images/categories-05.jpg" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg col-sm-6 col-xs-12">
-          <div class="item">
-            <h4>Action</h4>
-            <div class="thumb">
-              <a href="product-details.html"><img src="assets/images/categories-03.jpg" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg col-sm-6 col-xs-12">
-          <div class="item">
-            <h4>Action</h4>
-            <div class="thumb">
-              <a href="product-details.html"><img src="assets/images/categories-04.jpg" alt=""></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg col-sm-6 col-xs-12">
-          <div class="item">
-            <h4>Action</h4>
-            <div class="thumb">
-              <a href="product-details.html"><img src="assets/images/categories-05.jpg" alt=""></a>
-            </div>
-          </div>
-        </div>
+        @endforeach
+
       </div>
     </div>
   </div>

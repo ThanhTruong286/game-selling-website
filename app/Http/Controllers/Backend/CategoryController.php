@@ -117,12 +117,12 @@ class CategoryController extends Controller
                 $qty += $cart['quantity'];
             }
         }
-        $product = Product::whereRaw("DATEDIFF('" . now() . "',created_at) <= 7")->where('total_play_time','>=',1000)->orderBy("created_at","asc")->paginate(4);
+        $product = Product::whereRaw("DATEDIFF('" . now() . "',created_at) <= 7")->where('total_play_time','>=',1000)->orderBy("created_at","asc")->paginate(8);
         $categories = DB::table("categories")->get();
         $count = count($product);
         return view("backend.category.layout",compact("product",'categories','qty','count','template','title'));
     }
-    public function index(Request $request){
+    public function index(Request $request,$search = ''){
         $template = "backend.category.index";
         $user_id = session()->get("user_id");
         $title = $request->get('name');
@@ -142,6 +142,11 @@ class CategoryController extends Controller
         $product = Product::where('slug','like','%' . $request->get('name') . '%')->paginate(8);
         $categories = DB::table("categories")->get();
         $count = count($product);
+        if(isset($_GET['keyword']) && $_GET['keyword']){
+            $search = $request->get('keyword');
+            $product = Product::where('name','like','%' . $search . '%')->orWhere('slug','like','%' . $search . "%")->paginate(8);
+            $count = count($product);
+        }
         return view("backend.category.layout",compact("product",'categories','qty','count','template','title'));
     }
 }

@@ -83,7 +83,10 @@ class ProductController extends Controller
         $product_id = $request->get("product_id");
         $gallery = Gallery::where("product_id",$product_id)->get();
         $data = Product::where("id",$product_id)->get();
-        return view('backend.dashboard.product.product-details',compact('data','qty','gallery'));
+        $related = Product::where('id',$product_id)->value('categories_id');
+        // dd($related);
+        $data_related = Product::where('categories_id',$related)->paginate(5);
+        return view('backend.dashboard.product.product-details',compact('data','qty','gallery','data_related'));
     }
     public function add(Request $request){
         $rule = [
