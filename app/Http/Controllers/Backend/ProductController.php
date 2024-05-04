@@ -28,11 +28,20 @@ class ProductController extends Controller
         return redirect()->route('product.index')->with("error","Xoá Sản Phẩm Thất Bại");
     }
     public function edit(Request $request){
+        $rule = [
+            'image' => 'image|mimes:png,jpg,jpeg|max:2048'
+        ];
+        $customMessages = [
+            'mimes' => 'Yêu Cầu Định Dạng png,jpg,jpeg',
+            'max' => 'Kích Thước Tối Đa: 2048kb'
+        ];
+        $this->validate($request, $rule, $customMessages);//kiem tra hop le file hinh anh
         $category_str  = $request->get('category_id');//lay du lieu tu form
         $category = explode('<>', $category_str);//cat du lieu qua chuoi <>, truong hop nay se tao dc 2 chuoi id va name
         $categories_id = $category[0];//phan tu thu 0 chinh la id category
         $slug = $category[1];//phan tu thu 1 chinh la name category, dung de tao slug
         //tao bien data luu tru du lieu cua product can dc insert
+        $current_image = $request->get('imageName');
         $imageName = $request->get('imageName');
         if($request->file('image')){
             $image = $request->file('image');
@@ -47,11 +56,14 @@ class ProductController extends Controller
             'categories_id' => $categories_id,
             'slug'=>$slug,
             'updated_at'=>now(),
+            
             'image' => $imageName,
         ];
         if($request->file('image') != null){
+            // dd($imageName);
             if($image->storeAs('public/images', $imageName)){
                 DB::table('products')->where('id',$request->get('id'))->update($data);
+                unlink(storage_path('app/public/images/'.$current_image));
                 return redirect()->route('product.index')->with('success','Sửa Sản Phẩm Thành Công');
             }
         }

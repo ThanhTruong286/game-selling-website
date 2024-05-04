@@ -56,7 +56,7 @@
                                             <div class="form-group"><label class="col-sm-2 control-label">Image:</label>
                                                 <div class="col-sm-10">
                                                 <img name="edit-image" src="{{asset('storage/images/'.$products->image)}}" alt="" width="200" height="100">
-                                                <input  name="imageName" type="hidden" class="form-control" placeholder="{{$products->image}}"value="{{$products->image}}">
+                                                <input name="imageName" type="hidden" class="form-control" placeholder="{{$products->image}}"value="{{$products->image}}">
 
                                                     <input accept="image/*"  value="{{$products->image}}"  name="image" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="{{$products->image}}">
                                                     <!-- IF ERROR -->

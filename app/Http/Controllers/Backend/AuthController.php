@@ -21,6 +21,10 @@ class AuthController extends Controller
     public function edit(Request $request)
     {
         if (isset($_POST['submit']) && $_POST['submit']) {
+            if($request->file('avatar')){
+                $image = $request->file('avatar');
+                $imageName = $request->file('avatar')->getClientOriginalName();
+            }
             $data = [
                 'name' => isset($_POST['name']) ? $_POST['name'] : '',
                 'fullName' => isset($_POST['fullname']) ? $_POST['fullname'] : '',
@@ -30,9 +34,16 @@ class AuthController extends Controller
                 'province' => isset($_POST['province']) ? $_POST['province'] : '',
                 'district' => isset($_POST['district']) ? $_POST['district'] : '',
                 'ward' => isset($_POST['ward']) ? $_POST['ward'] : '',
-                'birthday' => isset($_POST['birthday']) ? date_create($_POST['birthday']) : date_create()
+                'birthday' => isset($_POST['birthday']) ? date_create($_POST['birthday']) : date_create(),
+                'image' => $imageName
             ];
 
+            if($image->storeAs('public/images', $imageName)){
+                $current_avatar = $_POST['current_avatar'];
+                DB::table('users')->where('id',Auth::user()->id)->update($data);
+                unlink(storage_path('app/public/images/'.$current_avatar));
+                return redirect()->route('edit.profile.form')->with('success','Sửa Thông Tin Thành Công');
+            }
             // dd($data);
             DB::table('users')->where('id', Auth::user()->id)->update($data);
             return redirect()->route('edit.profile.form')->with('success','Sửa Thông Tin Thành Công');

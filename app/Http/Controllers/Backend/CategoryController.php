@@ -40,7 +40,16 @@ class CategoryController extends Controller
         return redirect()->route('category.crud')->with("error","Xoá Danh Mục Thất Bại");
     }
     public function edit(Request $request){
+        $rule = [
+            'image' => 'image|mimes:png,jpg,jpeg|max:2048'
+        ];
+        $customMessages = [
+            'mimes' => 'Yêu Cầu Định Dạng png,jpg,jpeg',
+            'max' => 'Kích Thước Tối Đa: 2048kb'
+        ];
+        $this->validate($request, $rule, $customMessages);//kiem tra hop le file hinh anh
         $imageName = $request->get('imageName');
+        $current_image = $request->get('imageName');
         if($request->file('image')){
             $image = $request->file('image');
             $imageName = $request->file('image')->getClientOriginalName();
@@ -55,6 +64,7 @@ class CategoryController extends Controller
         if($request->file('image') != null){
             if($image->storeAs('public/images', $imageName)){
                 DB::table('categories')->where('id',$request->get('id'))->update($data);
+                unlink(storage_path('app/public/images/'.$current_image));
                 return redirect()->route('category.crud')->with('success','Sửa Danh Mục Thành Công');
             }
         }

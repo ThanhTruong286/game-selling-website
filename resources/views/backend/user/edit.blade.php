@@ -13,11 +13,16 @@
 
 <body>
 @foreach($data as $value)
+<form action="{{route('edit.profile')}}" method="post" enctype="multipart/form-data">
     
 <div class="container rounded bg-white mt-5">
         <div class="row">
             <div class="col-md-4 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="{{asset('storage/images/'.$value->image)}}" width="90"><span class="font-weight-bold">{{$value->fullname}}</span><span class="text-black-50">{{$value->email}}</span><span>{{$value->province}}</span></div>
+                <p style="text-align: center; font-weight: bold;">Change Avatar</p>
+                <input name="avatar" type="file" placeholder="Change Avatar" value="{{$value->image}}">
+                <input type="hidden" name="current_avatar" value="{{$value->image}}">
+
             </div>
             <div class="col-md-8">
                 <div class="p-3 py-5">
@@ -27,7 +32,6 @@
                         </div>
                         <h6 class="text-right">Edit Profile</h6>
                     </div>
-                <form action="{{route('edit.profile')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row mt-2">
                         <label class="col-md-6" style="padding: 0 15px;" for="name">Name</label>
@@ -42,7 +46,7 @@
                         <label class="col-md-6" style="padding: 0 15px;" for="phone">Phone Number</label>
                     </div>
                     <div class="row mt-3">
-                        <input type="text" value="{{$value->email}}" name="email" placeholder="Email" class="col-md-6">
+                        <input readonly type="text" value="{{$value->email}}" name="email" placeholder="Email" class="col-md-6">
 
                         <input type="text" value="{{$value->phone}}" name="phone" placeholder="Phone" class="col-md-6">
                     </div>
@@ -70,14 +74,14 @@
                     </div>
                     <div class="row mt-3">
                         <?php $date = date_create($value->birthday);?>
-                        <input name="birthday" type="date" class="col-md-6" placeholder="Birthday" value="{{$date->format('d/m/Y')}}">
+                        <input name="birthday" type="date" class="col-md-6" placeholder="Birthday" value="{{date_format($date,'Y-m-d')}}">
                     </div>
                     <div class="mt-5 text-right"><button class="btn btn-primary profile-button" name="submit" value="submit" type="submit">Save Profile</button></div>
-                </form>
                 </div>
             </div>
         </div>
     </div>
+</form>
 </body>
 @endforeach
 
