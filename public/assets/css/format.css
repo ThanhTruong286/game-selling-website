@@ -576,8 +576,17 @@ ul.summary-list > li:last-child  {
     background-color: #0070E1;
     color: #fff;
     margin-top: 20px;
+    border: none;
+    width: 100px;
+    height: 30px;
+    border-radius: 5px;
 }
-
+#cal:hover{
+    background-color: blue;
+}
+#cal a {
+    color: white;
+}
 
 div.gallery img {
     width: 200px;
@@ -620,6 +629,15 @@ div.gallery img {
   }
   .sidebar-collapse{
     height: 100%;
+  }
+  .content{
+    margin-top: 100px;
+    height: 100%;
+  }
+  .title{
+    text-align: center;
+    margin-top: 100px;
+    font-weight: bold;
   }
 
 

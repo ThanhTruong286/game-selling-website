@@ -21,12 +21,18 @@
         <div class="col-lg-6">
           <div class="left-image">
             <img src="{{ asset('storage/images/'.$values->image) }}" alt="">
+            
           </div>
 
         </div>
         <div class="col-lg-6 align-self-center">
+
           <h4>{{$values->name}}</h4>
+          @if($values->sale > 0)
+                <p style="font-weight:bold;color:red; margin:15px 0px;font-size:large;"> SALE: {{ $values->sale }}%</p>
+              @endif
           <span class="price">
+
           @if($values->sale > 0)
             <em>{{ number_format($values->old_price) }} VND</em>
           @endif
@@ -36,6 +42,7 @@
               {{ 'Free' }}
           @endif
           </span>
+
           <p>{{ $values->description }}</p>
           <form id="qty" action="#">
             @if($values->price == 0)
@@ -109,7 +116,7 @@
         </div>
         <div class="col-lg-6">
           <div class="main-button">
-            <a href="shop.html">View All</a>
+            <a href="{{route('category.home',['name'=>$values->category->name])}}">View All</a>
           </div>
         </div>
         @foreach($data_related as $value)

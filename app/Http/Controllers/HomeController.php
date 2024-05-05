@@ -30,6 +30,7 @@ class HomeController extends Controller
         dd($search);
     }
     public function returnViewHome(Request $request){
+        $special_product = DB::table('products')->where('banner',1)->get();
         $user_id = session()->get("user_id");
         $qty = 0;//bien luu tru tong so luong san pham
         //kiem tra su ton tai cua session 'cart'
@@ -44,9 +45,6 @@ class HomeController extends Controller
         $products = Product::whereRaw("DATEDIFF('" . now() . "',created_at) <= 7")->where('total_play_time','>=',1000)->orderBy("created_at","asc")->paginate(4);
         $most_play = Product::where('total_play_time','>=',100000)->orderBy('total_play_time','desc')->paginate(6);
         $categories = Category::paginate(3);
-        return view('home',compact('products','categories','most_play','qty'));
-    }
-    public function returnViewShop(){
-        return view('shop');
+        return view('home',compact('products','categories','most_play','qty','special_product'));
     }
 }

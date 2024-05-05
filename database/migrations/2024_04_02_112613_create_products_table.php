@@ -25,6 +25,7 @@ return new class extends Migration
             $table->double('sale');
             $table->double('old_price');
             $table->timestamps();
+            $table->boolean('banner');
             //khoa ngoai la cot categories_id noi voi id ben bang categories
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
         });

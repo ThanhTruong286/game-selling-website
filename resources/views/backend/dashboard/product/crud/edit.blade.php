@@ -40,6 +40,21 @@
                                                     <input  name="description" type="text" class="form-control" placeholder="{{$products->description}}"value="{{$products->description}}">
                                                 </div>
                                             </div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Special Product:</label>
+                                                <div class="col-sm-10">
+                                                    @if($products->banner)
+                                                    True
+                                                    <input checked  name="banner" type="radio" value="1">
+                                                    False
+                                                    <input  name="banner" type="radio" value="0">
+                                                    @elseif(!$products->banner)
+                                                    True
+                                                    <input checked  name="banner" type="radio" value="1">
+                                                    False
+                                                    <input checked  name="banner" type="radio" value="0">
+                                                    @endif
+                                                </div>
+                                            </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Category:</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-control" name="category_id" id="">
@@ -55,11 +70,13 @@
                                             </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Image:</label>
                                                 <div class="col-sm-10">
-                                                <img name="edit-image" src="{{asset('storage/images/'.$products->image)}}" alt="" width="200" height="100">
+                                                <img name="edit-image" src="{{asset('storage/images/'.$products->image)}}" alt="" width="200" height="100"><br><br>
                                                 <input name="imageName" type="hidden" class="form-control" placeholder="{{$products->image}}"value="{{$products->image}}">
 
-                                                    <input accept="image/*"  value="{{$products->image}}"  name="image" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="{{$products->image}}">
+                                                <input accept="image/*"  value="{{$products->image}}"  name="image" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="{{$products->image}}">
                                                     <!-- IF ERROR -->
+                                                <button class="inputBox" id="cal" type="button"><a href="{{route('add.gallery.form',['product_id'=>$products->id])}}">Add Gallery</a></button>
+
                                                     @if ($errors->any())
                                                         <div class="alert alert-danger">
                                                             <ul>
@@ -71,31 +88,12 @@
                                                     @endif
                                                     <!-- END IF -->
                                                 </div>
+                                                
                                             </div>
-                                            <hr>
-                                            <div class="form-group"><label class="col-sm-2 control-label">Gallery:</label>
-                                                <div class="col-sm-10">
-                                                    <input  name="gl1" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
-                                                    <input  name="gl2" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
-                                                    <input  name="gl3" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
-                                                    <input  name="gl4" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
-                                                    <input  name="gl5" type="file" class="form-control @error('title') is-invalid @enderror" placeholder="Choose image"><br>
-          
-                                                    @if ($errors->any())
-                                                        <div class="alert alert-danger">
-                                                            <ul>
-                                                                @foreach ($errors->all() as $error)
-                                                                    <li>{{ $error }}</li>
-                                                                @endforeach
-                                                            </ul>
-                                                        </div>
-                                                    @endif
-                                                  
-                                                </div>
-                                            </div>
+                                            
                                         </fieldset>
                                         @endforeach
-
+        
                                         <div class="inputBox"> 
 
                                         <input type="submit" value="Submit"> 

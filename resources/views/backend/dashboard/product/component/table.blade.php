@@ -6,7 +6,7 @@
                                 <th>Tên Sản Phẩm</th>
                                 <th>Giá Sản Phẩm</th>
                                 <th>Danh Mục</th>
-                                <th>Còn Hàng</th>
+                                <th>Tiêu Biểu</th>
                                 <th>Thao Tác</th>
                             </tr>
                             </thead>
@@ -29,7 +29,11 @@
                                 <!-- switch button -->
                                 <td>
                                     <label class="switch">
-                                    <input type="checkbox" checked>
+                                        @if($value->banner == 1)
+                                        <input checked class="check-btn" name="check" type="radio" value="{{$value->banner}}">
+                                        @elseif($value->banner == 0)
+                                        <input class="check-btn" name="check" type="radio" value="{{$value->banner}}">
+                                        @endif
                                     <span class="slider round"></span>
                                     </label>
                                 </td>

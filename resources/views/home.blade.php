@@ -21,13 +21,22 @@
             </div>
           </div>
         </div>
+        @foreach($special_product as $value)
         <div class="col-lg-4 offset-lg-2">
           <div class="right-image">
-            <img src="{{ asset('storage/images/re4.jpg') }}" alt="">
-            <span class="price">$1</span>
-            <span class="offer">-40%</span>
+            <a href="{{ route('product.detail',['product_id'=>$value->id]) }}">
+            <img height="400px" width="700px" src="{{ asset('storage/images/'.$value->image) }}" alt="">
+            <span class="price">
+              @if($value->sale > 0)
+              <del>{{ number_format($value->old_price) }} VND</del>
+              @endif
+              {{number_format($value->price)}} VND</span>
+            @if($value->sale > 0)
+            <span class="offer">-{{$value->sale}}%</span>
+            @endif
           </div>
         </div>
+        @endforeach
       </div>
     </div>
   </div>

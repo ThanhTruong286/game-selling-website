@@ -13,8 +13,48 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+    public function add_gallery(Request $request){
+        $product_id = isset($_POST['product_id']) ? $_POST['product_id'] : '';
+        $image = null;
+        $imageName =null;
+        if($request->file('gl1')){
+            $imageName = $request->file('gl1')->getClientOriginalName();
+            $image = $request->file('gl1');
+        }
+
+        $rule = [
+            'image' => 'image|mimes:png,jpg,jpeg|max:2048'
+        ];
+        $customMessages = [
+            'mimes' => 'Yêu Cầu Định Dạng png,jpg,jpeg',
+            'max' => 'Kích Thước Tối Đa: 2048kb'
+        ];
+        $this->validate($request, $rule, $customMessages);//kiem tra hop le file hinh anh
+        $data = [
+            'image'=>$imageName,
+            'name'=>$imageName,
+            'product_id'=>$product_id,
+        ];
+        if($image != null){
+            if($image->storeAs('public/images', $imageName)){
+                if(DB::table('gallery')->where('product_id',$product_id)->count() < 5){
+                    DB::table('gallery')->insert($data);
+                    return redirect()->route('add.gallery.form',compact('product_id'))->with('success','Thêm Gallery Thành Công');
+                }
+                return redirect()->route('add.gallery.form',compact('product_id'))->with('error','Gallery Cho Sản Phẩm Này Đã  Dạt Giới Hạn');
+                
+            }}
+        return redirect()->route('add.gallery.form',compact('product_id'))->with('error','Thêm Gallery Thất Bại');
+    }
+    public function add_gallery_form(Request $request){
+        $product_id = $request->get('product_id');
+        $data = Product::where('id',$product_id)->get();
+        $gallery = DB::table('gallery')->where('product_id',$product_id)->get();
+        $template = 'backend.dashboard.product.crud.add_gallery';
+        return view('backend.dashboard.layout',compact('template','data','gallery'));
+    }
     public function banner(Request $request){
-        echo 'banner';
+
     }
     public function delete(Request $request){
         $file = $request->get('file');
@@ -58,16 +98,19 @@ class ProductController extends Controller
             'updated_at'=>now(),
             
             'image' => $imageName,
+            'banner' => $request->get('banner'),
         ];
         if($request->file('image') != null){
             // dd($imageName);
             if($image->storeAs('public/images', $imageName)){
+                DB::table('products')->where('banner',true)->update(['banner'=>false]);
                 DB::table('products')->where('id',$request->get('id'))->update($data);
                 unlink(storage_path('app/public/images/'.$current_image));
                 return redirect()->route('product.index')->with('success','Sửa Sản Phẩm Thành Công');
             }
         }
         else{
+            DB::table('products')->where('banner',true)->update(['banner'=>false]);
             DB::table('products')->where('id',$request->get('id'))->update($data);
             return redirect()->route('product.index')->with('success','Sửa Sản Phẩm Thành Công');
         }
@@ -126,6 +169,7 @@ class ProductController extends Controller
             'sale'=>0,
             'old_price'=>$request->get('price'),
             'image' => $request->image->getClientOriginalName(),//lay ra ten cua file hinh 
+            'banner'=>false,
         ];
         $file = $request->file('image');//lay du lieu file hinh
         //up file hinh vao storage, trong storage/public tao 1 file moi la images

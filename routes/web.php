@@ -67,6 +67,8 @@ Route::prefix('admin')->group(function () {
     Route::get('edit-form', [ProductController::class,'edit_form'])->name('product.edit.form')->middleware('admin');
     Route::post('edit', [ProductController::class,'edit'])->name('product.edit')->middleware('admin');
     Route::get('delete', [ProductController::class,'delete'])->name('product.delete')->middleware('admin');
+    Route::get('add-gallery-form',[ProductController::class,'add_gallery_form'])->name('add.gallery.form')->middleware('admin');
+    Route::post('add-gallery',[ProductController::class,'add_gallery'])->name('add.gallery')->middleware('admin');
 });
     // CRUD CATEGORIES
     Route::prefix('category')->group(function () {

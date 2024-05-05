@@ -18,7 +18,7 @@
 <div class="container rounded bg-white mt-5">
         <div class="row">
             <div class="col-md-4 border-right">
-                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" src="{{asset('storage/images/'.$value->image)}}" width="90"><span class="font-weight-bold">{{$value->fullname}}</span><span class="text-black-50">{{$value->email}}</span><span>{{$value->province}}</span></div>
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img height="100px" width="100px" class="rounded-circle mt-5" src="{{asset('storage/images/'.$value->image)}}" width="90"><span class="font-weight-bold">{{$value->fullname}}</span><span class="text-black-50">{{$value->email}}</span><span>{{$value->province}}</span></div>
                 <p style="text-align: center; font-weight: bold;">Change Avatar</p>
                 <input name="avatar" type="file" placeholder="Change Avatar" value="{{$value->image}}">
                 <input type="hidden" name="current_avatar" value="{{$value->image}}">

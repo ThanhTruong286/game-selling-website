@@ -21,6 +21,8 @@ class AuthController extends Controller
     public function edit(Request $request)
     {
         if (isset($_POST['submit']) && $_POST['submit']) {
+            $imageName = null;
+            $image = null;
             if($request->file('avatar')){
                 $image = $request->file('avatar');
                 $imageName = $request->file('avatar')->getClientOriginalName();
@@ -37,13 +39,15 @@ class AuthController extends Controller
                 'birthday' => isset($_POST['birthday']) ? date_create($_POST['birthday']) : date_create(),
                 'image' => $imageName
             ];
-
+            if($image != null){
             if($image->storeAs('public/images', $imageName)){
                 $current_avatar = $_POST['current_avatar'];
                 DB::table('users')->where('id',Auth::user()->id)->update($data);
+                if($current_avatar != null){
                 unlink(storage_path('app/public/images/'.$current_avatar));
+                }
                 return redirect()->route('edit.profile.form')->with('success','Sửa Thông Tin Thành Công');
-            }
+            }}
             // dd($data);
             DB::table('users')->where('id', Auth::user()->id)->update($data);
             return redirect()->route('edit.profile.form')->with('success','Sửa Thông Tin Thành Công');

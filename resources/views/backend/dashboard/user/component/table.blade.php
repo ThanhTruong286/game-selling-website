@@ -6,7 +6,6 @@
                                 <th>Thông Tin Thành Viên</th>
                                 <th>Địa Chỉ</th>
                                 <th>Tình Trạng</th>
-                                <th>Thao Tác</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -35,11 +34,6 @@
                                     <input type="checkbox" name="checkAll" checked>
                                     <span class="slider round"></span>
                                     </label>
-                                </td>
-                                <!-- edit button -->
-                                <td>
-                                    <a href="" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                                    <a href="" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                             @endforeach
