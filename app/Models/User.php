@@ -36,6 +36,9 @@ class User extends Authenticatable
         'password',
         'role',
     ];
+    public function review(){
+        return $this->hasOne(Review::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

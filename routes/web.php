@@ -41,15 +41,16 @@ Route::prefix('user')->group(function () {
 
     Route::get('make-new-password',[AuthController::class,'make_new_password'])->name('makeNewPass');
     // USER PROFILE
-    Route::get('profile',[AuthController::class,'showProfile'])->name('profile');
-    Route::get('edit-profile-form',[AuthController::class,'edit_profile'])->name('edit.profile.form');
-    Route::post('edit',[AuthController::class,'edit'])->name('edit.profile');
-    Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
+    Route::get('profile',[AuthController::class,'showProfile'])->name('profile')->middleware('check_login');
+    Route::get('edit-profile-form',[AuthController::class,'edit_profile'])->name('edit.profile.form')->middleware('check_login');
+    Route::post('edit',[AuthController::class,'edit'])->name('edit.profile')->middleware('check_login');
+    Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email')->middleware('check_login');
+    Route::post('add-review',[ProductController::class,'add_review'])->name('add.review')->middleware('check_login');
     // LIBRARY
     Route::prefix('library')->group(function () {
-        Route::get('home',[LibraryController::class,'user_library'])->name('library')->middleware('user');
-        Route::get('game',[LibraryController::class,'library_game'])->name('library.game')->middleware(LibraryMiddleware::class);
-        Route::get('delete',[LibraryController::class,'delete_game'])->name('delete.game.library')->middleware(LibraryMiddleware::class);
+        Route::get('home',[LibraryController::class,'user_library'])->name('library')->middleware('check_login')->middleware('user');
+        Route::get('game',[LibraryController::class,'library_game'])->name('library.game')->middleware('check_login')->middleware(LibraryMiddleware::class);
+        Route::get('delete',[LibraryController::class,'delete_game'])->name('delete.game.library')->middleware('check_login')->middleware(LibraryMiddleware::class)->middleware('user');
     });
 });
 Route::get('product-detail', [ProductController::class,'product_detail'])->name('product.detail');
@@ -80,7 +81,6 @@ Route::prefix('admin')->group(function () {
         Route::get('delete', [CategoryController::class,'delete'])->name('category.delete')->middleware('admin');
         });
 /* WEB CONTENT*/
-    Route::get('web-banner', [ProductController::class,'banner'])->name('web.banner')->middleware('admin');
 
 });
 /* CART */

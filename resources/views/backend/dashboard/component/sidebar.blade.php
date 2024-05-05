@@ -25,7 +25,6 @@
                         <li><a href="{{ route('user.index') }}">Quản Lý Thành Viên</a></li>
                         <li><a href="{{ route('product.index') }}">Quản Lý Sản Phẩm</a></li>
                         <li><a href="{{ route('category.crud') }}">Quản Lý Danh Mục</a></li>
-                        <li><a href="{{ route('web.banner') }}">Quản Lý Banner</a></li>
                     </ul>
                 </li>
                 

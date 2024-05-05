@@ -6,13 +6,28 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Product;
-use App\Models\User;
+use App\Models\Review;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Auth;
 
 class ProductController extends Controller
 {
+    public function add_review(Request $request){
+        $product_id = $request->get('product_id');
+        $content = isset($_POST['review']) ? $_POST['review'] : '';
+        if($content!=''){
+            $data = [
+                'content'=>$content,
+                'user_id'=>Auth::user()->id,
+                'product_id'=>$request->get('product_id'),
+            ];
+            DB::table('review')->insert($data);
+            return redirect()->route('library.game',compact('product_id'))->with('success','Thêm Review Thành Công');
+        }
+        return redirect()->route('library.game')->with('error','Thêm Review Thất Bại');
+    }
     public function add_gallery(Request $request){
         $product_id = isset($_POST['product_id']) ? $_POST['product_id'] : '';
         $image = null;
@@ -52,9 +67,6 @@ class ProductController extends Controller
         $gallery = DB::table('gallery')->where('product_id',$product_id)->get();
         $template = 'backend.dashboard.product.crud.add_gallery';
         return view('backend.dashboard.layout',compact('template','data','gallery'));
-    }
-    public function banner(Request $request){
-
     }
     public function delete(Request $request){
         $file = $request->get('file');
@@ -141,7 +153,10 @@ class ProductController extends Controller
         $related = Product::where('id',$product_id)->value('categories_id');
         // dd($related);
         $data_related = Product::where('categories_id',$related)->paginate(5);
-        return view('backend.dashboard.product.product-details',compact('data','qty','gallery','data_related'));
+        $review = Review::where('product_id',$product_id)->get();
+        $review_count = Review::where('product_id',$product_id)->count();
+
+        return view('backend.dashboard.product.product-details',compact('data','qty','gallery','data_related','review','review_count'));
     }
     public function add(Request $request){
         $rule = [

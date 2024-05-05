@@ -39,7 +39,7 @@ class CartController extends Controller
             $accessKey = 'klm05TvNBzhg7h7j';
             $secretKey = 'at67qH6mk8w5Y1nAyMoYKMWACiEi2bsa';
             $orderInfo = "Thanh toán qua MoMo";
-            $amount = "10000";
+            $amount = $_POST['amount'];
 
             $orderId = time() . "";
             $redirectUrl = "http://127.0.0.1:8000/thanks";

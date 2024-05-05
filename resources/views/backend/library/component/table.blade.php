@@ -12,6 +12,10 @@
 <a href="{{route('delete.game.library',['product_id'=>$value->id])}}" class="btn btn-info btn-lg play-btn">
   <span class="play-btn"></span> Play        
 </a>
+<a href="{{route('product.detail',['product_id'=>$value->id])}}" class="btn btn-info btn-lg play-btn">
+  <span class="play-btn"></span> Game Detail        
+</a>
+
 
 </ul>
 </div>
@@ -23,7 +27,6 @@
 <tr>
 <td>
 <strong>
-<span class="glyphicon glyphicon-asterisk text-primary"></span>
 Name
 </strong>
 </td>
@@ -34,7 +37,6 @@ Name
 <tr>
 <td>
 <strong>
-<span class="glyphicon glyphicon-user  text-primary"></span>
 Price
 </strong>
 </td>
@@ -45,7 +47,6 @@ Price
 <tr>
 <td>
 <strong>
-<span class="glyphicon glyphicon-cloud text-primary"></span>
 Category
 </strong>
 </td>
@@ -56,7 +57,6 @@ Category
 <tr>
 <td>
 <strong>
-<span class="glyphicon glyphicon-bookmark text-primary"></span>
 Description
 </strong>
 </td>
@@ -66,6 +66,10 @@ Description
 </tr>
 <tr>
 <td>
+
+
+  
+  
 <!-- <strong>
 <span class="glyphicon glyphicon-eye-open text-primary"></span>
 Role
@@ -109,13 +113,23 @@ Modified
 </td>
 </tr> -->
 </tbody>
+
 </table>
+<strong>Add Your Review</strong><hr style="border-top: 1px solid red;">
+<form action="{{route('add.review',['product_id'=>$value->id])}}" method="post">
+@csrf
+  <input class="form-control" type="text" name="review" class="message">
+  <br>
+  <div class="inputBox">
+  <input type="submit" value="Submit">
+  </div>
+</form>
+</div>
+</div>
+</div>
+</div>
 
+</div>
 
-</div>
-</div>
-</div>
-</div>
-</div>
 @endforeach
 @endif

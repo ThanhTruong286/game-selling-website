@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Auth;
 use Illuminate\Support\Facades\DB;
 
 class LibraryController extends Controller
@@ -26,7 +27,8 @@ class LibraryController extends Controller
         foreach($product_id_user as $value){
             $product[] = DB::table('products')->where('id',$value->product_id)->get();
         }
-        return view('backend.library.index',['product'=>$product,'data'=>$data]);
+        $review = DB::table('review')->where('product_id',$product_id)->where('user_id',Auth::user()->id)->get();
+        return view('backend.library.index',['product'=>$product,'data'=>$data,'review'=>$review]);
     }
     public function user_library(Request $request){
         $user_id = $request->get('user_id');

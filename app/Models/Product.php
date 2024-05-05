@@ -13,4 +13,7 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class,'categories_id');//su dung categories_id lam chia khoa ngoai giua Product va Category Models
     }
+    public function review(){
+        return $this->hasOne(Review::class);
+    }
 }

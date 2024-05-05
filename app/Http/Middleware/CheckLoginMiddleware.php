@@ -2,11 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use Auth;
 use Closure;
+use Auth;
 use Illuminate\Http\Request;
 
-class UserMiddleware
+class CheckLoginMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,13 +17,9 @@ class UserMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $user_id = Auth::user()->id;
-        $user_library_id = $request->get('user_id');
-        if($user_id == $user_library_id){
-            return $next($request);
+        if(!Auth::check()){
+            return redirect()->route('home')->with('error','Bạn Phải Đăng Nhập');
         }
-        else{
-            return redirect()->route('profile')->with('error','Bạn Không Có Quyền Truy Cập Thư Viện Này');
-        }
+        return $next($request);
     }
 }
