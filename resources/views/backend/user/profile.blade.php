@@ -84,6 +84,14 @@
 <div class="bio-row">
 <p><span>Phone </span>: {{ $user->phone}}</p>
 </div>
+<div class="bio-row">
+<p><span>Voucher </span>:
+@foreach ($voucher as $value)
+ {{ $value->voucher->content}},
+@endforeach
+</p>
+</div>
+
 </div>
 </div>
 </div>

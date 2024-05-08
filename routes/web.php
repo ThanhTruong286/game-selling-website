@@ -50,7 +50,7 @@ Route::prefix('user')->group(function () {
     Route::prefix('library')->group(function () {
         Route::get('home',[LibraryController::class,'user_library'])->name('library')->middleware('check_login')->middleware('user');
         Route::get('game',[LibraryController::class,'library_game'])->name('library.game')->middleware('check_login')->middleware(LibraryMiddleware::class);
-        Route::get('delete',[LibraryController::class,'delete_game'])->name('delete.game.library')->middleware('check_login')->middleware(LibraryMiddleware::class)->middleware('user');
+        Route::get('delete',[LibraryController::class,'delete_game'])->name('delete.game.library')->middleware('check_login')->middleware(LibraryMiddleware::class);
     });
 });
 Route::get('product-detail', [ProductController::class,'product_detail'])->name('product.detail');
@@ -95,6 +95,8 @@ Route::prefix('category')->group(function () {
     Route::get('/{search?}', [CategoryController::class,'index'])->name('category.home');
 });
 // ORTHER
+Route::get('voucher',[ProductController::class,'voucher_view'])->name('voucher.view')->middleware('check_login');
+Route::get('take-voucher',[ProductController::class,'take_voucher'])->name('voucher')->middleware('check_login');
 Route::get('trending', [CategoryController::class,'trending'])->name('category.trending');
 Route::get('most-played', [CategoryController::class,'most_play'])->name('category.most.play');
 Route::get('session', [HomeController::class,'session'])->name('session');

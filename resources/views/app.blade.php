@@ -61,7 +61,7 @@ https://templatemo.com/tm-589-lugx-gaming
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
-                    <li><a href="{{ route('session') }}">Session</a></li>
+                      <li><a href="{{ route('session') }}">Session</a></li>
                       <li><a href="{{ route('home') }}">Home</a></li>
                       <li><a href="{{ route('category.home') }}">Our Shop</a></li>
 
@@ -73,6 +73,7 @@ https://templatemo.com/tm-589-lugx-gaming
                         @endif
                       <!-- check user login -->
                         @if(Auth::check())
+                          <li><a href="{{ route('voucher.view') }}">Voucher</a></li>
                           <li><a href="{{ route('auth.logout') }}">Log Out</a></li>
                           <li>
                             <a href="{{route('show.cart')}}">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Gallery;
 use App\Models\Product;
+use App\Models\ProductTag;
 use App\Models\Review;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -14,6 +15,23 @@ use Auth;
 
 class ProductController extends Controller
 {
+    public function take_voucher(Request $request){
+        $user_id = session()->get('user_id');
+        $data = [
+            'user_id'=>$user_id,
+            'voucher_id'=>$request->get('id'),
+        ];
+        // dd($data);
+        if(DB::table('voucher_user')->where('user_id',$user_id)->where('voucher_id',$request->get('id'))->exists()){
+            return redirect()->route('home')->with('error','Thêm Voucher Thất Bại');
+        }
+        DB::table('voucher_user')->insert($data);
+        return redirect()->route('home')->with('success','Thêm Voucher Thành Công');
+    }
+    public function voucher_view(){
+        $data = DB::table('voucher')->get();
+        return view('voucher',compact('data'));
+    }
     public function add_review(Request $request){
         $product_id = $request->get('product_id');
         $content = isset($_POST['review']) ? $_POST['review'] : '';
@@ -155,8 +173,9 @@ class ProductController extends Controller
         $data_related = Product::where('categories_id',$related)->paginate(5);
         $review = Review::where('product_id',$product_id)->get();
         $review_count = Review::where('product_id',$product_id)->count();
+        $tag = ProductTag::where('product_id',$product_id)->get();
 
-        return view('backend.dashboard.product.product-details',compact('data','qty','gallery','data_related','review','review_count'));
+        return view('backend.dashboard.product.product-details',compact('data','qty','gallery','data_related','review','review_count','tag'));
     }
     public function add(Request $request){
         $rule = [

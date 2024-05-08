@@ -53,8 +53,11 @@
           </form>
           <ul>
 
-            <li><span>Genre:</span> <a href="#">Action</a>, <a href="#">Team</a>, <a href="#">Single</a></li>
-            <li><span>Multi-tags:</span> <a href="#">War</a>, <a href="#">Battle</a>, <a href="#">Royal</a></li>
+            <!-- <li><span>Genre:</span> <a href="#">Action</a>, <a href="#">Team</a>, <a href="#">Single</a></li> -->
+            <li><span>Multi-tags:</span>
+            @foreach ($tag as $value)
+              <a href="{{route('category.home',['name'=>$value->tag->name])}}">{{$value->tag->name}}</a>,
+            @endforeach 
           </ul>
         </div>
         <div class="col-lg-12">

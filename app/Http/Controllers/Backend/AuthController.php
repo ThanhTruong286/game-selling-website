@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\VoucherUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,7 +74,8 @@ class AuthController extends Controller
     {
         // $user = User::where("email", $request->email)->first();cach khong toi uu 
         $user = Auth::user();
-        return view("backend.user.profile", compact("user"));
+        $voucher = VoucherUser::where('user_id',Auth::user()->id)->get();
+        return view("backend.user.profile", compact("user",'voucher'));
     }
 
     public function index(Request $request)
