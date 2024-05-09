@@ -39,7 +39,7 @@ https://templatemo.com/tm-589-lugx-gaming
       }
     }
   </style>
-  <form class="mt-4" method="post" action="{{ route('use.voucher') }}" enctype="application/x-www-form-urlencoded">
+  <form class="mt-4" method="get" action="{{ route('add.to.library') }}" enctype="application/x-www-form-urlencoded">
     @csrf
     <section class="h-100 h-custom" style="background-color: #eee;">
       <div class="container py-5 h-100">
@@ -95,29 +95,37 @@ https://templatemo.com/tm-589-lugx-gaming
         </div>
         </div>
       @endforeach
-
-              <div class="form-group"><label class="col-sm-2 control-label">
-                <p style="color:dark;font-weight:bold;" class="mb-2">Voucher</p>
-                </label>
-                <div class="col-sm-10">
-                <select class="form-control" name="voucher" id="dynamic_select">
-                  <option value="0">{{ "None" }}</option>
-                  @foreach($voucher as $value)
-                    <!-- <input type="hidden" name="type" value="{{$value->voucher->type}}"> -->
-                    <option name="voucher" value="{{ $value->voucher->content.'<>'.$value->voucher->type.'<>'.$value->voucher->value }}">{{ $value->voucher->content }}</option>
-                  @endforeach
-                </select>
-                </div><br>
-              </div>
-
-              <p style="color:dark;font-weight:bold;" class="mb-2">Subtotal</p>
+              <p style="color:dark;font-weight:bold;" class="mb-2">Voucher</p>
+                @if($voucher!=null)
+                <P>{{ $voucher[0] }}</P>
+                @else
+                <p>Không Sử Dụng</p>
+                @endif
+              <hr><p style="color:dark;font-weight:bold;" class="mb-2">Subtotal</p>
               <hr class="my-2">
+              @if($voucher != null)
+              <p style="color:dark;font-weight:bold;" class="mb-2">{{number_format($old_price)}} VND</p>
+              @endif
+              @if($voucher_type == 'VND')
+              <p style="color:dark;font-weight:bold;" class="mb-2">- {{number_format($voucher_value)}} VND</p>
+              @elseif($voucher_type == '%')
+              <p style="color:dark;font-weight:bold;" class="mb-2">- {{number_format($voucher_value)}} % ({{number_format($voucher_value_price)}} VND)</p>
+              @endif
+              @if($voucher)
+              <hr>
+              @endif
               <p style="color:dark;font-weight:bold;" class="mb-2">{{number_format($totalPrice)}} VND</p>
               <input type="hidden" value="{{$totalPrice}}" name="amount">
-              <button type="submit" data-mdb-button-init data-mdb-ripple-init
+              <button name="payUrl" type="submit" data-mdb-button-init data-mdb-ripple-init
               class="btn btn-info btn-block btn-lg">
               <div class="d-flex justify-content-between">
-                <span style="color:white;">Xác Nhận Thanh Toán</span>
+                <span style="color:white;">MoMo</span>
+              </div>
+              </button>
+              <button name="payUrl" type="submit" data-mdb-button-init data-mdb-ripple-init
+              class="btn btn-info btn-block btn-lg">
+              <div class="d-flex justify-content-between">
+                <span style="color:white;">VISA</span>
               </div>
               </button>
 

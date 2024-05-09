@@ -136,11 +136,8 @@
                 {{ 'Free' }}
               </span>
                 @endif
-              @if($value->price == 0)
-              <a class="edit-cart" href="{{route('add.to.library',['product_id' => $value->id,'qty'=>$qty])}}">ADD TO LIBRARY</a>
-              @elseif($value->price > 0)
               <a class="edit-cart" href="{{route('add.to.cart',['product_id' => $value->id,'qty'=>$qty])}}">ADD TO CART</a>
-              @endif
+
             </div>
           </div>
         </div>

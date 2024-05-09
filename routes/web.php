@@ -95,6 +95,7 @@ Route::prefix('category')->group(function () {
     Route::get('/{search?}', [CategoryController::class,'index'])->name('category.home');
 });
 // ORTHER
+Route::post('payment',[CartController::class,'use_voucher'])->name('use.voucher')->middleware('check_login');
 Route::get('voucher',[ProductController::class,'voucher_view'])->name('voucher.view')->middleware('check_login');
 Route::get('take-voucher',[ProductController::class,'take_voucher'])->name('voucher')->middleware('check_login');
 Route::get('trending', [CategoryController::class,'trending'])->name('category.trending');

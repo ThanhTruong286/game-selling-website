@@ -45,11 +45,8 @@
 
           <p>{{ $values->description }}</p>
           <form id="qty" action="#">
-            @if($values->price == 0)
-            <button type="button" onclick="window.location='{{ route('add.to.library',['product_id'=>$values->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO LIBRARY</button>
-            @elseif($values->price > 0)
-            <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$values->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
-            @endif
+          <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$values->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
+
           </form>
           <ul>
 

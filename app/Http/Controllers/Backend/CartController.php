@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Models\Product;
+use App\Models\Voucher;
+use App\Models\VoucherUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -10,28 +12,70 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
-    public function add_to_library(Request $request){
-        $product_id = $request->get("product_id");
-        $user_id = Auth::user()->id;
-        $data = [
-            "product_id"=> $product_id,
-            'user_id'=> $user_id,
-        ];
-        // dd($data);
-        if(DB::table('library')->where('product_id', $product_id)->where('user_id',$user_id)->exists()){
-            return redirect()->back()->with('error','Đã Có Sản Phẩm Trong Thư Viện');
+    public function use_voucher(Request $request){
+        $user_id = session()->get('user_id');
+        $cart = session()->get($user_id . 'cart');
+        $totalPrice = 0;
+        $old_price = 0;
+        if ($cart) {
+            foreach ($cart as $key => $value) {
+                $totalPrice += $value['price'];
+                $old_price += $value['price'];
+            }
         }
-        DB::table("library")->insert($data);
-        return redirect()->route('thanks')->with("success","Mua Sản Phẩm Thành Công");
+        $totalProduct = 0;
+        if ($cart) {
+            $totalProduct = count($cart);
+        }
+        $voucher = null;
+        $voucher_value = null;
+        $voucher_value_price = null;
+        $voucher_type = null;
+        $voucher_str = isset($_POST['voucher']) ? $_POST['voucher'] : '';
+        if($voucher_str != '0'){
+            $voucher = explode('<>',$voucher_str);
+            $voucher_type = $voucher[1];
+            $voucher_value = $voucher[2];
+            switch($voucher_type){
+                case 'VND':
+                    $voucher_value = $voucher_value * 1000;
+                    $totalPrice = $totalPrice - $voucher_value;
+                    break;
+                case '%':
+                    $voucher_value_price = $totalPrice * $voucher_value / 100;
+                    $totalPrice = $old_price - $voucher_value_price;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return view('backend.cart.final_cart', compact('cart', 'totalPrice', 'totalProduct','voucher','old_price','voucher_value','voucher_type','voucher_value_price'));
+    }
+    public function add_to_library(Request $request){
+        if(isset($_GET['payUrl'])){
+            $user_id = Auth::user()->id;
+            $cart = session()->get($user_id . 'cart');
+    
+            foreach($cart as $key => $value){
+                $data[] = [
+                    "product_id" => $value['id'],
+                    'user_id'=> $user_id,
+                ];
+                if(DB::table('library')->where('product_id', $value['id'])->where('user_id',$user_id)->exists()){
+                    return redirect()->route('show.cart')->with('error','Đã Có Sản Phẩm ' .$value['name']. ' Trong Thư Viện');
+                }
+            }
+            DB::table("library")->insert($data);
+            session()->forget($user_id . 'cart');
+    
+            return redirect()->route('thanks')->with("success","Mua Sản Phẩm Thành Công");
+        }
+        return redirect()->route('home')->with("error","Mua Sản Thất Bại");
     }
     public function thanks()
     {
         return view('thanks');
-    }
-    public function online_checkout(Request $request)
-    {
-
-        return redirect()->route('home')->with('error','Giao Dịch Thất Bại');
     }
 
     public function delete($product_id)
@@ -103,7 +147,6 @@ class CartController extends Controller
     }
     public function show_cart()
     {
-        $template = 'backend.cart.payment';
         $user = session()->get('user');
         $user_id = session()->get('user_id');
         $result = json_decode($user, true);//Để conver giá trị chỉ định thành định dạng JSON,
@@ -124,6 +167,7 @@ class CartController extends Controller
             $totalProduct = count($cart);
         }
         // dd($cart);
-        return view('backend.cart.index', compact('cart', 'template', 'totalPrice', 'totalProduct', 'user_image'));
+        $voucher = VoucherUser::where('user_id',session()->get('user_id'))->get();
+        return view('backend.cart.index', compact('cart', 'totalPrice', 'totalProduct', 'user_image','voucher'));
     }
 }
