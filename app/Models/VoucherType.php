@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Voucher extends Model
+class VoucherType extends Model
 {
     use HasFactory;
-    protected $table = 'voucher';
-    public function voucher_type(){
-        return $this->hasOne(VoucherType::class);
+    protected $table = 'voucher_type';
+    public function voucher(){
+        return $this->belongsTo(Voucher::class);
     }
-
 }

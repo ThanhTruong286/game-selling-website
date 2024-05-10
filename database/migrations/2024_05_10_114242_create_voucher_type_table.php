@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('voucher', function (Blueprint $table) {
+        Schema::create('voucher_type', function (Blueprint $table) {
             $table->id();
-            $table->string('content');
-            $table->string('image')->nullable();
-            $table->integer('value');
-            $table->string('type');
-            $table->integer('type_id');
-            $table->foreign('type_id')->references('id')->on('voucher_type')->onDelete('cascade');
+            $table->string('name');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('voucher');
+        Schema::dropIfExists('voucher_type');
     }
 };

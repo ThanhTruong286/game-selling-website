@@ -53,6 +53,7 @@ class CartController extends Controller
         return view('backend.cart.final_cart', compact('cart', 'totalPrice', 'totalProduct','voucher','old_price','voucher_value','voucher_type','voucher_value_price'));
     }
     public function add_to_library(Request $request){
+        $voucher = isset($_GET['voucher']) ? $_GET['voucher'] : '';
         if(isset($_GET['payUrl'])){
             $user_id = Auth::user()->id;
             $cart = session()->get($user_id . 'cart');
@@ -67,6 +68,11 @@ class CartController extends Controller
                 }
             }
             DB::table("library")->insert($data);
+            if($voucher != null){
+                $voucher_id = DB::table('voucher')->where('content',$voucher)->get()->value('id');
+     
+                DB::table('voucher_user')->where('user_id',$user_id)->where('voucher_id',$voucher_id)->delete();
+            }
             session()->forget($user_id . 'cart');
     
             return redirect()->route('thanks')->with("success","Mua Sản Phẩm Thành Công");

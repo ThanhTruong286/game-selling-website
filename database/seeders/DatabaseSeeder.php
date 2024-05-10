@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             GallerySeeder::class,
             ReivewSeeder::class,
+            VoucherTypeSeeder::class,
             VoucherSeeder::class,
         ]);
     }

@@ -15,23 +15,7 @@ use Auth;
 
 class ProductController extends Controller
 {
-    public function take_voucher(Request $request){
-        $user_id = session()->get('user_id');
-        $data = [
-            'user_id'=>$user_id,
-            'voucher_id'=>$request->get('id'),
-        ];
-        // dd($data);
-        if(DB::table('voucher_user')->where('user_id',$user_id)->where('voucher_id',$request->get('id'))->exists()){
-            return redirect()->route('home')->with('error','Thêm Voucher Thất Bại');
-        }
-        DB::table('voucher_user')->insert($data);
-        return redirect()->route('home')->with('success','Thêm Voucher Thành Công');
-    }
-    public function voucher_view(){
-        $data = DB::table('voucher')->get();
-        return view('voucher',compact('data'));
-    }
+
     public function add_review(Request $request){
         $product_id = $request->get('product_id');
         $content = isset($_POST['review']) ? $_POST['review'] : '';

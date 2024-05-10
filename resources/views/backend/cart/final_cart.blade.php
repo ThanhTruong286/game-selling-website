@@ -98,6 +98,7 @@ https://templatemo.com/tm-589-lugx-gaming
               <p style="color:dark;font-weight:bold;" class="mb-2">Voucher</p>
                 @if($voucher!=null)
                 <P>{{ $voucher[0] }}</P>
+                <input name="voucher" type="hidden" value="{{$voucher[0]}}">
                 @else
                 <p>Không Sử Dụng</p>
                 @endif

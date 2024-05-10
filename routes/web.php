@@ -7,6 +7,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\LibraryController;
+use App\Http\Controllers\Backend\VoucherController;
 use App\Http\Middleware\LibraryMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -80,6 +81,14 @@ Route::prefix('admin')->group(function () {
         Route::post('edit', [CategoryController::class,'edit'])->name('category.edit')->middleware('admin');
         Route::get('delete', [CategoryController::class,'delete'])->name('category.delete')->middleware('admin');
         });
+        Route::prefix('voucher')->group(function(){
+            Route::get('home',[VoucherController::class,'home'])->name('voucher.crud')->middleware('admin');
+            Route::get('add-form', [VoucherController::class,'add_form'])->name('voucher.add.form')->middleware('admin');
+            Route::post('add', [VoucherController::class,'add'])->name('voucher.add')->middleware('admin');
+            Route::get('edit-form', [VoucherController::class,'edit_form'])->name('voucher.edit.form')->middleware('admin');
+            Route::post('edit', [VoucherController::class,'edit'])->name('voucher.edit')->middleware('admin');
+            Route::get('delete', [VoucherController::class,'delete'])->name('voucher.delete')->middleware('admin');
+        });
 /* WEB CONTENT*/
 
 });
@@ -96,8 +105,8 @@ Route::prefix('category')->group(function () {
 });
 // ORTHER
 Route::post('payment',[CartController::class,'use_voucher'])->name('use.voucher')->middleware('check_login');
-Route::get('voucher',[ProductController::class,'voucher_view'])->name('voucher.view')->middleware('check_login');
-Route::get('take-voucher',[ProductController::class,'take_voucher'])->name('voucher')->middleware('check_login');
+Route::get('voucher',[VoucherController::class,'voucher_view'])->name('voucher.view')->middleware('check_login');
+Route::get('take-voucher',[VoucherController::class,'take_voucher'])->name('voucher')->middleware('check_login');
 Route::get('trending', [CategoryController::class,'trending'])->name('category.trending');
 Route::get('most-played', [CategoryController::class,'most_play'])->name('category.most.play');
 Route::get('session', [HomeController::class,'session'])->name('session');
