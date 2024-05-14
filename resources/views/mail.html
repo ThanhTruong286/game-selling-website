@@ -1,26 +1,3 @@
-<?php
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use Illuminate\Http\Request;
-
-if(!class_exists('PHPMailer\PHPMailer\Exception')){
-require '../vendor/phpmailer/phpmailer/src/Exception.php';
-require '../vendor/phpmailer/phpmailer/src/PHPMailer.php';
-require '../vendor/phpmailer/phpmailer/src/SMTP.php';
-}
-
-//Import PHPMailer classes into the global namespace
-//These must be at the top of your script, not inside a function
-
-//Load Composer's autoloader
-require '../vendor/autoload.php';
-
-//Create an instance; passing `true` enables exceptions
-$mail = new PHPMailer(true);
-
-$routeUrl = route('make_new_password_view', compact('email'));
-$htmlContent = '
 <!DOCTYPE html>
 <html lang="en" class="miro" style="background-color: #007cf8; font-size: 0; line-height: 0;">
   <head xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en" style="font-family: Helvetica,Arial,sans-serif;">
@@ -50,7 +27,7 @@ $htmlContent = '
                   <div class="miro-template__subtitle" style="color: #050038; font-family: Helvetica,Arial,sans-serif; font-size: 20px; font-stretch: normal; font-style: normal; font-weight: 400; letter-spacing: normal; line-height: 1.4; margin-bottom: 24px; opacity: .7;">
                         Use The Link Below
                   </div>
-                  <a href="'.$routeUrl.'" target="_blank" class="miro-btn--size-auto-60 miro-btn miro-btn--cl-blue miro-btn--br-none font-size-20 font-weight-normal" style="background-color: #3f53d9; border-radius: 4px; box-sizing: border-box; color: #fff !important; cursor: pointer; display: inline-block; font-family: Helvetica,Arial,sans-serif; font-size: 20px !important; font-stretch: normal; font-style: normal; font-weight: 400; height: 60px; letter-spacing: normal; line-height: 60px !important; text-align: center; text-decoration: none; white-space: nowrap; width: auto; margin: 0; padding: 0 42px; border: none;">Reset</a>
+                  <a href="https://email.info.miro.com/e/c/eyJlbWFpbF9pZCI6IlJNRF9Bd0FBQVhKbVFkRDRtYzVrczZtS2ROYzBBZz09IiwiaHJlZiI6Imh0dHBzOi8vaGVscC5taXJvLmNvbS9oYy9lbi11cy9hcnRpY2xlcy8zNjAwMTc3MzEyMzMtMTAtV2F5cy10by1BZGQtQ29udGVudC8_dHJhY2s9dHJ1ZVx1MDAyNnV0bV9zb3VyY2U9b25ib2FyZGluZyUyMGZsb3dcdTAwMjZ1dG1fbWVkaXVtPWVtYWlsXHUwMDI2dXRtX2NhbXBhaWduPWFycmFuZ2UlMjBjb250ZW50XHUwMDI2dXRtX2NvbnRlbnQ9TGVhcm4lMjBob3clMjB0byUyMHVwbG9hZFx1MDAyNnV0bV9jYW1wYWlnbj1PbmJvYXJkaW5nXHUwMDI2dXRtX2NvbnRlbnQ9MTArd2F5cyt0byt2aXN1YWxpemUreW91citpZGVhc1x1MDAyNnV0bV9tZWRpdW09ZW1haWxfYWN0aW9uXHUwMDI2dXRtX3NvdXJjZT1jdXN0b21lci5pbyIsImxpbmtfaWQiOjg3MzY0MDYsInBvc2l0aW9uIjoyfQ/d071b87eb1dc7933f0ab0b3f5d92846ca2e8c903f5beccec676471bd78a2ff5c" target="_blank" class="miro-btn--size-auto-60 miro-btn miro-btn--cl-blue miro-btn--br-none font-size-20 font-weight-normal" style="background-color: #3f53d9; border-radius: 4px; box-sizing: border-box; color: #fff !important; cursor: pointer; display: inline-block; font-family: Helvetica,Arial,sans-serif; font-size: 20px !important; font-stretch: normal; font-style: normal; font-weight: 400; height: 60px; letter-spacing: normal; line-height: 60px !important; text-align: center; text-decoration: none; white-space: nowrap; width: auto; margin: 0; padding: 0 42px; border: none;">Reset</a>
                 </div>
 
                 <table class="spacer" style="border-collapse: collapse; border-spacing: 0; font-family: Helvetica,Arial,sans-serif; text-align: left; vertical-align: top; width: 100%; padding: 0;">
@@ -108,39 +85,3 @@ $htmlContent = '
     </div>
   </body>
 </html>
-';
-
-try {
-    //Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'thanht43069@gmail.com';                     //SMTP username
-    $mail->Password   = 'kkpu kubo zllt ycli';                               //SMTP password
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-    $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-    //Recipients
-    $mail->setFrom('thanht43069@gmail.com', 'Hopi Steam');
-    $mail->addAddress($email);     //Add a recipient
-    // $mail->addAddress('ellen@example.com');               //Name is optional
-    // $mail->addReplyTo('info@example.com', 'Information');
-    // $mail->addCC('cc@example.com');
-    // $mail->addBCC('bcc@example.com');
-
-    //Attachments
-    // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-    // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-
-    //include content here
-    $mail->Subject = 'Reset Password Request';
-    $mail->Body    = $htmlContent;
-    $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-    $mail->send();
-} catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-}

@@ -45,7 +45,7 @@ Route::prefix('user')->group(function () {
     Route::get('profile',[AuthController::class,'showProfile'])->name('profile')->middleware('check_login');
     Route::get('edit-profile-form',[AuthController::class,'edit_profile'])->name('edit.profile.form')->middleware('check_login');
     Route::post('edit',[AuthController::class,'edit'])->name('edit.profile')->middleware('check_login');
-    Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email')->middleware('check_login');
+    Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
     Route::post('add-review',[ProductController::class,'add_review'])->name('add.review')->middleware('check_login');
     // LIBRARY
     Route::prefix('library')->group(function () {
