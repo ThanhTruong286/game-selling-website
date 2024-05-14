@@ -68,6 +68,11 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Tags:</label>
+                                                <div class="col-sm-10">
+                                                    <input  name="tags" type="text" class="form-control" placeholder=""value="{{old('tags', $tagsString)}}" size="5">
+                                                </div>
+                                            </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Image:</label>
                                                 <div class="col-sm-10">
                                                 <img name="edit-image" src="{{asset('storage/images/'.$products->image)}}" alt="" width="200" height="100"><br><br>

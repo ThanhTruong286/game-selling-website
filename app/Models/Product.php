@@ -16,4 +16,8 @@ class Product extends Model
     public function review(){
         return $this->hasOne(Review::class);
     }
+    public function tags()
+    {
+        return $this->belongsToMany(Tags::class,'products_tags');
+    }
 }

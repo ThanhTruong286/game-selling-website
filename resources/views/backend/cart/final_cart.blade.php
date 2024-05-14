@@ -129,6 +129,12 @@ https://templatemo.com/tm-589-lugx-gaming
                 <span style="color:white;">VISA</span>
               </div>
               </button>
+              <button type="button" data-mdb-button-init data-mdb-ripple-init
+              class="btn btn-info btn-block btn-lg">
+              <div class="d-flex justify-content-between">
+                <a style="color:white;" href="#">GIFT</a>
+              </div>
+              </button>
 
             </div>
           @elseif(is_null($cart))

@@ -8,6 +8,7 @@ use App\Models\Gallery;
 use App\Models\Product;
 use App\Models\ProductTag;
 use App\Models\Review;
+use App\Models\Tags;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -81,86 +82,140 @@ class ProductController extends Controller
         }
         return redirect()->route('product.index')->with("error","Xoá Sản Phẩm Thất Bại");
     }
-    public function edit(Request $request){
-        $rule = [
+    public function edit(Request $request)
+    {
+        // Validation rules and custom messages
+        $rules = [
             'image' => 'image|mimes:png,jpg,jpeg|max:2048'
         ];
         $customMessages = [
             'mimes' => 'Yêu Cầu Định Dạng png,jpg,jpeg',
             'max' => 'Kích Thước Tối Đa: 2048kb'
         ];
-        $this->validate($request, $rule, $customMessages);//kiem tra hop le file hinh anh
-        $category_str  = $request->get('category_id');//lay du lieu tu form
-        $category = explode('<>', $category_str);//cat du lieu qua chuoi <>, truong hop nay se tao dc 2 chuoi id va name
-        $categories_id = $category[0];//phan tu thu 0 chinh la id category
-        $slug = $category[1];//phan tu thu 1 chinh la name category, dung de tao slug
-        //tao bien data luu tru du lieu cua product can dc insert
+        $this->validate($request, $rules, $customMessages);
+    
+        // Process category data
+        $category_str = $request->get('category_id');
+        $category = explode('<>', $category_str);
+        $categories_id = $category[0];
+        $slug = $category[1];
+    
+        // Handle image upload
         $current_image = $request->get('imageName');
-        $imageName = $request->get('imageName');
-        if($request->file('image')){
+        $imageName = $current_image;
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $imageName = $request->file('image')->getClientOriginalName();
+            $imageName = $image->getClientOriginalName();
         }
+    
+        // Find the product
+        $product = Product::find($request->get('id'));
+    
+        // Process tags
+        if ($request->has('tags')) {
+            $tagNames = explode(',', $request->input('tags'));
+            $tagNames = array_map('trim', $tagNames);
+    
+            $tagIds = [];
+            foreach ($tagNames as $tagName) {
+                if (!empty($tagName)) {
+                    $tag = Tags::firstOrCreate(['name' => $tagName]);
+                    $tagIds[] = $tag->id;
+                }
+            }
+            $product->tags()->sync($tagIds); // Update product tags
+        } else {
+            $product->tags()->sync([]); // If no tags are provided, detach all tags
+        }
+    
+        // Data to be updated
         $data = [
-            'id' => $request->get("id"),
             'name' => $request->get("name"),
             'sale' => $request->get("sale"),
             'price' => $request->get("price"),
             'description' => $request->get("description"),
             'categories_id' => $categories_id,
-            'slug'=>$slug,
-            'updated_at'=>now(),
-            
+            'slug' => $slug,
+            'updated_at' => now(),
             'image' => $imageName,
             'banner' => $request->get('banner'),
         ];
-        if($request->file('image') != null){
-            // dd($imageName);
-            if($image->storeAs('public/images', $imageName)){
-                DB::table('products')->where('banner',true)->update(['banner'=>false]);
-                DB::table('products')->where('id',$request->get('id'))->update($data);
-                unlink(storage_path('app/public/images/'.$current_image));
-                return redirect()->route('product.index')->with('success','Sửa Sản Phẩm Thành Công');
+    
+        // Update the product
+        if ($request->hasFile('image')) {
+            if ($image->storeAs('public/images', $imageName)) {
+                // Update banner status and product data
+                DB::table('products')->where('banner', true)->update(['banner' => false]);
+                DB::table('products')->where('id', $request->get('id'))->update($data);
+    
+                // Remove old image
+                if (!empty($current_image)) {
+                    unlink(storage_path('app/public/images/' . $current_image));
+                }
+    
+                return redirect()->route('product.index')->with('success', 'Sửa Sản Phẩm Thành Công');
             }
+        } else {
+            // Update banner status and product data
+            DB::table('products')->where('banner', true)->update(['banner' => false]);
+            DB::table('products')->where('id', $request->get('id'))->update($data);
+    
+            return redirect()->route('product.index')->with('success', 'Sửa Sản Phẩm Thành Công');
         }
-        else{
-            DB::table('products')->where('banner',true)->update(['banner'=>false]);
-            DB::table('products')->where('id',$request->get('id'))->update($data);
-            return redirect()->route('product.index')->with('success','Sửa Sản Phẩm Thành Công');
-        }
-        
-        return redirect()->route('product.edit.form')->with('error','Sửa Sản Phẩm Thất Bại');
+    
+        return redirect()->route('product.edit.form')->with('error', 'Sửa Sản Phẩm Thất Bại');
     }
-    public function edit_form(Request $request){
-        $product_id = isset($_GET['product_id']) ? $_GET['product_id'] : 0;
-        $product = Product::where("id",$product_id)->get();
-        $category = Category::get();//lay toan bo du lieu category
+    
+    public function edit_form(Request $request)
+    {
+        $product_id = $request->query('product_id', 0);
+        $products = Product::find($product_id); // Use find() to get a single product
+        $product = Product::where('id',$product_id)->get();
+        $category = Category::all(); // Use all() to get all categories
+        $tags = Tags::all(); // Use the Tag model to get all tags
+    
+        // Get the product's tag names and convert them to a comma-separated string
+        $productTags = $products ? $products->tags()->pluck('name')->toArray() : [];
+        $tagsString = implode(', ', $productTags);
+    
         $template = "backend.dashboard.product.crud.edit";
-        return view("backend.dashboard.layout",compact("template",'category','product'));
+        return view("backend.dashboard.layout", compact("template", 'category', 'product', 'tags', 'tagsString'));
     }
-    public function product_detail(Request $request){
-        $user_id = session('user_id');
-        $qty = 0;//bien luu tru tong so luong san pham
-        //kiem tra su ton tai cua session 'cart'
-        $cart = session($user_id . "cart");
-        if($cart){
-            //tao vong lap va cong don quantity ben trong session('cart')
-            foreach(session($user_id . 'cart') as $cart){
-                $qty += $cart['quantity'];
-            }
-        }
-        $product_id = $request->get("product_id");
-        $gallery = Gallery::where("product_id",$product_id)->get();
-        $data = Product::where("id",$product_id)->get();
-        $related = Product::where('id',$product_id)->value('categories_id');
-        // dd($related);
-        $data_related = Product::where('categories_id',$related)->paginate(5);
-        $review = Review::where('product_id',$product_id)->get();
-        $review_count = Review::where('product_id',$product_id)->count();
-        $tag = ProductTag::where('product_id',$product_id)->get();
+    public function product_detail(Request $request)
+{
+    $user_id = session('user_id');
+    $qty = 0; // Variable to store the total quantity of products in the cart
 
-        return view('backend.dashboard.product.product-details',compact('data','qty','gallery','data_related','review','review_count','tag'));
+    // Check if the 'cart' session exists
+    $cart = session($user_id . "cart");
+    if ($cart) {
+        // Loop through the items in the cart and sum up the quantities
+        foreach ($cart as $item) {
+            $qty += $item['quantity'];
+        }
     }
+
+    $product_id = $request->get("product_id");
+    $gallery = Gallery::where("product_id", $product_id)->get();
+    $data = Product::where("id", $product_id)->get();
+    $related = Product::where('id', $product_id)->value('categories_id');
+
+    // Retrieve related products
+    $data_related = Product::where('categories_id', $related)->paginate(5);
+
+    // Retrieve reviews for the product
+    $review = Review::where('product_id', $product_id)->get();
+    $review_count = $review->count();
+
+    $tags = Tags::all(); // Use the Tag model to get all tags
+    
+    // Get the product's tag names and convert them to a comma-separated string
+    $products = Product::find($product_id); // Use find() to get a single product
+    $productTags = $products ? $products->tags()->pluck('name')->toArray() : [];
+
+    return view('backend.dashboard.product.product-details', compact('data', 'qty', 'gallery', 'data_related', 'review', 'review_count', 'tags','productTags'));
+}
+
     public function add(Request $request){
         $rule = [
             'image' => 'required|image|mimes:png,jpg,jpeg|max:2048'

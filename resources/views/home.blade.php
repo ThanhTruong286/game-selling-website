@@ -60,7 +60,7 @@
 
             <img src="{{asset('storage/images/usermore.png')}}" alt="" style="max-width: 44px;">
              
-              <h4>User More</h4>
+              <h4>Community</h4>
             </div>
           </a>
         </div>
