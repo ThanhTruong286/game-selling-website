@@ -58,7 +58,7 @@
       <!-- <li><span>Genre:</span> <a href="#">Action</a>, <a href="#">Team</a>, <a href="#">Single</a></li> -->
       <li><span>Multi-tags:</span>
       @foreach ($productTags as $value)
-        <a href="{{ route('category.home', ['name' => $value]) }}">{{ $value }}</a>,
+        <a href="{{ route('category.home', ['keyword' => $value]) }}">{{ $value }}</a>,
     
       @endforeach
 

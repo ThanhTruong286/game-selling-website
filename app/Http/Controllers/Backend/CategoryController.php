@@ -132,31 +132,37 @@ class CategoryController extends Controller
         $count = count($product);
         return view("backend.category.layout",compact("product",'categories','qty','count','template','title'));
     }
-    public function index(Request $request,$search = ''){
+    public function index(Request $request, $search = '')
+    {
         $template = "backend.category.index";
         $user_id = session()->get("user_id");
-        $title = $request->get('name');
-        if($title == null){
-            $title = 'Our Shop';
-        }
+        $title = $request->get('keyword') ?? 'Our Shop';
+    
+        // Calculate total quantity of items in the cart
+        $qty = collect(session($user_id . "cart"))->sum('quantity');
+    
+        // Retrieve products based on search criteria
+        $productQuery = Product::query();
 
-        $qty = 0;//bien luu tru tong so luong san pham
-        //kiem tra su ton tai cua session 'cart'
-        $cart = session($user_id . "cart");
-        if($cart){
-            //tao vong lap va cong don quantity ben trong session('cart')
-            foreach(session($user_id . 'cart') as $cart){
-                $qty += $cart['quantity'];
-            }
-        }
-        $product = Product::where('slug','like','%' . $request->get('name') . '%')->paginate(8);
-        $categories = DB::table("categories")->get();
-        $count = count($product);
-        if(isset($_GET['keyword']) && $_GET['keyword']){
+        if ($request->filled('keyword')) {
             $search = $request->get('keyword');
-            $product = Product::where('name','like','%' . $search . '%')->orWhere('slug','like','%' . $search . "%")->paginate(8);
-            $count = count($product);
+            $productQuery->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                      ->orWhere('slug', 'like', '%' . $search . '%')
+                      ->orWhereHas('tags', function ($tagQuery) use ($search) {
+                          $tagQuery->where('name', 'like', '%' . $search . '%');
+                      });
+            });
+        } else {
+            $productQuery->where('slug', 'like', '%' . $request->get('name') . '%');
         }
-        return view("backend.category.layout",compact("product",'categories','qty','count','template','title'));
+        
+    
+        $product = $productQuery->paginate(8);
+        $categories = DB::table("categories")->get();
+        $count = $product->total();
+    
+        return view("backend.category.layout", compact("product", 'categories', 'qty', 'count', 'template', 'title'));
     }
+    
 }

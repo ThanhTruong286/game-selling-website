@@ -6,7 +6,7 @@
         <!-- duyet data category -->
         @foreach($categories as $value)
         <li>
-        <a href="{{route('category.home',['name' => $value->slug])}}">{{$value->name}}</a>
+        <a href="{{route('category.home',['keyword' => $value->slug])}}">{{$value->name}}</a>
         </li>
         @endforeach
 
