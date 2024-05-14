@@ -103,6 +103,10 @@ Route::get('add-to-library', [CartController::class,'add_to_library'])->name('ad
 Route::prefix('category')->group(function () {
     Route::get('/{search?}', [CategoryController::class,'index'])->name('category.home');
 });
+//WISHLIST
+Route::get('wishlist',[CartController::class,'wishlist'])->name('wishlist')->middleware('check_login');
+Route::get('add-to-wishlist',[CartController::class,'add_to_wishlist'])->name('add.to.wishlist')->middleware('check_login');
+Route::get('delete-wishlist',[CartController::class,'delete_wishlist'])->name('delete.wishlist')->middleware('check_login');
 // ORTHER
 Route::post('payment',[CartController::class,'use_voucher'])->name('use.voucher')->middleware('check_login');
 Route::get('voucher',[VoucherController::class,'voucher_view'])->name('voucher.view')->middleware('check_login');

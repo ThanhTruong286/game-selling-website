@@ -45,7 +45,8 @@
 
           <p>{{ $values->description }}</p>
           <form id="qty" action="#">
-          <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$values->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>
+          <button type="button" onclick="window.location='{{ route('add.to.cart',['product_id'=>$values->id]) }}'"><i class="fa fa-shopping-bag"></i> ADD TO CART</button>&ensp;&ensp;&ensp;
+          <button type="button" onclick="window.location='{{ route('add.to.wishlist',['product_id'=>$values->id]) }}'"><i class="fa fa-heart"></i> ADD TO WISHLIST</button>
 
           </form>
           <ul>

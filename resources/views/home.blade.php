@@ -45,21 +45,21 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-3 col-md-6">
-          <a href="#">
+          <a href="{{route('wishlist')}}">
             <div class="item">
-              <div class="image">
-                <img src="assets/images/featured-01.png" alt="" style="max-width: 44px;">
-              </div>
-              <h4>Free Storage</h4>
+
+                <img src="{{asset('storage/images/wishlist.png')}}" alt="" style="max-width: 44px;">
+
+              <h4>Your Wishlist</h4>
             </div>
           </a>
         </div>
         <div class="col-lg-3 col-md-6">
           <a href="#">
             <div class="item">
-              <div class="image">
-                <img src="assets/images/featured-02.png" alt="" style="max-width: 44px;">
-              </div>
+
+            <img src="{{asset('storage/images/usermore.png')}}" alt="" style="max-width: 44px;">
+             
               <h4>User More</h4>
             </div>
           </a>
@@ -67,9 +67,9 @@
         <div class="col-lg-3 col-md-6">
           <a href="#">
             <div class="item">
-              <div class="image">
-                <img src="assets/images/featured-03.png" alt="" style="max-width: 44px;">
-              </div>
+           
+            <img src="{{asset('storage/images/reply.png')}}" alt="" style="max-width: 44px;">
+            
               <h4>Reply Ready</h4>
             </div>
           </a>
@@ -77,9 +77,9 @@
         <div class="col-lg-3 col-md-6">
           <a href="#">
             <div class="item">
-              <div class="image">
-                <img src="assets/images/featured-04.png" alt="" style="max-width: 44px;">
-              </div>
+              
+            <img src="{{asset('storage/images/easylayout.png')}}" alt="" style="max-width: 44px;">
+              
               <h4>Easy Layout</h4>
             </div>
           </a>
@@ -136,7 +136,7 @@
                 {{ 'Free' }}
               </span>
                 @endif
-              <a class="edit-cart" href="{{route('add.to.cart',['product_id' => $value->id,'qty'=>$qty])}}">ADD TO CART</a>
+              <a class="edit-cart" href="{{route('add.to.cart',['product_id' => $value->id,'qty'=>$qty])}}">ADD TO CART</a><br><br><br>
 
             </div>
           </div>

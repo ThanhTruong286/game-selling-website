@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Product;
 use App\Models\Voucher;
 use App\Models\VoucherUser;
+use App\Models\WishList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -12,6 +13,35 @@ use Illuminate\Support\Facades\DB;
 
 class CartController extends Controller
 {
+    public function delete_wishlist(Request $request){
+        $product_id = $request->get('product_id');
+        $user_id = session()->get('user_id');
+        if(DB::table('wishlist')->where('user_id',$user_id)->where('product_id',$product_id)->exists()){
+            DB::table('wishlist')->where('user_id',$user_id)->where('product_id',$product_id)->delete();
+            return redirect()->route('wishlist')->with('success','Xóa Sản Phẩm Thành Công');
+        }
+        return redirect()->route('wishlist')->with('error','Xóa Sản Phẩm Thất Bại');
+    }
+    public function add_to_wishlist(Request $request){
+        $product_id = $request->get('product_id');
+        $user_id = session()->get('user_id');
+        $data = [
+            'user_id'=>$user_id,
+            'product_id'=>$product_id
+        ];
+        if(DB::table('wishlist')->where('user_id',$user_id)->where('product_id',$product_id)->exists()){
+            return redirect()->route('wishlist')->with('error','Đã Có Sản Phẩm Trong Wishlist');
+        }
+        if(DB::table('wishlist')->insert($data)){
+            return redirect()->route('wishlist')->with('success','Thêm Vào Wishlist Thành Công');
+        }
+        return redirect()->route('wishlist')->with('error','Thêm Vào Wishlist Thất Bại');
+    }
+    public function wishlist(){
+        $user_id = session()->get('user_id');
+        $data = WishList::where('user_id',$user_id)->get();
+        return view('backend.wishlist.index',compact('data'));
+    }
     public function use_voucher(Request $request){
         $user_id = session()->get('user_id');
         $cart = session()->get($user_id . 'cart');
