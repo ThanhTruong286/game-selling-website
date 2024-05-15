@@ -108,6 +108,10 @@ Route::prefix('category')->group(function () {
 Route::get('wishlist',[CartController::class,'wishlist'])->name('wishlist')->middleware('check_login');
 Route::get('add-to-wishlist',[CartController::class,'add_to_wishlist'])->name('add.to.wishlist')->middleware('check_login');
 Route::get('delete-wishlist',[CartController::class,'delete_wishlist'])->name('delete.wishlist')->middleware('check_login');
+//LIST FRIEND
+Route::get('list-friend',[CommunityController::class,'list_friend'])->name('list.friend')->middleware('check_login');
+Route::get('add-friend',[CommunityController::class,'add_friend'])->name('add.friend')->middleware('check_login');
+Route::get('delete-friend',[CommunityController::class,'delete_friend'])->name('delete.friend')->middleware('check_login');
 //COMMUNITY
 Route::get('community',[CommunityController::class,'community'])->name('community.home');
 // ORTHER

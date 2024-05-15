@@ -31,7 +31,7 @@ class LibraryController extends Controller
         return view('backend.library.index',['product'=>$product,'data'=>$data,'review'=>$review]);
     }
     public function user_library(Request $request){
-        $user_id = $request->get('user_id');
+        $user_id = session()->get('user_id');
         $product_id = DB::table('library')->where('user_id',$user_id)->get('product_id');
         $product[] = null;
         foreach($product_id as $value){

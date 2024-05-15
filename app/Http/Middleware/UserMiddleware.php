@@ -18,7 +18,7 @@ class UserMiddleware
     public function handle(Request $request, Closure $next)
     {
         $user_id = Auth::user()->id;
-        $user_library_id = $request->get('user_id');
+        $user_library_id = session()->get('user_id');
         if($user_id == $user_library_id){
             return $next($request);
         }
