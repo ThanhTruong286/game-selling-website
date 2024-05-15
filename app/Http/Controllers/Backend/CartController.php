@@ -39,8 +39,17 @@ class CartController extends Controller
     }
     public function wishlist(){
         $user_id = session()->get('user_id');
-        $data = WishList::where('user_id',$user_id)->get();
-        return view('backend.wishlist.index',compact('data'));
+        $data = WishList::where('user_id',$user_id)->paginate(4);
+        $qty = 0;//bien luu tru tong so luong san pham
+        //kiem tra su ton tai cua session 'cart'
+        $carts = session($user_id . "cart");
+        if($carts){
+            //tao vong lap va cong don quantity ben trong session('cart')
+            foreach(session($user_id . 'cart') as $carts){
+                $qty += $carts['quantity'];
+            }
+        }
+        return view('backend.wishlist.index',compact('data','qty'));
     }
     public function use_voucher(Request $request){
         $user_id = session()->get('user_id');
@@ -79,8 +88,16 @@ class CartController extends Controller
                     break;
             }
         }
-
-        return view('backend.cart.final_cart', compact('cart', 'totalPrice', 'totalProduct','voucher','old_price','voucher_value','voucher_type','voucher_value_price'));
+        $qty = 0;//bien luu tru tong so luong san pham
+        //kiem tra su ton tai cua session 'cart'
+        $carts = session($user_id . "cart");
+        if($carts){
+            //tao vong lap va cong don quantity ben trong session('cart')
+            foreach(session($user_id . 'cart') as $carts){
+                $qty += $carts['quantity'];
+            }
+        }
+        return view('backend.cart.final_cart', compact('cart', 'totalPrice', 'totalProduct','voucher','old_price','voucher_value','voucher_type','voucher_value_price','qty'));
     }
     public function add_to_library(Request $request){
         $voucher = isset($_GET['voucher']) ? $_GET['voucher'] : '';
@@ -204,6 +221,15 @@ class CartController extends Controller
         }
         // dd($cart);
         $voucher = VoucherUser::where('user_id',session()->get('user_id'))->get();
-        return view('backend.cart.index', compact('cart', 'totalPrice', 'totalProduct', 'user_image','voucher'));
+        $qty = 0;//bien luu tru tong so luong san pham
+        //kiem tra su ton tai cua session 'cart'
+        $carts = session($user_id . "cart");
+        if($carts){
+            //tao vong lap va cong don quantity ben trong session('cart')
+            foreach(session($user_id . 'cart') as $carts){
+                $qty += $carts['quantity'];
+            }
+        }
+        return view('backend.cart.index', compact('cart', 'totalPrice', 'totalProduct', 'user_image','voucher','qty'));
     }
 }

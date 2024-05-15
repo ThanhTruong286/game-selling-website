@@ -55,7 +55,7 @@
           </a>
         </div>
         <div class="col-lg-3 col-md-6">
-          <a href="#">
+          <a href="{{route('community.home')}}">
             <div class="item">
 
             <img src="{{asset('storage/images/usermore.png')}}" alt="" style="max-width: 44px;">

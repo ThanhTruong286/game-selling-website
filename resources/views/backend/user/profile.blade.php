@@ -27,6 +27,8 @@
 <li><a href="{{route('home')}}"> <i class="fa fa-home"></i> Back To Shop </a></li>
 <li><a href="{{route('edit.profile.form')}}"> <i class="fa fa-edit"></i> Edit profile</a></li>
 <li><a href="{{route('library',['user_id'=>$user->id])}}"> <i class="fa fa-gamepad"></i> Game Library</a></li>
+<li><a href="{{ route('auth.logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a></li>
+
 </ul>
 </div>
 </div>

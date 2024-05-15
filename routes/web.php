@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\CartController;
+use App\Http\Controllers\Backend\CommunityController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\ProductController;
@@ -107,6 +108,8 @@ Route::prefix('category')->group(function () {
 Route::get('wishlist',[CartController::class,'wishlist'])->name('wishlist')->middleware('check_login');
 Route::get('add-to-wishlist',[CartController::class,'add_to_wishlist'])->name('add.to.wishlist')->middleware('check_login');
 Route::get('delete-wishlist',[CartController::class,'delete_wishlist'])->name('delete.wishlist')->middleware('check_login');
+//COMMUNITY
+Route::get('community',[CommunityController::class,'community'])->name('community.home');
 // ORTHER
 Route::post('payment',[CartController::class,'use_voucher'])->name('use.voucher')->middleware('check_login');
 Route::get('voucher',[VoucherController::class,'voucher_view'])->name('voucher.view')->middleware('check_login');

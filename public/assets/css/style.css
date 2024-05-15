@@ -8027,7 +8027,7 @@ body.boxed-layout.skin-3 #wrapper {
   background: #3e2c42;
 }
 .skin-3 .breadcrumb {
-  background: transparent;
+  background: none;
 }
 .skin-3 .page-heading {
   border: none;

@@ -24,6 +24,8 @@ use Illuminate\Support\Facades\Auth;
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/format.css') }}">
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="{{asset('assets/css/community.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/css/wishlist.css')}}">
 <!--
 
 TemplateMo 589 lugx gaming
@@ -74,7 +76,6 @@ https://templatemo.com/tm-589-lugx-gaming
                       <!-- check user login -->
                         @if(Auth::check())
                           <li><a href="{{ route('voucher.view') }}">Voucher</a></li>
-                          <li><a href="{{ route('auth.logout') }}">Log Out</a></li>
                           <li>
                             <a href="{{route('show.cart')}}">
                               <!-- khi an buy thi luu session cart -->
