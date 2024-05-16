@@ -75,7 +75,8 @@ class AuthController extends Controller
         // $user = User::where("email", $request->email)->first();cach khong toi uu 
         $user = Auth::user();
         $voucher = VoucherUser::where('user_id',Auth::user()->id)->get();
-        return view("backend.user.profile", compact("user",'voucher'));
+        $roles = User::where('id',session()->get('user_id'))->value('roles');
+        return view("backend.user.profile", compact("user",'voucher','roles'));
     }
 
     public function index(Request $request)

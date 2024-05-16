@@ -28,7 +28,11 @@
 <li><a href="{{route('edit.profile.form')}}"> <i class="fa fa-edit"></i> Edit profile</a></li>
 <li><a href="{{route('library')}}"> <i class="fa fa-gamepad"></i> Game Library</a></li>
 <li><a href="{{route('list.friend')}}"> <i class="fa fa-users"></i> List Friend</a></li>
+@if($roles == 2)
+<li><a href="{{route('developer.dashboard')}}"> <i class="fa fa-users"></i> Dashboard</a></li>
+@endif
 <li><a href="{{ route('auth.logout') }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Log Out</a></li>
+
 
 </ul>
 </div>

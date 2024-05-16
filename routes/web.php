@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\LibraryController;
 use App\Http\Controllers\Backend\VoucherController;
+use App\Http\Middleware\DeveloperMiddleware;
 use App\Http\Middleware\LibraryMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -48,6 +49,9 @@ Route::prefix('user')->group(function () {
     Route::post('edit',[AuthController::class,'edit'])->name('edit.profile')->middleware('check_login');
     Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
     Route::post('add-review',[ProductController::class,'add_review'])->name('add.review')->middleware('check_login');
+    //USER DASHBOARD
+    Route::get('dashboard',[UserController::class,'dashboard'])->name('developer.dashboard')->middleware('check_login');
+    Route::get('user-product',[UserController::class,'user_product'])->name('user.product')->middleware('check_login');
     // LIBRARY
     Route::prefix('library')->group(function () {
         Route::get('home',[LibraryController::class,'user_library'])->name('library')->middleware('check_login')->middleware('user');
@@ -65,13 +69,13 @@ Route::prefix('admin')->group(function () {
     Route::prefix('product')->group(function () {
     Route::get('home', [ProductController::class,'index'])->name('product.index')->middleware('admin');
     /* CRUD PRODUCT */
-    Route::get('add-form', [ProductController::class,'add_form'])->name('product.add.form')->middleware('admin');
-    Route::post('add', [ProductController::class,'add'])->name('product.add')->middleware('admin');
-    Route::get('edit-form', [ProductController::class,'edit_form'])->name('product.edit.form')->middleware('admin');
-    Route::post('edit', [ProductController::class,'edit'])->name('product.edit')->middleware('admin');
-    Route::get('delete', [ProductController::class,'delete'])->name('product.delete')->middleware('admin');
-    Route::get('add-gallery-form',[ProductController::class,'add_gallery_form'])->name('add.gallery.form')->middleware('admin');
-    Route::post('add-gallery',[ProductController::class,'add_gallery'])->name('add.gallery')->middleware('admin');
+    Route::get('add-form', [ProductController::class,'add_form'])->name('product.add.form')->middleware(DeveloperMiddleware::class);
+    Route::post('add', [ProductController::class,'add'])->name('product.add')->middleware(DeveloperMiddleware::class);
+    Route::get('edit-form', [ProductController::class,'edit_form'])->name('product.edit.form')->middleware(DeveloperMiddleware::class);
+    Route::post('edit', [ProductController::class,'edit'])->name('product.edit')->middleware(DeveloperMiddleware::class);
+    Route::get('delete', [ProductController::class,'delete'])->name('product.delete')->middleware(DeveloperMiddleware::class);
+    Route::get('add-gallery-form',[ProductController::class,'add_gallery_form'])->name('add.gallery.form')->middleware(DeveloperMiddleware::class);
+    Route::post('add-gallery',[ProductController::class,'add_gallery'])->name('add.gallery')->middleware(DeveloperMiddleware::class);
 });
     // CRUD CATEGORIES
     Route::prefix('category')->group(function () {
