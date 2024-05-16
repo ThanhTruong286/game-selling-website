@@ -31,8 +31,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('roles');
+            $table->integer('dev_id')->nullable();
             // $table->integer('library_id');
-            // $table->foreign('library_id')->references('id')->on('library')->onDelete('cascade');
+            $table->foreign('dev_id')->references('id')->on('developers')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

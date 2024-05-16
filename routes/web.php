@@ -114,6 +114,11 @@ Route::get('add-friend',[CommunityController::class,'add_friend'])->name('add.fr
 Route::get('delete-friend',[CommunityController::class,'delete_friend'])->name('delete.friend')->middleware('check_login');
 //COMMUNITY
 Route::get('community',[CommunityController::class,'community'])->name('community.home');
+//COOP
+Route::get('cooperation',[CommunityController::class,'cooperation'])->name('cooperation.home')->middleware('check_login');
+Route::post('send-email-coop',[CommunityController::class,'send_email'])->name('cooperation.send.email')->middleware('check_login');
+Route::get('confirm-coop-request',[CommunityController::class,'confirm_coop'])->name('cooperation.confirm')->middleware('admin');
+Route::get('deny-coop-request',[CommunityController::class,'deny_coop'])->name('cooperation.deny')->middleware('admin');
 // ORTHER
 Route::post('payment',[CartController::class,'use_voucher'])->name('use.voucher')->middleware('check_login');
 Route::get('voucher',[VoucherController::class,'voucher_view'])->name('voucher.view')->middleware('check_login');

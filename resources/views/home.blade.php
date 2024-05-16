@@ -65,12 +65,12 @@
           </a>
         </div>
         <div class="col-lg-3 col-md-6">
-          <a href="#">
+          <a href="{{route('cooperation.home')}}">
             <div class="item">
            
             <img src="{{asset('storage/images/reply.png')}}" alt="" style="max-width: 44px;">
             
-              <h4>Reply Ready</h4>
+              <h4>Cooperation</h4>
             </div>
           </a>
         </div>

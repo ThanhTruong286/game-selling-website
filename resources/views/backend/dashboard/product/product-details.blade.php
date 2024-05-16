@@ -61,7 +61,10 @@
         <a href="{{ route('category.home', ['keyword' => $value]) }}">{{ $value }}</a>,
     
       @endforeach
-
+      </li>
+      <li><span>Developers: </span>
+      <a href="">{{$values->developer->name}}</a>
+      </li>
       </ul>
     </div>
     <div class="col-lg-12">

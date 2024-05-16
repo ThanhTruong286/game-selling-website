@@ -19,6 +19,7 @@ return new class extends Migration
             $table->double('price')->nullable();
             $table->string('description');
             $table->integer('categories_id');
+            $table->integer('dev_id');
             $table->string('image');
             $table->string('slug');
             $table->double('total_play_time');
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->boolean('banner');
             //khoa ngoai la cot categories_id noi voi id ben bang categories
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('dev_id')->references('id')->on('developers')->onDelete('cascade');
         });
     }
 

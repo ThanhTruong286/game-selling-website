@@ -20,4 +20,7 @@ class Product extends Model
     {
         return $this->belongsToMany(Tags::class,'products_tags');
     }
+    public function developer(){
+        return $this->belongsTo(Developers::class,'dev_id');
+    }
 }

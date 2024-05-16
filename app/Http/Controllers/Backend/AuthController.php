@@ -122,13 +122,18 @@ class AuthController extends Controller
         ];
         //check thong tin
         if (Auth::attempt($credentials)) {
-            $user_name = DB::table('users')->where('email', $request->input('email'))->value('name');
             $user_id = DB::table('users')->where('email', $request->input('email'))->value('id');
+            $email = DB::table('users')->where('email', $request->input('email'))->value('email');
+            $fullname = DB::table('users')->where('email', $request->input('email'))->value('fullname');
+            $name = DB::table('users')->where('email', $request->input('email'))->value('name');
             $user = DB::table('users')->where('email', $request->input('email'))->get();
             // dd($user_name);
             $request->session()->regenerate();
             $request->session()->put('user_id', $user_id);
             $request->session()->put('user', $user);
+            $request->session()->put('email', $email);
+            $request->session()->put('name', $name);
+            $request->session()->put('fullname', $fullname);
             // dd(session()->all());
             return redirect()->route('home')->with('success', 'Đăng Nhập Thành Công');
         } else {
