@@ -43,6 +43,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Product::class, 'library');
     }
+    public function friends()
+    {
+        return $this->belongsToMany(User::class, 'list_friend', 'owner_id', 'friend_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

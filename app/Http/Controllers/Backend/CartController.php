@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\ListFriend;
 use App\Models\Product;
 use App\Models\Voucher;
 use App\Models\VoucherUser;
@@ -97,22 +98,32 @@ class CartController extends Controller
                 $qty += $carts['quantity'];
             }
         }
-        return view('backend.cart.final_cart', compact('cart', 'totalPrice', 'totalProduct','voucher','old_price','voucher_value','voucher_type','voucher_value_price','qty'));
+        $user = Auth::user();
+        $list_friend = $user->friends()->get();
+        return view('backend.cart.final_cart', compact('list_friend','cart', 'totalPrice', 'totalProduct','voucher','old_price','voucher_value','voucher_type','voucher_value_price','qty'));
     }
     public function add_to_library(Request $request){
         $voucher = isset($_GET['voucher']) ? $_GET['voucher'] : '';
+        $purchase = isset($_GET['friend_id']) ? $_GET['friend_id'] : '-1';
         $revenue = 0;
+        $user_id = Auth::user()->id;
         if(isset($_GET['payUrl'])){
-            $user_id = Auth::user()->id;
+            if($purchase != -1){
+                $user = $purchase;
+            }
+            else{
+                $user = $user_id;
+            }
+            // dd($user);
             $cart = session()->get($user_id . 'cart');
     
             foreach($cart as $key => $value){
                 $data[] = [
                     "product_id" => $value['id'],
-                    'user_id'=> $user_id,
+                    'user_id'=> $user,
                 ];
-                if(DB::table('library')->where('product_id', $value['id'])->where('user_id',$user_id)->exists()){
-                    return redirect()->route('show.cart')->with('error','Đã Có Sản Phẩm ' .$value['name']. ' Trong Thư Viện');
+                if(DB::table('library')->where('product_id', $value['id'])->where('user_id',$user)->exists()){
+                    return redirect()->route('show.cart')->with('error','Đã Có Sản Phẩm ' .$value['name']. ' Trong Thư Viện Của '.DB::table('users')->where('id',$user)->value('name'));
                 }
                 $revenue = $value['price'];
                 $product_id = $value['id'];

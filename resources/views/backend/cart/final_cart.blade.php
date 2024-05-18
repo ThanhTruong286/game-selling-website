@@ -2,12 +2,12 @@
 @section('content')
 
 <body>
-<div class="page-heading header-text">
+  <div class="page-heading header-text">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <h3>Payment</h3>
-          <span class="breadcrumb"><a href="#">Home</a>  >  Payment</span>
+          <span class="breadcrumb"><a href="#">Home</a> > Payment</span>
         </div>
       </div>
     </div>
@@ -76,37 +76,45 @@
         </div>
       @endforeach
               <p style="color:dark;font-weight:bold;" class="mb-2">Voucher</p>
-                @if($voucher!=null)
-                <P>{{ $voucher[0] }}</P>
-                <input name="voucher" type="hidden" value="{{$voucher[0]}}">
-                @else
-                <p>Không Sử Dụng</p>
-                @endif
-              <hr><p style="color:dark;font-weight:bold;" class="mb-2">Subtotal</p>
+              @if($voucher != null)
+        <P>{{ $voucher[0] }}</P>
+        <input name="voucher" type="hidden" value="{{$voucher[0]}}">
+      @else
+    <p>Không Sử Dụng</p>
+  @endif
+              <hr>
+              <p style="color:dark;font-weight:bold;" class="mb-2">Subtotal</p>
               <hr class="my-2">
               @if($voucher != null)
-              <p style="color:dark;font-weight:bold;" class="mb-2">{{number_format($old_price)}} VND</p>
-              @endif
+        <p style="color:dark;font-weight:bold;" class="mb-2">{{number_format($old_price)}} VND</p>
+      @endif
               @if($voucher_type == 'VND')
-              <p style="color:dark;font-weight:bold;" class="mb-2">- {{number_format($voucher_value)}} VND</p>
-              @elseif($voucher_type == '%')
-              <p style="color:dark;font-weight:bold;" class="mb-2">- {{number_format($voucher_value)}} % ({{number_format($voucher_value_price)}} VND)</p>
-              @endif
+        <p style="color:dark;font-weight:bold;" class="mb-2">- {{number_format($voucher_value)}} VND</p>
+      @elseif($voucher_type == '%')
+    <p style="color:dark;font-weight:bold;" class="mb-2">- {{number_format($voucher_value)}} %
+    ({{number_format($voucher_value_price)}} VND)</p>
+  @endif
               @if($voucher)
-              <hr>
-              @endif
+        <hr>
+      @endif
+
               <p style="color:dark;font-weight:bold;" class="mb-2">{{number_format($totalPrice)}} VND</p>
               <input type="hidden" value="{{$totalPrice}}" name="amount">
+              <div class="form-group"><label class="col-sm-2 control-label">Products For:</label>
+              <div class="col-sm-10">
+                <select class="form-control" name="friend_id" id="">
+                  <option value="-1">My Self</option>
+                @foreach($list_friend as $value)
+          <!-- phan cach id va name bang ky tu <>, name dung de tao slug -->
+          <option value="{{ $value->id }}">{{ $value->name }}</option>
+        @endforeach
+                </select>
+              </div>
+              </div><br><br><br>
               <button name="payUrl" type="submit" data-mdb-button-init data-mdb-ripple-init
               class="btn btn-info btn-block btn-lg">
               <div class="d-flex justify-content-between">
-                <span style="color:white;">Purchase For Yourself</span>
-              </div>
-              </button>
-              <button type="button" data-mdb-button-init data-mdb-ripple-init
-              class="btn btn-info btn-block btn-lg">
-              <div class="d-flex justify-content-between">
-                <a style="color:white;" href="#">Gift Friend</a>
+                <span style="color:white;">Purchase</span>
               </div>
               </button>
 
@@ -121,8 +129,7 @@
       </button>
     @endif  
 
-          
-    </div>
+                </div>
               </div>
             </div>
           </div>
@@ -131,4 +138,3 @@
   </form>
 
 </body>
-
