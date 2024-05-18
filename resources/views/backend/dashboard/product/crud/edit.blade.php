@@ -68,6 +68,19 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                            <div class="form-group"><label class="col-sm-2 control-label">Company:</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="company" id="">
+                                                    <option value="{{ $products->developer->id}}">{{ $products->developer->name }}</option>
+
+                                                        @foreach($company as $value)
+                                                        
+                                                            <!-- phan cach id va name bang ky tu <>, name dung de tao slug -->
+                                                            <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
                                             <div class="form-group"><label class="col-sm-2 control-label">Tags:</label>
                                                 <div class="col-sm-10">
                                                     <input  name="tags" type="text" class="form-control" placeholder=""value="{{old('tags', $tagsString)}}" size="5">

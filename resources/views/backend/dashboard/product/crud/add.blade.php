@@ -24,6 +24,19 @@
                                                     <input required name="description" type="text" class="form-control" placeholder="Description">
                                                 </div>
                                             </div>
+
+                                            <div class="form-group"><label class="col-sm-2 control-label">Company:</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control" name="company" id="">
+                                                        @foreach($company as $value)
+                                                            <!-- phan cach id va name bang ky tu <>, name dung de tao slug -->
+                                                            <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
                                             <div class="form-group"><label class="col-sm-2 control-label">Category:</label>
                                                 <div class="col-sm-10">
                                                     <select class="form-control" name="category_id" id="">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Developers;
 use App\Models\Gallery;
 use App\Models\Product;
 use App\Models\ProductTag;
@@ -139,6 +140,7 @@ class ProductController extends Controller
             'updated_at' => now(),
             'image' => $imageName,
             'banner' => $request->get('banner'),
+            'dev_id'=>$request->get('company'),
         ];
     
         // Update the product
@@ -172,6 +174,7 @@ class ProductController extends Controller
         $products = Product::find($product_id); // Use find() to get a single product
         $product = Product::where('id',$product_id)->get();
         $category = Category::all(); // Use all() to get all categories
+        $company = Developers::all();
         $tags = Tags::all(); // Use the Tag model to get all tags
     
         // Get the product's tag names and convert them to a comma-separated string
@@ -179,7 +182,7 @@ class ProductController extends Controller
         $tagsString = implode(', ', $productTags);
     
         $template = "backend.dashboard.product.crud.edit";
-        return view("backend.dashboard.layout", compact("template", 'category', 'product', 'tags', 'tagsString'));
+        return view("backend.dashboard.layout", compact("template", 'category', 'product', 'tags', 'tagsString','company'));
     }
     public function product_detail(Request $request)
 {
@@ -243,6 +246,7 @@ class ProductController extends Controller
             'old_price'=>$request->get('price'),
             'image' => $request->image->getClientOriginalName(),//lay ra ten cua file hinh 
             'banner'=>false,
+            'dev_id'=>$request->get('company'),
         ];
         $file = $request->file('image');//lay du lieu file hinh
         //up file hinh vao storage, trong storage/public tao 1 file moi la images
@@ -255,10 +259,11 @@ class ProductController extends Controller
     public function add_form(){
         $category = Category::get();//lay toan bo du lieu category
         $template = "backend.dashboard.product.crud.add";
-        return view("backend.dashboard.layout",compact("template",'category'));
+        $company = Developers::all();
+        return view("backend.dashboard.layout",compact('company',"template",'category'));
     }
     public function index(){
-        $products = Product::paginate(5);//lay ra 5 ban ghi
+        $products = Product::orderBy('created_at','DESC')->paginate(5);//lay ra 5 ban ghi
         $template = "backend.dashboard.product.index";
         return view("backend.dashboard.layout",compact("template","products"));
     }
