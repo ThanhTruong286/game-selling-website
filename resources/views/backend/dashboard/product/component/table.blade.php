@@ -6,6 +6,7 @@
                                 <th>Tên Sản Phẩm</th>
                                 <th>Giá Sản Phẩm</th>
                                 <th>Danh Mục</th>
+                                <th>Doanh Thu</th>
                                 <th>Tiêu Biểu</th>
                                 <th>Thao Tác</th>
                             </tr>
@@ -26,6 +27,7 @@
                                     {{ number_format($value->price )}} VND
                                 </td>
                                 <td>{{ $value->category->name }}</td>
+                                <td>{{number_format($value->revenue)}} VND</td>
                                 <!-- switch button -->
                                 <td>
                                     <label class="switch">

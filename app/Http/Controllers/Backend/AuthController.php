@@ -24,7 +24,7 @@ class AuthController extends Controller
         if (isset($_POST['submit']) && $_POST['submit']) {
             $imageName = null;
             $image = null;
-            if($request->file('avatar')){
+            if ($request->file('avatar')) {
                 $image = $request->file('avatar');
                 $imageName = $request->file('avatar')->getClientOriginalName();
             }
@@ -40,21 +40,22 @@ class AuthController extends Controller
                 'birthday' => isset($_POST['birthday']) ? date_create($_POST['birthday']) : date_create(),
                 'image' => $imageName
             ];
-            if($image != null){
-            if($image->storeAs('public/images', $imageName)){
-                $current_avatar = $_POST['current_avatar'];
-                DB::table('users')->where('id',Auth::user()->id)->update($data);
-                if($current_avatar != null){
-                unlink(storage_path('app/public/images/'.$current_avatar));
+            if ($image != null) {
+                if ($image->storeAs('public/images', $imageName)) {
+                    $current_avatar = $_POST['current_avatar'];
+                    DB::table('users')->where('id', Auth::user()->id)->update($data);
+                    if ($current_avatar != null) {
+                        unlink(storage_path('app/public/images/' . $current_avatar));
+                    }
+                    return redirect()->route('edit.profile.form')->with('success', 'Sửa Thông Tin Thành Công');
                 }
-                return redirect()->route('edit.profile.form')->with('success','Sửa Thông Tin Thành Công');
-            }}
+            }
             // dd($data);
             DB::table('users')->where('id', Auth::user()->id)->update($data);
-            return redirect()->route('edit.profile.form')->with('success','Sửa Thông Tin Thành Công');
+            return redirect()->route('edit.profile.form')->with('success', 'Sửa Thông Tin Thành Công');
         }
 
-        return redirect()->route('edit.profile.form')->with('error','Sửa Thông Tin Thất Bại');
+        return redirect()->route('edit.profile.form')->with('error', 'Sửa Thông Tin Thất Bại');
     }
     public function confirm_email(Request $request)
     {
@@ -74,9 +75,9 @@ class AuthController extends Controller
     {
         // $user = User::where("email", $request->email)->first();cach khong toi uu 
         $user = Auth::user();
-        $voucher = VoucherUser::where('user_id',Auth::user()->id)->get();
-        $roles = User::where('id',session()->get('user_id'))->value('roles');
-        return view("backend.user.profile", compact("user",'voucher','roles'));
+        $voucher = VoucherUser::where('user_id', Auth::user()->id)->get();
+        $roles = User::where('id', session()->get('user_id'))->value('roles');
+        return view("backend.user.profile", compact("user", 'voucher', 'roles'));
     }
 
     public function index(Request $request)
@@ -161,6 +162,37 @@ class AuthController extends Controller
         $email = $request->get('email');
         return view('backend.auth.new_password', compact('email'));
     }
+    public function changepass(Request $request)
+    {
+        $email = session()->get('email');
+        return view('backend.auth.change_password', compact('email'));
+    }
+    
+    public function changePAS(Request $request)
+    {
+        $current_pass = $request->get('current');
+        $password = $request->get('password');
+        $confirm = $request->get('confirm');
+        $email = session()->get('email');
+    
+        // Fetch the user's hashed password from the database
+        $hashedPassword = DB::table('users')->where('email', $email)->value('password');
+    
+        // Check if the current password matches the hashed password in the database
+        if (Hash::check($current_pass, $hashedPassword)) {
+            // Check if the new password and confirmation password match
+            if ($password === $confirm) {
+                // Update the password in the database
+                DB::table('users')->where('email', $email)->update(['password' => Hash::make($password)]);
+                return redirect()->route('home')->with('success', 'Đổi Mật Khẩu Thành Công !!!');
+            } else {
+                return redirect()->route('home')->with('error', 'Mật Khẩu Không Trùng Khớp !!!');
+            }
+        } else {
+            return redirect()->route('home')->with('error', 'Mật Khẩu Hiện Tại Sai !!!');
+        }
+    }
+    
     public function make_new_password(Request $request)
     {
         $password = $request->get('password');
