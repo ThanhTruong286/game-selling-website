@@ -101,6 +101,7 @@ class CartController extends Controller
     }
     public function add_to_library(Request $request){
         $voucher = isset($_GET['voucher']) ? $_GET['voucher'] : '';
+        $revenue = 0;
         if(isset($_GET['payUrl'])){
             $user_id = Auth::user()->id;
             $cart = session()->get($user_id . 'cart');
@@ -113,8 +114,15 @@ class CartController extends Controller
                 if(DB::table('library')->where('product_id', $value['id'])->where('user_id',$user_id)->exists()){
                     return redirect()->route('show.cart')->with('error','Đã Có Sản Phẩm ' .$value['name']. ' Trong Thư Viện');
                 }
+                $revenue = $value['price'];
+                $product_id = $value['id'];
             }
-            DB::table("library")->insert($data);
+            if(DB::table("library")->insert($data)){
+                $currentReven = DB::table('products')->where('id',$product_id)->value('revenue');
+                $revenue = $currentReven + $revenue;
+                $update = ['revenue'=>$revenue];
+                DB::table('products')->where('id',$product_id)->update($update);
+            }
             if($voucher != null){
                 $voucher_id = DB::table('voucher')->where('content',$voucher)->get()->value('id');
      

@@ -28,7 +28,7 @@
             <img height="400px" width="700px" src="{{ asset('storage/images/'.$value->image) }}" alt="">
             <span class="price">
               @if($value->sale > 0)
-              <del>{{ number_format($value->old_price) }} VND</del>
+              <del>{{ number_format($value->old_price) }} VND</del><br>
               @endif
               {{number_format($value->price)}} VND</span>
             @if($value->sale > 0)

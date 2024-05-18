@@ -39,6 +39,10 @@ class User extends Authenticatable
     public function review(){
         return $this->hasOne(Review::class);
     }
+    public function games()
+    {
+        return $this->belongsToMany(Product::class, 'library');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

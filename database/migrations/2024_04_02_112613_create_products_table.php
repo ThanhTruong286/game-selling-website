@@ -25,6 +25,7 @@ return new class extends Migration
             $table->double('total_play_time');
             $table->double('sale');
             $table->double('old_price');
+            $table->double('revenue')->nullable();
             $table->timestamps();
             $table->boolean('banner');
             //khoa ngoai la cot categories_id noi voi id ben bang categories
