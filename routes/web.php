@@ -50,8 +50,8 @@ Route::prefix('user')->group(function () {
     Route::get('confirm-email',[AuthController::class,'confirm_email'])->name('confirm_email');
     Route::post('add-review',[ProductController::class,'add_review'])->name('add.review')->middleware('check_login');
     //USER DASHBOARD
-    Route::get('dashboard',[UserController::class,'dashboard'])->name('developer.dashboard')->middleware('check_login');
-    Route::get('user-product',[UserController::class,'user_product'])->name('user.product')->middleware('check_login');
+    Route::get('dashboard',[UserController::class,'dashboard'])->name('developer.dashboard')->middleware(DeveloperMiddleware::class);
+    Route::get('user-product',[UserController::class,'user_product'])->name('user.product')->middleware(DeveloperMiddleware::class);
     // LIBRARY
     Route::prefix('library')->group(function () {
         Route::get('home',[LibraryController::class,'user_library'])->name('library')->middleware('check_login')->middleware('user');

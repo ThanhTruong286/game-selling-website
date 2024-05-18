@@ -20,11 +20,22 @@ class CommunityController extends Controller
         $email = $request->get('email');
         $tax = $request->get('tax');
         $company = $request->get('company');
+        $user_id=$request->get('user_id');
+        // dd($email);
         $data = [
             'roles'=>2,
         ];
-        if(DB::table('users')->where('email',$email)->update($data)){
-        return view('backend.auth.mail.confirm_coop',compact('name','email','tax','company'));}
+        if(DB::table('users')->where('id',$user_id)->update($data)){
+            if(!DB::table('developers')->where('name',$company)->exists()){
+                $dev = [
+                    'name'=>$request->get('company'),
+                    'user_id'=>$request->get('user_id'),
+                ];
+                DB::table('developers')->insert($dev);
+                return view('backend.auth.mail.confirm_coop',compact('name','email','tax','company','user_id'));
+            }
+            return redirect()->route('home')->with('error','Có Người Đã Đăng Ký Tên Cty Này');
+        }
         return redirect()->route('home')->with('error','Có Gì Đó Sai Sai !!!');
     }
     public function send_email()
@@ -34,14 +45,16 @@ class CommunityController extends Controller
         $company = isset($_POST['company']) ? $_POST['company'] : '';
         $reason = isset($_POST['reason']) ? $_POST['reason'] : '';
         $tax = isset($_POST['tax']) ? $_POST['tax'] : '';
+        $user_id = isset($_POST['user_id']) ? $_POST['user_id'] : '';
 
-        return view('backend.auth.waiting.thanks',compact('email','name','company','tax','reason'));
+        return view('backend.auth.waiting.thanks',compact('email','name','company','tax','reason','user_id'));
     }
     public function cooperation()
     {
         $email = session()->get('email');
+        $userId = session()->get('user_id');
         $name = session()->get('name')??session()->get('fullname');
-        return view('cooperation', compact('email', 'name'));
+        return view('cooperation', compact('email', 'name','userId'));
     }
     public function delete_friend(Request $request)
     {

@@ -260,6 +260,9 @@ class ProductController extends Controller
         $category = Category::get();//lay toan bo du lieu category
         $template = "backend.dashboard.product.crud.add";
         $company = Developers::all();
+        if(Auth::user()->id == 2){
+            $company = Developers::where('user_id',session()->get('user_id'))->get();
+        }
         return view("backend.dashboard.layout",compact('company',"template",'category'));
     }
     public function index(){

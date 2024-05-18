@@ -146,7 +146,7 @@ try {
     $mail->isHTML(true);                                  //Set email format to HTML
 
     //include content here
-    $mail->Subject = 'Confirm Your Email';
+    $mail->Subject = 'Deny Co-Op Request';
     $mail->Body    = $htmlContent;
 
     $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';

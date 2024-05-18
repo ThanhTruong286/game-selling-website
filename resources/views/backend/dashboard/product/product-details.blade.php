@@ -63,7 +63,7 @@
       @endforeach
       </li>
       <li><span>Developers: </span>
-      <a href="">{{$values->developer->name}}</a>
+      <a href="{{ route('category.home', ['keyword' => $values->developer->name]) }}">{{$values->developer->name}}</a>
       </li>
       </ul>
     </div>

@@ -167,6 +167,7 @@ form .form-row .textarea{
          <div class="form-row">
             <div class="input-data">
                <input name="name" type="text" readonly value="{{$name}}">
+               <input type="hidden" name="user_id" id="" value="{{$userId}}">
                <div class="underline"></div>
                <!-- <label for="">Full Name</label> -->
             </div>

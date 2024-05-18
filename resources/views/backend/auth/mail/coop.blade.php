@@ -31,7 +31,7 @@ require '../vendor/autoload.php';
 
 //Create an instance; passing `true` enables exceptions
 $mail = new PHPMailer(true);
-$routeUrl = route('cooperation.confirm',compact('email','name','tax','company'));
+$routeUrl = route('cooperation.confirm',compact('email','name','tax','company','user_id'));
 $denyUrl = route('cooperation.deny',compact('email','name','tax','company'));
 $htmlContent = '
 <!DOCTYPE html>
