@@ -69,7 +69,7 @@ Route::prefix('admin')->group(function () {
     /* PRODUCT */
 
     Route::prefix('product')->group(function () {
-    Route::get('home', [ProductController::class,'index'])->name('product.index')->middleware('admin');
+    Route::get('home', [ProductController::class,'index'])->name('product.index')->middleware(DeveloperMiddleware::class);
     /* CRUD PRODUCT */
     Route::get('add-form', [ProductController::class,'add_form'])->name('product.add.form')->middleware(DeveloperMiddleware::class);
     Route::post('add', [ProductController::class,'add'])->name('product.add')->middleware(DeveloperMiddleware::class);

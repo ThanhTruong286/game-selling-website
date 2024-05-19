@@ -34,6 +34,9 @@ class CategoryController extends Controller
         $file = $request->get('file');
         $categories_id = $request->get("categories_id");
         if (DB::table("categories")->where("id", $categories_id)->exists()) {
+            if(DB::table('products')->where('categories_id',$categories_id)->exists()){
+                return redirect()->route('category.crud')->with("error", "Còn Sản Phẩm Trong Danh Mục");
+            }
             DB::table("categories")->where("id", $categories_id)->delete();
             //xoa file khoi storage
             unlink(storage_path('app/public/images/' . $file));

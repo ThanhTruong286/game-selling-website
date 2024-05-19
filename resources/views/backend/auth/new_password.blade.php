@@ -33,15 +33,23 @@
     </div> 
       <div class="inputBox"> 
 
-       <input name="password" type="text" required> <i>New Password</i> 
+       <input name="password" type="password" required> <i>New Password</i> 
 
       </div> 
+      <div>
+              <input type="checkbox" id="showPassword" onclick="togglePassword()"> 
+              <label for="showPassword">Show Password</label>
+            </div>
 
       <div class="inputBox"> 
 
         <input name="confirm" type="text" required> <i>Confirm Password</i> 
 
         </div> 
+        <div>
+              <input type="checkbox" id="showPassword" onclick="togglePassword()"> 
+              <label for="showPassword">Show Password</label>
+            </div>
 
       <div class="links"> <p style="color:white;">Have Account ?</p> <a href="{{ route('signin.form') }}">Sign In</a> 
 
@@ -61,6 +69,17 @@
    </div> 
 
   </section> <!-- partial --> 
+  <script>
+    function togglePassword() {
+      var passwordField = document.getElementById("password");
+      var showPasswordCheckbox = document.getElementById("showPassword");
+      if (showPasswordCheckbox.checked) {
+        passwordField.type = "text";
+      } else {
+        passwordField.type = "password";
+      }
+    }
+  </script>
 
  </body>
 
