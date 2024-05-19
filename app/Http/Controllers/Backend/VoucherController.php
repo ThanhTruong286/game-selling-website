@@ -46,10 +46,10 @@ class VoucherController extends Controller
         if(DB::table("voucher")->where("id", $voucher_id)->exists()){  
             DB::table("voucher")->where("id", $voucher_id)->delete();
             //xoa file khoi storage
-            unlink(storage_path('app/public/images/'.$file));
-            return redirect()->route('category.crud')->with("success","Xóa Voucher Thành Công");
+            // unlink(storage_path('app/public/images/'.$file));
+            return redirect()->route('voucher.crud')->with("success","Xóa Voucher Thành Công");
         }
-        return redirect()->route('category.crud')->with("error","Xoá Voucher Thất Bại");
+        return redirect()->route('voucher.crud')->with("error","Xoá Voucher Thất Bại");
     }
     public function edit(Request $request){
         $rule = [
@@ -66,14 +66,20 @@ class VoucherController extends Controller
             $image = $request->file('image');
             $imageName = $request->file('image')->getClientOriginalName();
         }
+        $type_str  = $request->get('type');//lay du lieu tu form
+        $typeArr = explode('<>', $type_str);//cat du lieu qua chuoi <>, truong hop nay se tao dc 2 chuoi id va name
+        $type_id = $typeArr[0];//phan tu thu 0 chinh la id category
+        $type = $typeArr[1];//phan tu thu 1 chinh la name category, dung de tao slug 
         $data = [
             'id' => $request->get("id"),
             'content' => $request->get("content"),
-            'value'=>$request->get('value'),
-            'type'=>$request->get('type'),
+            'value'=>$request->get('giaTri'),
+            'type_id'=>$type_id,
+            'type'=>$type,
             'updated_at'=>now(),
             'image' => $imageName,
         ];
+        // dd($data);
         if($request->file('image') != null){
             if($image->storeAs('public/images', $imageName)){
                 DB::table('voucher')->where('id',$request->get('id'))->update($data);
@@ -83,7 +89,7 @@ class VoucherController extends Controller
         }
         else{
             DB::table('voucher')->where('id',$request->get('id'))->update($data);
-            return redirect()->route('category.crud')->with('success','Sửa Voucher Thành Công');
+            return redirect()->route('voucher.crud')->with('success','Sửa Voucher Thành Công');
         }
         
         return redirect()->route('voucher.edit.form')->with('error','Sửa Voucher Thất Bại');
@@ -92,7 +98,8 @@ class VoucherController extends Controller
         $id = isset($_GET['voucher_id']) ? $_GET['voucher_id'] : 0;
         $voucher = Voucher::where("id",$id)->get();
         $template = "backend.dashboard.voucher.crud.edit";
-        return view("backend.dashboard.layout",compact("template",'voucher'));
+        $type = DB::table('voucher_type')->get();
+        return view("backend.dashboard.layout",compact("template",'voucher','type'));
     }
     public function take_voucher(Request $request){
         $user_id = session()->get('user_id');
