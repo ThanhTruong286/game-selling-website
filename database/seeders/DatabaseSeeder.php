@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             ReivewSeeder::class,
             VoucherTypeSeeder::class,
             VoucherSeeder::class,
+            TagsSeeder::class,
         ]);
     }
 }
