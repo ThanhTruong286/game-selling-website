@@ -1,41 +1,61 @@
-# Introduction
-- A game selling website like [Steam](https://store.steampowered.com/) built with **Laravel** and **Lugx template**. This is the best place where we can buy or sell games.
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
-<a id="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
+
+# Lugx - Game Selling Website
+
+A game selling website like [Steam](https://store.steampowered.com/) built with **Laravel** and **Lugx template**. This is the best place where we can buy or sell games.
+Some important functions I got here: 
+
+- User functions (login, logout, change name, ...)
+- **Sell** and **Buy** games
+- Comment, search games with filter
+- Co-op with many other companies
+- Sale games if you are the owner
+- **Give** or **Receive** games
+
+
+## Authors
+
+- [@OCEAN](https://github.com/ThanhTruong286)
+
+
+## Tech Stack
+
+**Client:** [Lugx Template](https://templatemo.com/tm-589-lugx-gaming), Bootstrap 5  
+**Server:** PHP, Laravel, WAMP Server
 
 
 
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+## Installation
 
+**Require**
+- PHP version >= 8.0
+- Laravel framework 9
+- Composer
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="public/assets/images/logo.png" alt="Logo" width="80" height="80">
-  </a>
-</div>
+Install project with Composer and artisan
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+*Clone project*
+```bash
+  git clone https://github.com/ThanhTruong286/game-selling-website.git
+```
+*Move into project*
+```bash
+  cd game-selling-website
+```
+*Composer update*
+```bash
+  composer update
+```
+*Create database*
+```bash
+  php artisan migrate
+  php artisan db:seed
+```
+*Run project*
+```bash
+  php artisan serve
+```
+    
+## Screenshots
+
+![App Screenshot](public/screenshots/home.png)
 
