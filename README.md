@@ -57,5 +57,5 @@ Install project with Composer and artisan
     
 ## Screenshots
 
-![App Screenshot](public/screenshots/home.png)
+![App Screenshot](screenshots/home.png)
 
